@@ -59,7 +59,7 @@ let typeOffreActuel = '';
   }
 
 
-    // refresh filtre  
+    
       
   document.getElementById('filtre-marque').addEventListener('input', rechercherVehicules);
   document.getElementById('filtre-modele').addEventListener('input', rechercherVehicules);
