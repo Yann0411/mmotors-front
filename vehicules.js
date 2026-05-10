@@ -55,6 +55,10 @@ let typeOffreActuel = '';
           `;
       }); 
 
+
+  }
+
+
     // refresh filtre  
       
   document.getElementById('filtre-marque').addEventListener('input', rechercherVehicules);
@@ -62,6 +66,3 @@ let typeOffreActuel = '';
   document.getElementById('filtre-prix-min').addEventListener('input', rechercherVehicules);
   document.getElementById('filtre-prix-max').addEventListener('input', rechercherVehicules);
   document.getElementById('filtre-km').addEventListener('input', rechercherVehicules);
-
-
-  }

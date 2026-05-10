@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>M-Motors - Connexion</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+
+    <div class="auth-container">
+
+        <!-- Formulaire connexion -->
+        <div class="auth-box" id="box-connexion">
+
+            <h2>Connexion</h2>
+            <input type="email" id="connexion-email" placeholder="Email">
+            <input type="password" id="connexion-mdp" placeholder="Mot de passe">
+            <button onclick="seConnecter()">Se connecter</button>
+            <p>Pas encore de compte ? <a href="#" onclick="afficherInscription()">S'inscrire</a></p>
+            <p id="msg-connexion" class="message"></p>
+        </div>
+
+        <!-- Formulaire inscription -->
+        <div class="auth-box" id="box-inscription" style="display:none">
+
+            <h2>Inscription</h2>
+
+            <input type="text" id="inscription-nom" placeholder="Nom">
+            <input type="text" id="inscription-prenom" placeholder="Prénom">
+            <input type="email" id="inscription-email" placeholder="Email">
+            <input type="password" id="inscription-mdp" placeholder="Mot de passe (8 caractères min)">
+            <button onclick="sInscrire()">Créer mon compte</button>
+            <p>Déjà un compte ? <a href="#" onclick="afficherConnexion()">Se connecter</a></p>
+            
+            <p id="msg-inscription" class="message"></p>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="auth.js"></script>
+
+</body>
+</html>
