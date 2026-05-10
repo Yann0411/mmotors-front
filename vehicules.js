@@ -1,8 +1,10 @@
 let typeOffreActuel = '';
   
   function afficherCatalogue(typeOffre) {
+
       typeOffreActuel = typeOffre;
       document.getElementById('accueil').style.display = 'none';
+      
       document.getElementById('catalogue').style.display = 'block';
       document.getElementById('titre-catalogue').textContent =
           typeOffre === 'ACHAT' ? 'Véhicules à vendre' : 'Véhicules en location';
@@ -11,23 +13,26 @@ let typeOffreActuel = '';
 
 
 
-  function retourAccueil() {
-      document.getElementById('catalogue').style.display = 'none';
+    function retourAccueil() {
+
+       document.getElementById('catalogue').style.display = 'none';
       document.getElementById('accueil').style.display = 'block';
       document.getElementById('liste-vehicules').innerHTML = '';
   }
 
   
 
-  async function rechercherVehicules() {
+            async function rechercherVehicules() {
 
       const marque = document.getElementById('filtre-marque').value;
+
       const modele = document.getElementById('filtre-modele').value;
-      const prixMin = document.getElementById('filtre-prix-min').value;
+      
+       const prixMin = document.getElementById('filtre-prix-min').value;
       const prixMax = document.getElementById('filtre-prix-max').value;
       const km = document.getElementById('filtre-km').value;
 
-      const params = { typeOffre: typeOffreActuel };
+        const params = { typeOffre: typeOffreActuel };
       if (marque) params.marque = marque;
       if (modele) params.modele = modele;
       if (prixMin) params.prixMin = prixMin;
@@ -35,7 +40,7 @@ let typeOffreActuel = '';
       if (km) params.kilometrageMax = km;
 
       const response = await axios.get('http://localhost:8080/vehicules', { params });
-      const vehicules = response.data;
+         const vehicules = response.data;
       const div = document.getElementById('liste-vehicules');
 
       if (vehicules.length === 0) {
@@ -43,7 +48,7 @@ let typeOffreActuel = '';
           return;
       }
 
-      div.innerHTML = '';
+        div.innerHTML = '';
       vehicules.forEach(function(vehicule) {
           div.innerHTML += `
               <div class="carte-vehicule">

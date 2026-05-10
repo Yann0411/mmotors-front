@@ -1,0 +1,38 @@
+.espace-container {
+    max-width: 800px;
+
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.espace-container h1  {
+    color: #1a1a2e;
+    margin-bottom: 30px;
+}
+
+
+
+.carte-dossier {
+
+    border: 1px solid #ddd;
+     border-radius: 10px;
+    padding: 20px;
+    
+    margin-bottom: 20px;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.statut {
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 10px;
+
+}
+
+.statut-en-attente { background-color: #f0a500; color: white; }
+
+.statut-valide { background-color: #28a745; color: white; }
+.statut-refuse { background-color: #e94560; color: white; }

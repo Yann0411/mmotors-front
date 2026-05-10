@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+
+    <title>M-Motors - Déposer un dossier</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+    <div class="auth-container">
+
+        <div class="auth-box">
+
+              <h2>Déposer un dossier</h2>
+
+            <select id="typeOffre">
+                <option value="ACHAT">Achat</option>
+                
+                <option value="LOCATION">Location</option>
+
+            </select>
+
+            <textarea id="message" placeholder="Décrivez votre demande..."></textarea>
+
+            <button onclick="deposerDossier()">Envoyer mon dossier</button>
+
+    <p id="msg-dossier" class="message"></p>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="dossier.js"></script>
+
+</body>
+</html>
