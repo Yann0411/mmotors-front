@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>M-Motors - Administration</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <div class="admin-container">
+
+        <h1>Back-office M-Motors</h1>
+
+        <!-- Section véhicules -->
+        <section class="admin-section">
+
+            <h2>Véhicules</h2>
+
+            <div class="admin-formulaire">
+
+                <h3 id="titre-form-vehicule">Ajouter un véhicule</h3>
+                <input type="hidden" id="vehicule-id">
+                 <input type="text" id="vehicule-marque" placeholder="Marque">
+                <input type="text" id="vehicule-modele" placeholder="Modèle">
+                <input type="number" id="vehicule-annee" placeholder="Année">
+                <input type="number" id="vehicule-prix" placeholder="Prix (€)">
+                    <input type="number" id="vehicule-km" placeholder="Kilométrage">
+                <select id="vehicule-typeOffre">
+
+                    <option value="ACHAT">Achat</option>
+                    <option value="LOCATION">Location</option>
+                </select>
+                <button onclick="sauvegarderVehicule()">Sauvegarder</button>
+                <button onclick="annulerModification()">Annuler</button>
+                <p id="msg-vehicule" class="message"></p>
+
+
+            </div>
+
+            <div id="liste-vehicules-admin"></div>
+        </section>
+
+        <!--  dossiers -->
+        <section class="admin-section">
+            <h2>Dossiers clients</h2>
+            <div id="liste-dossiers-admin"></div>
+
+        </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="admin.js"></script>
+
+</body>
+</html>
