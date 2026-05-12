@@ -12,12 +12,20 @@
       <div class="accueil" id="accueil">
           <h1>M-Motors</h1>
 
+          <button onclick="seDeconnecter()">Se déconnecter</button>
+
+
           <p>Trouvez le véhicule qui vous correspond</p>
           <div class="choix">
               <button class="btn-choix btn-achat" onclick="afficherCatalogue('ACHAT')">Achat</button>
 
               <button class="btn-choix btn-location" onclick="afficherCatalogue('LOCATION')">Location</button>
           </div>
+          <div class="choix">
+        <button onclick="window.location.href='espaceClient.html'">Mon espace client</button>
+        <button onclick="window.location.href='dossier.html'">Déposer un dossier</button>
+        </div>
+
       </div>
 
       <!-- Page catalogue -->

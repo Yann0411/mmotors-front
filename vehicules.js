@@ -1,3 +1,9 @@
+function seDeconnecter() {
+    localStorage.clear();
+    window.location.href = 'auth.html';
+}
+
+
 let typeOffreActuel = '';
   
   function afficherCatalogue(typeOffre) {
@@ -27,7 +33,7 @@ let typeOffreActuel = '';
       const marque = document.getElementById('filtre-marque').value;
 
       const modele = document.getElementById('filtre-modele').value;
-      
+
        const prixMin = document.getElementById('filtre-prix-min').value;
       const prixMax = document.getElementById('filtre-prix-max').value;
       const km = document.getElementById('filtre-km').value;

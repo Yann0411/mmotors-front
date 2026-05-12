@@ -1,3 +1,9 @@
+function seDeconnecter() {
+    localStorage.clear();
+    window.location.href = 'auth.html';
+}
+
+
 async function deposerDossier() {
 
      const typeOffre = document.getElementById('typeOffre').value;

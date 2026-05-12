@@ -3,6 +3,12 @@ const token = localStorage.getItem('token');
   const headers = { Authorization: 'Bearer ' + token };
 
 
+  function seDeconnecter() {
+    localStorage.clear();
+    window.location.href = 'auth.html';
+}
+
+
 async function chargerVehicules() {
 
       const response = await axios.get('http://localhost:8080/vehicules');
@@ -129,5 +135,5 @@ async function chargerVehicules() {
 
   // Chargement initial
   chargerVehicules();
-  
+
   chargerDossiers();
