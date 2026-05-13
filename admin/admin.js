@@ -5,7 +5,7 @@ const token = localStorage.getItem('token');
 
   function seDeconnecter() {
     localStorage.clear();
-    window.location.href = 'auth.html';
+    window.location.href = '../auth/auth.html';
 }
 
 

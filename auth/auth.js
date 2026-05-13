@@ -45,7 +45,7 @@ async function seConnecter() {
         localStorage.setItem('nom', response.data.nom);
         msg.style.color= 'green';
         msg.textContent = 'Connexion réussie ! Bonjour ' + response.data.nom;
-        setTimeout(() => window.location.href = 'index.html', 2000);
+        setTimeout(() => window.location.href = '../index.html', 2000);
 
     } catch (error) {
         msg.style.color ='red';
