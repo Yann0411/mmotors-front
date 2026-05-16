@@ -36,13 +36,27 @@ async function seConnecter() {
     const motDePasse = document.getElementById('connexion-mdp').value;
     const msg = document.getElementById('msg-connexion');
 
+    console.log("=== CONNEXION ENVOYÉE ===");
+    console.log("Email envoyé : " + email);
+
+
     try {
         const response = await axios.post('http://localhost:8080/auth/connexion', {
             email, motDePasse
 
+
         });
+         console.log("response.data")
+        console.log(response.data)
+
         localStorage.setItem('token', response.data.token);
+         console.log("response.dataToken")
+         console.log(response.data.token)
+
         localStorage.setItem('nom', response.data.nom);
+         console.log("response.data.nom")
+         console.log(response.data.nom)
+         
         msg.style.color= 'green';
         msg.textContent = 'Connexion réussie ! Bonjour ' + response.data.nom;
         setTimeout(() => window.location.href = '../index.html', 2000);

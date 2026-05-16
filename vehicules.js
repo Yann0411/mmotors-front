@@ -5,6 +5,8 @@ function seDeconnecter() {
 
 
 let typeOffreActuel = '';
+
+console.log("TypeOffresActuels : " + typeOffreActuel)
   
   function afficherCatalogue(typeOffre) {
 
@@ -14,9 +16,10 @@ let typeOffreActuel = '';
       document.getElementById('catalogue').style.display = 'block';
       document.getElementById('titre-catalogue').textContent =
           typeOffre === 'ACHAT' ? 'Véhicules à vendre' : 'Véhicules en location';
+          console.log("typeOffre: " +typeOffre)
       rechercherVehicules();
   }
-
+console.log("TypeOffresActuels : " + typeOffreActuel)
 
 
     function retourAccueil() {
@@ -39,13 +42,21 @@ let typeOffreActuel = '';
       const km = document.getElementById('filtre-km').value;
 
         const params = { typeOffre: typeOffreActuel };
+console.log("avant")
+console.log(params)
+
+
       if (marque) params.marque = marque;
       if (modele) params.modele = modele;
       if (prixMin) params.prixMin = prixMin;
       if (prixMax) params.prixMax = prixMax;
       if (km) params.kilometrageMax = km;
+console.log("apres")
+      console.log(params)
 
       const response = await axios.get('http://localhost:8080/vehicules', { params });
+
+      console.log(response.data)
          const vehicules = response.data;
       const div = document.getElementById('liste-vehicules');
 
