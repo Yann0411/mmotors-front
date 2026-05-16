@@ -17,6 +17,12 @@ async function sInscrire() {
     const motDePasse = document.getElementById('inscription-mdp').value;
     const msg = document.getElementById('msg-inscription');
 
+    console.log("=== INSCRITION FAITE ===");
+    console.log("nom créé : " + nom);
+    console.log("prenom créé : " + prenom);
+    console.log("Email créé : " + email);
+    console.log("mdp créé : " + motDePasse);
+
     try {
 
         await axios.post('http://localhost:8080/auth/inscription', {
@@ -24,7 +30,10 @@ async function sInscrire() {
         });
         msg.style.color ='green';
         msg.textContent = 'Compte créé ! Vous pouvez vous connecter.';
+        
         setTimeout(() => afficherConnexion(), 2000);
+
+
     } catch (error) {
         msg.style.color= 'red';
         msg.textContent =error.response?.data || 'Erreur lors de l\'inscription';
@@ -59,8 +68,14 @@ async function seConnecter() {
          
         msg.style.color= 'green';
         msg.textContent = 'Connexion réussie ! Bonjour ' + response.data.nom;
-        setTimeout(() => window.location.href = '../index.html', 2000);
 
+
+            localStorage.setItem('role', response.data.role);
+            if (response.data.role === 'ADMIN') {
+             setTimeout(() => window.location.href = '../admin/admin.html', 2000);
+            } else {
+             setTimeout(() => window.location.href = '../index.html', 2000);
+            }
     } catch (error) {
         msg.style.color ='red';
         msg.textContent = error.response?.data || 'Erreur lors de la connexion';

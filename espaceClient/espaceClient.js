@@ -3,6 +3,12 @@
       window.location.href = '../auth/auth.html';
   }
 
+  const nomStocke = localStorage.getItem('nom');
+if (nomStocke) {
+    document.getElementById('nom-utilisateur').textContent = 'Bonjour ' + nomStocke;
+}
+
+
 
 async function chargerDossiers() {
 

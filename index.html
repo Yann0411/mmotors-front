@@ -9,24 +9,30 @@
   <body>
 
       <!-- la Page daccueil -->
-      <div class="accueil" id="accueil">
-          <h1>M-Motors</h1>
+   <nav class="navbar">
+    <span class="navbar-brand">M-Motors</span>
+    <div class="navbar-user">
+        <span id="nom-utilisateur"></span>
+        <button class="btn-deconnecter" onclick="seDeconnecter()">Se déconnecter</button>
+     </div>
+    </nav>
 
-          <button onclick="seDeconnecter()">Se déconnecter</button>
+<!-- la Page daccueil -->
+<div class="accueil" id="accueil">
+    <h1>M-Motors</h1>
 
+    <p>Trouvez le véhicule qui vous correspond</p>
+    <div class="choix">
+        <button class="btn-choix btn-achat" onclick="afficherCatalogue('ACHAT')">Achat</button>
+        <button class="btn-choix btn-location" onclick="afficherCatalogue('LOCATION')">Location</button>
+    </div>
+    <div class="choix">
+        <button class="btn-nav" onclick="window.location.href='espaceClient/espaceClient.html'">Mon espace client</button>
+        <button class="btn-nav" onclick="window.location.href='dossier/dossier.html'">Déposer un dossier</button>
+    </div>
 
-          <p>Trouvez le véhicule qui vous correspond</p>
-          <div class="choix">
-              <button class="btn-choix btn-achat" onclick="afficherCatalogue('ACHAT')">Achat</button>
+</div>
 
-              <button class="btn-choix btn-location" onclick="afficherCatalogue('LOCATION')">Location</button>
-          </div>
-          <div class="choix">
-        <button onclick="window.location.href='espaceClient/espaceClient.html'">Mon espace client</button>
-        <button onclick="window.location.href='dossier/dossier.html'">Déposer un dossier</button>
-        </div>
-
-      </div>
 
       <!-- Page catalogue -->
       <div class="catalogue" id="catalogue">

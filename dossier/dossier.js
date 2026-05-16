@@ -1,7 +1,15 @@
+
 function seDeconnecter() {
     localStorage.clear();
     window.location.href = '../auth/auth.html';
 }
+  const nomStocke = localStorage.getItem('nom');
+  if (nomStocke) {
+      document.getElementById('nom-utilisateur').textContent = 'Bonjour ' + nomStocke;
+  }
+
+
+
 
 
 async function deposerDossier() {
@@ -12,6 +20,12 @@ async function deposerDossier() {
     const msg = document.getElementById('msg-dossier');
 
     const token = localStorage.getItem('token');
+
+    console.log("=== DÉPÔT DE DOSSIER ===");
+    console.log("typeOffre : " + typeOffre);
+    console.log("message : " + message);
+    console.log("token présent : " + (token ? "OUI" : "NON"));
+
 
     if (!token) {
         msg.style.color = 'red';

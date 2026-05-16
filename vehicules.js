@@ -3,12 +3,19 @@ function seDeconnecter() {
     window.location.href = 'auth/auth.html';
 }
 
+  const nomStocke = localStorage.getItem('nom');
+  if (nomStocke) {
+      document.getElementById('nom-utilisateur').textContent = 'Bonjour ' + nomStocke;
+  }
+
+
 
 let typeOffreActuel = '';
 
 console.log("TypeOffresActuels : " + typeOffreActuel)
   
   function afficherCatalogue(typeOffre) {
+
 
       typeOffreActuel = typeOffre;
       document.getElementById('accueil').style.display = 'none';
@@ -17,8 +24,13 @@ console.log("TypeOffresActuels : " + typeOffreActuel)
       document.getElementById('titre-catalogue').textContent =
           typeOffre === 'ACHAT' ? 'Véhicules à vendre' : 'Véhicules en location';
           console.log("typeOffre: " +typeOffre)
+
+          console.log("=== CLIC SUR " + typeOffre + " ===");
+
       rechercherVehicules();
   }
+
+
 console.log("TypeOffresActuels : " + typeOffreActuel)
 
 
@@ -34,6 +46,7 @@ console.log("TypeOffresActuels : " + typeOffreActuel)
             async function rechercherVehicules() {
 
       const marque = document.getElementById('filtre-marque').value;
+      //console.log(marque)
 
       const modele = document.getElementById('filtre-modele').value;
 
@@ -42,7 +55,10 @@ console.log("TypeOffresActuels : " + typeOffreActuel)
       const km = document.getElementById('filtre-km').value;
 
         const params = { typeOffre: typeOffreActuel };
-console.log("avant")
+
+
+console.log("=== REQUÊTE VEHICULES ENVOYÉE ===");
+
 console.log(params)
 
 
@@ -51,8 +67,13 @@ console.log(params)
       if (prixMin) params.prixMin = prixMin;
       if (prixMax) params.prixMax = prixMax;
       if (km) params.kilometrageMax = km;
-console.log("apres")
+
+
+
+   console.log("=== params ENVOYÉE ===");
+
       console.log(params)
+      //const response = await axios.get('http://localhost:8080/vehicules', { params });
 
       const response = await axios.get('http://localhost:8080/vehicules', { params });
 
