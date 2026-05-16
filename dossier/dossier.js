@@ -1,4 +1,10 @@
 
+const token = localStorage.getItem('token');
+if (!token) {
+    window.location.href = '../auth/auth.html';
+}
+
+
 function seDeconnecter() {
     localStorage.clear();
     window.location.href = '../auth/auth.html';
@@ -8,6 +14,7 @@ function seDeconnecter() {
       document.getElementById('nom-utilisateur').textContent = 'Bonjour ' + nomStocke;
   }
 
+  
 
 
 
@@ -21,7 +28,10 @@ async function deposerDossier() {
 
     const token = localStorage.getItem('token');
 
-    console.log("=== DÉPÔT DE DOSSIER ===");
+
+
+
+    console.log("=== DEPOT DE DOSSIER ===");
     console.log("typeOffre : " + typeOffre);
     console.log("message : " + message);
     console.log("token présent : " + (token ? "OUI" : "NON"));

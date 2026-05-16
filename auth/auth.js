@@ -36,7 +36,8 @@ async function sInscrire() {
 
     } catch (error) {
         msg.style.color= 'red';
-        msg.textContent =error.response?.data || 'Erreur lors de l\'inscription';
+        msg.textContent ='Le mot de passe doit contenir au moins 8 caractères, une majuscule, un chiffre et un caractère spécial';
+;
     }
 }
 

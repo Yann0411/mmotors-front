@@ -1,5 +1,20 @@
 
 const token = localStorage.getItem('token');
+const role = localStorage.getItem('role');
+if (!token || role !== 'ADMIN') {
+    window.location.href = '../auth/auth.html';
+}
+
+
+
+//const token = localStorage.getItem('token');
+//if (!token) {
+  //  window.location.href = '../auth/auth.html';
+//}
+
+
+
+//const token = localStorage.getItem('token');
   const headers = { Authorization: 'Bearer ' + token };
 
 
@@ -17,6 +32,10 @@ if (nomStocke) {
 
 
 async function chargerVehicules() {
+
+    console.log("=== ADMIN - CHARGEMENT VÉHICULES ===");
+
+
 
       const response = await axios.get('http://localhost:8080/vehicules');
       const vehicules = response.data;
@@ -78,7 +97,16 @@ async function chargerVehicules() {
           typeOffre: document.getElementById('vehicule-typeOffre').value
       };
          const msg = document.getElementById('msg-vehicule');
+
+            console.log("=======================================================");
+            console.log("=== ADMIN - SAUVEGARDE VÉHICULE ===");
+            console.log("id : " + (id ? id : "nouveau"));
+             console.log("marque : " + vehicule.marque + " | modele : " + vehicule.modele);
+             console.log("prix : " + vehicule.prix + " | typeOffre : " + vehicule.typeOffre);
+            console.log("=======================================================");
       try {
+
+
           if (id) {
               await axios.put('http://localhost:8080/admin/vehicules/' + id, vehicule, {
   headers });

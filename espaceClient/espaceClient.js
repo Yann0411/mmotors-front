@@ -1,3 +1,8 @@
+  const token = localStorage.getItem('token');
+if (!token) {
+    window.location.href = '../auth/auth.html';
+}
+  
   function seDeconnecter() {
       localStorage.clear();
       window.location.href = '../auth/auth.html';
@@ -14,6 +19,10 @@ async function chargerDossiers() {
 
         const token = localStorage.getItem('token');
 
+console.log("=======================================================");
+console.log("=== CHARGEMENT ESPACE CLIENT ===");
+console.log("token présent : " + (token ? "OUI" : "NON"));
+console.log("=======================================================");
 
     
      const msg = document.getElementById('msg-espace');
@@ -32,6 +41,11 @@ async function chargerDossiers() {
         );
 
              const dossiers = response.data;
+
+             console.log("=== DOSSIERS =>  REPONSE DU DU BACK ===");
+            console.log("nombre de dossiers : " + dossiers.length);
+            console.log(dossiers);
+
 
         const div =document.getElementById('liste-dossiers');
 
