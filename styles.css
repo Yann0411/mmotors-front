@@ -168,3 +168,41 @@
     color: #8d021e;
 }
 
+@media (max-width: 600px) {
+
+
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+        
+        padding: 10px 15px;
+        text-align: center;
+        
+
+    }
+
+    .accueil h1 { font-size: 2em; }
+    .accueil p { font-size: 1em; }
+
+    .btn-choix {
+
+        padding: 20px 40px;
+        font-size: 1.2em;
+    }
+
+    .catalogue { padding: 15px; }
+
+
+
+    .filtres {
+
+        flex-direction: column;
+    }
+
+    .filtres input {
+        width: 100%;
+    }
+
+    
+}
+
