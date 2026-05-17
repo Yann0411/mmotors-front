@@ -36,7 +36,7 @@ console.log("=======================================================");
 
     try {
 
-        const response = await axios.get('http://localhost:8080/dossiers/moi',
+        const response = await axios.get('https://mmotors-back-production.up.railway.app/dossiers/moi',
             { headers: { Authorization: 'Bearer ' + token } }
         );
 

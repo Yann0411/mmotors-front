@@ -25,7 +25,7 @@ async function sInscrire() {
 
     try {
 
-        await axios.post('http://localhost:8080/auth/inscription', {
+        await axios.post('https://mmotors-back-production.up.railway.app/auth/inscription', {
             nom, prenom, email, motDePasse
         });
         msg.style.color ='green';
@@ -51,7 +51,7 @@ async function seConnecter() {
 
 
     try {
-        const response = await axios.post('http://localhost:8080/auth/connexion', {
+        const response = await axios.post('https://mmotors-back-production.up.railway.app/auth/connexion', {
             email, motDePasse
 
 

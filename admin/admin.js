@@ -37,7 +37,7 @@ async function chargerVehicules() {
 
 
 
-      const response = await axios.get('http://localhost:8080/vehicules');
+      const response = await axios.get('https://mmotors-back-production.up.railway.app/vehicules');
       const vehicules = response.data;
       const div = document.getElementById('liste-vehicules-admin');
       div.innerHTML = '';
@@ -108,10 +108,10 @@ async function chargerVehicules() {
 
 
           if (id) {
-              await axios.put('http://localhost:8080/admin/vehicules/' + id, vehicule, {
+              await axios.put('https://mmotors-back-production.up.railway.app/admin/vehicules/' + id, vehicule, {
   headers });
           } else {
-              await axios.post('http://localhost:8080/admin/vehicules', vehicule, { headers
+              await axios.post('https://mmotors-back-production.up.railway.app/admin/vehicules', vehicule, { headers
   });
           }
           msg.style.color = 'green';
@@ -127,7 +127,7 @@ async function chargerVehicules() {
     async function supprimerVehicule(id) {
       if (!confirm('Supprimer ce véhicule ?')) return;
       try {
-          await axios.delete('http://localhost:8080/admin/vehicules/' + id, { headers });
+          await axios.delete('https://mmotors-back-production.up.railway.app/admin/vehicules/' + id, { headers });
           chargerVehicules();
       } catch (error) {
           alert('Erreur lors de la suppression');
@@ -139,7 +139,7 @@ async function chargerVehicules() {
   // ===============================
 
   async function chargerDossiers() {
-        const response = await axios.get('http://localhost:8080/admin/dossiers', { headers });
+        const response = await axios.get('https://mmotors-back-production.up.railway.app/admin/dossiers', { headers });
       const dossiers = response.data;
        const div = document.getElementById('liste-dossiers-admin');
        div.innerHTML = '';
@@ -160,7 +160,7 @@ async function chargerVehicules() {
 
      async function changerStatut(id, statut) {
         try {
-          await axios.put('http://localhost:8080/admin/dossiers/' + id, { statut }, { headers
+          await axios.put('https://mmotors-back-production.up.railway.app/admin/dossiers/' + id, { statut }, { headers
   });
           chargerDossiers();
       } catch (error) {
