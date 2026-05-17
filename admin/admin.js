@@ -153,6 +153,8 @@ async function chargerVehicules() {
                   <p><strong>Statut :</strong> ${d.statut}</p>
                   <button onclick="changerStatut(${d.id}, 'VALIDE')">Valider</button>
                   <button onclick="changerStatut(${d.id}, 'REFUSE')">Refuser</button>
+                  ${d.statut !== 'EN_ATTENTE' ? `<button onclick="supprimerDossier(${d.id})">Supprimer</button>` : ''}
+
               </div>
           `;
       });
@@ -163,10 +165,26 @@ async function chargerVehicules() {
           await axios.put('https://mmotors-back-production.up.railway.app/admin/dossiers/' + id, { statut }, { headers
   });
           chargerDossiers();
+
       } catch (error) {
           alert('Erreur lors de la mise à jour du statut');
       }
   }
+
+  async function supprimerDossier(id) {
+
+    if (!confirm('Supprimer ce dossier ?')) return;
+    try {
+
+        //  await axios.delete('https://mmotors-back-production.up.railway.app/admin/dossiers/' + id, { headers });
+
+        await axios.delete('https://mmotors-back-production.up.railway.app/admin/dossiers/' + id, { headers });
+        chargerDossiers();
+    } catch (error) {
+        alert('Erreur lors de la suppression');
+    }
+}
+
 
   // Chargement initial
   chargerVehicules();
