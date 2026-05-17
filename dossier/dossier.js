@@ -36,6 +36,14 @@ async function deposerDossier() {
     console.log("message : " + message);
     console.log("token présent : " + (token ? "OUI" : "NON"));
 
+    if (!message || message.trim() === '') {
+        msg.style.color = 'red';
+        msg.textContent = 'Le message est obligatoire.';
+        return;
+    }   
+
+
+
 
     if (!token) {
         msg.style.color = 'red';
