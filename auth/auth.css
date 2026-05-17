@@ -90,3 +90,12 @@ textarea {
     font-size: 14px;
     resize: vertical;
 }
+
+select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    background: white;
+    
+}
