@@ -3,10 +3,18 @@ function seDeconnecter() {
     window.location.href = 'auth/auth.html';
 }
 
-  const nomStocke = localStorage.getItem('nom');
-  if (nomStocke) {
-      document.getElementById('nom-utilisateur').textContent = 'Bonjour ' + nomStocke;
-  }
+ // const nomStocke = localStorage.getItem('nom');
+ // if (nomStocke) {
+  //    document.getElementById('nom-utilisateur').textContent = 'Bonjour ' + nomStocke;
+ // }
+ 
+const nomStocke = localStorage.getItem('nom');
+if (nomStocke) {
+    document.getElementById('nom-utilisateur').textContent = 'Bonjour ' + nomStocke;
+} else {
+    document.querySelector('.btn-deconnecter').style.display = 'none';
+}
+
 
 
 
