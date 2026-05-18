@@ -1,15 +1,26 @@
+
 .admin-container {
-    max-width: 900px;
+    max-width: 1200px;
     margin: 40px auto;
     padding: 20px;
     font-family: Arial, sans-serif;
-
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
 }
 
 .admin-section {
-
-    margin-bottom:50px;
+    flex: 1;
+    margin-bottom: 0;
+    padding: 25px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    border-left: 4px solid #CC0000;
 }
+
+
+
+
 
 .admin-formulaire {
     background: #f5f5f5;
@@ -22,7 +33,7 @@
     max-width: 400px;
 }
 
-.admin-formulaire input,azerty
+.admin-formulaire input,
 
 .admin-formulaire select {
     padding: 8px;
@@ -51,6 +62,13 @@
     margin-bottom: 15px;
 }
 
+.admin-titre {
+    text-align: center;
+    color: #CC0000;
+    padding: 20px;
+}
+
+
 .carte-vehicule button, .carte-dossier button {
     margin-right:10px;
     padding: 6px 12px;
@@ -63,6 +81,32 @@
 }
 
 .message {
-    margin-top:s5px;
+    margin-top:5px;
     font-size: 14px;
+}
+
+
+.admin-section {
+
+    margin-bottom: 40px;
+    padding: 25px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    border-left: 4px solid #CC0000;
+}
+
+.admin-section h2 {
+
+    margin-top: 0;
+    color: #CC0000;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+
+@media (max-width: 900px) {
+    .admin-container {
+        flex-direction: column;
+    }
 }

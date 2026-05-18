@@ -4,6 +4,13 @@ if (!token) {
     window.location.href = '../auth/auth.html';
 }
 
+const params = new URLSearchParams(window.location.search);
+if (params.get('marque')) {
+    document.getElementById('typeOffre').value = params.get('typeOffre') || 'ACHAT';
+    document.getElementById('message').value = `Véhicule souhaité : ${params.get('marque')} ${params.get('modele')} ${params.get('annee')} - ${params.get('km')} km -${params.get('prix')} € - ${params.get('typeOffre')}`;
+}
+
+
 
 function seDeconnecter() {
     localStorage.clear();

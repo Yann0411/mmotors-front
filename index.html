@@ -12,8 +12,20 @@
    <nav class="navbar">
     <span class="navbar-brand">M-Motors</span>
     <div class="navbar-user">
-        <span id="nom-utilisateur"></span>
-        <button class="btn-deconnecter" onclick="seDeconnecter()">Se déconnecter</button>
+        <button class="btn-nav-link" 
+        onclick="window.location.href='espaceClient/espaceClient.html'">Mon espace
+        client</button>
+        <button class="btn-nav-link" 
+        onclick="window.location.href='dossier/dossier.html'">Déposer un dossier</button>
+
+        
+        <div>
+            <span id="nom-utilisateur"></span>
+            <button class="btn-deconnecter" onclick="seDeconnecter()">Se déconnecter</button>
+            
+             
+        </div>
+       
      </div>
     </nav>
 
@@ -22,13 +34,13 @@
     <h1>M-Motors</h1>
 
     <p>Trouvez le véhicule qui vous correspond</p>
+
+    <p class="accroche">Depuis 1987, M-Motors vous accompagne dans l'achat et la location de véhicules d'occasion de qualité.<br>
+    Plus d'un million de clients nous font confiance à travers toute la France.</p>
+
     <div class="choix">
-        <button class="btn-choix btn-achat" onclick="afficherCatalogue('ACHAT')">Achat</button>
-        <button class="btn-choix btn-location" onclick="afficherCatalogue('LOCATION')">Location</button>
-    </div>
-    <div class="choix">
-        <button class="btn-nav" onclick="window.location.href='espaceClient/espaceClient.html'">Mon espace client</button>
-        <button class="btn-nav" onclick="window.location.href='dossier/dossier.html'">Déposer un dossier</button>
+        <button class="btn-choix btn-achat" onclick="afficherCatalogue('ACHAT')">Catalogue Achat</button>
+        <button class="btn-choix btn-location" onclick="afficherCatalogue('LOCATION')">Catalogue Location</button>
     </div>
 
 </div>

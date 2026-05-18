@@ -95,19 +95,22 @@ console.log(params)
       }
 
         div.innerHTML = '';
-      vehicules.forEach(function(vehicule) {
-          div.innerHTML += `
-              <div class="carte-vehicule">
-                  <h3>${vehicule.marque} ${vehicule.modele}</h3>
-                  <p>Année : ${vehicule.annee}</p>
-                  <p>Prix : ${vehicule.prix} €</p>
-                  <p>Kilométrage : ${vehicule.kilometrage} km</p>
-              </div>
-          `;
-      }); 
+        
+         vehicules.forEach(function(vehicule) {
+             div.innerHTML += `
+                 <div class="carte-vehicule">
+                     <h3>${vehicule.marque} ${vehicule.modele}</h3>
+                     <p>Année : ${vehicule.annee}</p>
+                     <p>Prix : ${vehicule.prix} €</p>
+                     <p>Kilométrage : ${vehicule.kilometrage} km</p>
+                     <button onclick="window.location.href='dossier/dossier.html?marque=${vehicule.marque}&modele=${vehicule.modele}&annee=${vehicule.annee}&prix=${vehicule.prix}&km=${vehicule.kilometrage}&typeOffre=${vehicule.typeOffre}'">Déposer un dossier</button>
+                 </div>
+             `;
+         });
+     }
 
 
-  }
+
 
 
     

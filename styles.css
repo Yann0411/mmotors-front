@@ -81,6 +81,24 @@
        cursor:pointer;
   }
 
+ 
+.accueil .accroche {
+
+      font-size: 1em;
+      color: #666;
+      max-width: 550px;
+
+      margin: 0 auto 50px auto;
+      line-height: 1.8;
+      padding: 20px;
+      border-left: 4px solid #CC0000;
+      background-color: rgba(255,255,255,0.6);
+      border-radius: 0 8px 8px 0;
+      text-align: left;
+  }
+
+
+
   .liste-vehicules {
     
       display: grid;
@@ -111,12 +129,43 @@
     z-index: 100;
 }
 
+
+
+
+  .navbar-user-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+      margin-right: 5px;
+  }
+
+
+
 .navbar-brand {
     font-size: 1.4em;
     font-weight: bold;
     color: #cc0000;
     letter-spacing: 1px;
     
+}
+
+.btn-nav-link {
+
+    padding: 8px 16px;
+    background: transparent;
+    color: #CC0000;
+    border: 1px solid #CC0000;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.2s;
+
+}
+.btn-nav-link:hover {
+
+    background-color: #CC0000;
+    color: white;
 }
 
 
@@ -129,10 +178,13 @@
     gap: 15px;
 }
 
-.navbar-user span {
-    color: #ccc;
-    font-size: 0.95em;
-}
+ .navbar-user span {
+     color: #999;
+     font-size: 0.8em;
+     padding-right: 3px;
+ }
+
+ 
 
 .btn-deconnecter {
     padding: 8px 16px;
