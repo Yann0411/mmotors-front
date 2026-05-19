@@ -57,9 +57,12 @@ async function seConnecter() {
     const motDePasse = document.getElementById('connexion-mdp').value;
     const msg = document.getElementById('msg-connexion');
 
-    console.log("=== CONNEXION ENVOYÉE ===");
-    console.log("Email envoyé : " + email);
-
+    // Ajouter ces lignes avant le try
+    if (!email || !motDePasse) {
+        msg.style.color = 'red';
+        msg.textContent = 'Tous les champs sont obligatoires';
+        return;
+    }
 
     try {
         const response = await axios.post('https://mmotors-back-production.up.railway.app/auth/connexion', {
