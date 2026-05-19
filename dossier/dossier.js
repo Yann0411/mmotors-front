@@ -25,43 +25,34 @@ function seDeconnecter() {
 
 
 
-
 async function deposerDossier() {
 
-     const typeOffre = document.getElementById('typeOffre').value;
-
-      const message = document.getElementById('message').value;
+    const typeOffre = document.getElementById('typeOffre').value;
+    const message = document.getElementById('message').value;
+    
     const msg = document.getElementById('msg-dossier');
-
     const token = localStorage.getItem('token');
-
-
-
-
-    console.log("=== DEPOT DE DOSSIER ===");
-    console.log("typeOffre : " + typeOffre);
-    console.log("message : " + message);
-    console.log("token présent : " + (token ? "OUI" : "NON"));
+    const btn = document.querySelector('button[onclick="deposerDossier()"]');
 
     if (!message || message.trim() === '') {
+
+
         msg.style.color = 'red';
         msg.textContent = 'Le message est obligatoire.';
         return;
-    }   
-
-
-
+    }
 
     if (!token) {
+
         msg.style.color = 'red';
         msg.textContent = 'Vous devez être connecté pour déposer un dossier.';
-
         return;
     }
 
+    btn.disabled = true;
+
     try {
         await axios.post('https://mmotors-back-production.up.railway.app/dossiers',
-
             { typeOffre, message },
             { headers: { Authorization: 'Bearer ' + token } }
         );
@@ -70,5 +61,8 @@ async function deposerDossier() {
     } catch (error) {
         msg.style.color = 'red';
         msg.textContent = error.response?.data || 'Erreur lors de l\'envoi';
+    } finally {
+        btn.disabled = false;
     }
 }
+

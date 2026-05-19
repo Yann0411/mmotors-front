@@ -1,3 +1,10 @@
+  
+  const statutLabels = {
+    'EN_ATTENTE': 'En attente',
+    'VALIDE': 'Validé',
+    'REFUSE': 'Refusé'
+};
+
   const token = localStorage.getItem('token');
 if (!token) {
     window.location.href = '../auth/auth.html';
@@ -64,7 +71,7 @@ console.log("=======================================================");
                     <p><strong>Type :</strong> ${dossier.typeOffre}</p>
                     <p><strong>Message :</strong> ${dossier.message}</p>
                     <p><strong>Date :</strong> ${dossier.dateDepot}</p>
-                    <span class="statut ${statutClasse}">${dossier.statut}</span>
+                    <span class="statut ${statutClasse}">${statutLabels[dossier.statut] || dossier.statut}</span>
                 </div>
             `;
         });

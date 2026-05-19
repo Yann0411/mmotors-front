@@ -1,3 +1,10 @@
+const statutLabels = {
+    'EN_ATTENTE': 'En attente',
+    'VALIDE': 'Validé',
+    'REFUSE': 'Refusé'
+};
+
+
 
 const token = localStorage.getItem('token');
 const role = localStorage.getItem('role');
@@ -32,7 +39,7 @@ if (nomStocke) {
 
 async function chargerVehicules() {
 
-    
+
       try {
           const response = await axios.get('https://mmotors-back-production.up.railway.app/vehicules');
           const vehicules = response.data;
@@ -87,48 +94,42 @@ async function chargerVehicules() {
   }
 
   async function sauvegarderVehicule() {
-      const id = document.getElementById('vehicule-id').value;
-      const vehicule = {
-          marque: document.getElementById('vehicule-marque').value,
-          modele: document.getElementById('vehicule-modele').value,
-          annee: parseInt(document.getElementById('vehicule-annee').value),
-          prix: parseFloat(document.getElementById('vehicule-prix').value),
-          kilometrage: parseInt(document.getElementById('vehicule-km').value),
-          typeOffre: document.getElementById('vehicule-typeOffre').value
-      };
-         const msg = document.getElementById('msg-vehicule');
+    const id = document.getElementById('vehicule-id').value;
+    const vehicule = {
+        marque: document.getElementById('vehicule-marque').value,
+        modele: document.getElementById('vehicule-modele').value,
+        annee: parseInt(document.getElementById('vehicule-annee').value),
+        prix: parseFloat(document.getElementById('vehicule-prix').value),
+        kilometrage: parseInt(document.getElementById('vehicule-km').value),
+        typeOffre: document.getElementById('vehicule-typeOffre').value
+    };
+    const msg = document.getElementById('msg-vehicule');
+    const btn = document.querySelector('button[onclick="sauvegarderVehicule()"]');
 
-            console.log("=======================================================");
-            console.log("=== ADMIN - SAUVEGARDE VÉHICULE ===");
-            console.log("id : " + (id ? id : "nouveau"));
-             console.log("marque : " + vehicule.marque + " | modele : " + vehicule.modele);
-             console.log("prix : " + vehicule.prix + " | typeOffre : " + vehicule.typeOffre);
-            console.log("=======================================================");
-      try {
-
-
-          if (id) {
-              await axios.put('https://mmotors-back-production.up.railway.app/admin/vehicules/' + id, vehicule, {
-  headers });
-          } else {
-              await axios.post('https://mmotors-back-production.up.railway.app/admin/vehicules', vehicule, { headers
-  });
-          }
-          msg.style.color = 'green';
-          msg.textContent = 'Véhicule sauvegardé !';
-          annulerModification();
-          chargerVehicules();
-      } catch (error) {
-         msg.style.color = 'red';
+    btn.disabled = true;
+    try {
+        if (id) {
+            await axios.put('https://mmotors-back-production.up.railway.app/admin/vehicules/' + id, vehicule, { headers });
+        } else {
+            await axios.post('https://mmotors-back-production.up.railway.app/admin/vehicules', vehicule, { headers });
+        }
+        msg.style.color = 'green';
+        msg.textContent = 'Véhicule sauvegardé !';
+        annulerModification();
+        chargerVehicules();
+    } catch (error) {
+        msg.style.color = 'red';
         const data = error.response?.data;
         if (Array.isArray(data)) {
-        msg.textContent = data.join(' | ');
-            } else {
-                msg.textContent = data || 'Erreur inconnue';
+            msg.textContent = data.join(' | ');
+        } else {
+            msg.textContent = data || 'Erreur inconnue';
+        }
+    } finally {
+        btn.disabled = false;
     }
 }
 
-  }
 
     async function supprimerVehicule(id) {
       if (!confirm('Supprimer ce véhicule ?')) return;
@@ -160,7 +161,7 @@ async function chargerVehicules() {
                     <p><strong>Type :</strong> ${d.typeOffre}</p>
                     <p><strong>Message :</strong> ${d.message}</p>
                     <p><strong>Date :</strong> ${d.dateDepot}</p>
-                    <p><strong>Statut :</strong> ${d.statut}</p>
+                    <p><strong>Statut :</strong> ${statutLabels[d.statut] || d.statut}</p>
                     <button onclick="changerStatut(${d.id}, 'VALIDE')">Valider</button>
                     <button onclick="changerStatut(${d.id}, 'REFUSE')">Refuser</button>
                     ${d.statut !== 'EN_ATTENTE' ? `<button onclick="supprimerDossier(${d.id})">Supprimer</button>` : ''}

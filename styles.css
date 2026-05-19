@@ -142,13 +142,16 @@
 
 
 
+
+
 .navbar-brand {
     font-size: 1.4em;
     font-weight: bold;
     color: #cc0000;
     letter-spacing: 1px;
-    
+    text-decoration: none;
 }
+
 
 .btn-nav-link {
 
