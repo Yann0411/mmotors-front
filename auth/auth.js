@@ -21,7 +21,14 @@ async function sInscrire() {
     console.log("nom créé : " + nom);
     console.log("prenom créé : " + prenom);
     console.log("Email créé : " + email);
-    console.log("mdp créé : " + motDePasse);
+    
+
+    if (!nom || !prenom || !email || !motDePasse) {
+    msg.style.color = 'red';
+    msg.textContent = 'Tous les champs sont obligatoires';
+    return;
+}
+
 
     try {
 
@@ -34,16 +41,13 @@ async function sInscrire() {
         setTimeout(() => afficherConnexion(), 2000);
 
 
-   } catch (error) {
+   
+} catch (error) {
     msg.style.color = 'red';
     const data = error.response?.data;
     if (Array.isArray(data)) {
-        const erreurMdp = data.find(e => e.includes('mot de passe'));
-        if (erreurMdp) {
-            msg.textContent = erreurMdp;
-        } else {
-            msg.textContent ='Tous les champs sont obligatoires' ;
-        }
+        const erreurMdp = data.find(e => e.includes('majuscule'));
+        msg.textContent = erreurMdp || 'Erreur lors de l\'inscription';
     } else {
         msg.textContent = data || 'Erreur lors de l\'inscription';
     }
@@ -57,7 +61,7 @@ async function seConnecter() {
     const motDePasse = document.getElementById('connexion-mdp').value;
     const msg = document.getElementById('msg-connexion');
 
-    // Ajouter ces lignes avant le try
+
     if (!email || !motDePasse) {
         msg.style.color = 'red';
         msg.textContent = 'Tous les champs sont obligatoires';
@@ -70,8 +74,7 @@ async function seConnecter() {
 
 
         });
-         console.log("response.data")
-        console.log(response.data)
+     
 
         localStorage.setItem('token', response.data.token);
          
