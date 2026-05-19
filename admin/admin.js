@@ -119,9 +119,15 @@ async function chargerVehicules() {
           annulerModification();
           chargerVehicules();
       } catch (error) {
-          msg.style.color = 'red';
-          msg.textContent = 'Erreur : ' + (error.response?.data || 'inconnue');
-      }
+         msg.style.color = 'red';
+        const data = error.response?.data;
+        if (Array.isArray(data)) {
+        msg.textContent = data.join(' | ');
+            } else {
+                msg.textContent = data || 'Erreur inconnue';
+    }
+}
+
   }
 
     async function supprimerVehicule(id) {
