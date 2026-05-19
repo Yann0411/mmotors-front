@@ -34,12 +34,22 @@ async function sInscrire() {
         setTimeout(() => afficherConnexion(), 2000);
 
 
-    } catch (error) {
-
-        msg.style.color = 'red';
-        msg.textContent = error.response?.data || 'Erreur lors de l\'inscription';
-
+   } catch (error) {
+    msg.style.color = 'red';
+    const data = error.response?.data;
+    if (Array.isArray(data)) {
+        const erreurMdp = data.find(e => e.includes('mot de passe'));
+        if (erreurMdp) {
+            msg.textContent = erreurMdp;
+        } else {
+            msg.textContent ='Tous les champs sont obligatoires' ;
+        }
+    } else {
+        msg.textContent = data || 'Erreur lors de l\'inscription';
     }
+}
+
+
 }
 
 async function seConnecter() {
