@@ -30,29 +30,29 @@ if (nomStocke) {
 
 
 
-
 async function chargerVehicules() {
 
-    console.log("=== ADMIN - CHARGEMENT VÉHICULES ===");
-
-
-
-      const response = await axios.get('https://mmotors-back-production.up.railway.app/vehicules');
-      const vehicules = response.data;
-      const div = document.getElementById('liste-vehicules-admin');
-      div.innerHTML = '';
-      vehicules.forEach(function(v) {
-          div.innerHTML += `
-              <div class="carte-vehicule">
-                  <h3>${v.marque} ${v.modele} (${v.annee})</h3>
-                  <p>Prix : ${v.prix} € | Km : ${v.kilometrage} | ${v.typeOffre}</p>
-                  <button onclick="remplirFormulaire(${v.id}, '${v.marque}', '${v.modele}',
-  ${v.annee}, ${v.prix}, ${v.kilometrage}, '${v.typeOffre}')">Modifier</button>
-                  <button onclick="supprimerVehicule(${v.id})">Supprimer</button>
-              </div>
-          `;
-      });
+    
+      try {
+          const response = await axios.get('https://mmotors-back-production.up.railway.app/vehicules');
+          const vehicules = response.data;
+          const div = document.getElementById('liste-vehicules-admin');
+          div.innerHTML = '';
+          vehicules.forEach(function(v) {
+              div.innerHTML += `
+                  <div class="carte-vehicule">
+                      <h3>${v.marque} ${v.modele} (${v.annee})</h3>
+                      <p>Prix : ${v.prix} € | Km : ${v.kilometrage} | ${v.typeOffre}</p>
+                      <button onclick="remplirFormulaire(${v.id}, '${v.marque}', '${v.modele}', ${v.annee}, ${v.prix}, ${v.kilometrage}, '${v.typeOffre}')">Modifier</button>
+                      <button onclick="supprimerVehicule(${v.id})">Supprimer</button>
+                  </div>
+              `;
+          });
+      } catch (error) {
+          document.getElementById('liste-vehicules-admin').innerHTML = '<p style="color:red;">Impossible de charger les véhicules.</p>';
+      }
   }
+
 
   function remplirFormulaire(id, marque, modele, annee, prix, km, typeOffre) {
       document.getElementById('vehicule-id').value = id;
@@ -145,26 +145,35 @@ async function chargerVehicules() {
   // ===============================
 
   async function chargerDossiers() {
-        const response = await axios.get('https://mmotors-back-production.up.railway.app/admin/dossiers', { headers });
-      const dossiers = response.data;
-       const div = document.getElementById('liste-dossiers-admin');
-       div.innerHTML = '';
-      dossiers.forEach(function(d) {
-          div.innerHTML += `
-              <div class="carte-dossier">
-                  <p><strong>Client :</strong> ${d.clientEmail}</p>
-                  <p><strong>Type :</strong> ${d.typeOffre}</p>
-                  <p><strong>Message :</strong> ${d.message}</p>
-                  <p><strong>Date :</strong> ${d.dateDepot}</p>
-                  <p><strong>Statut :</strong> ${d.statut}</p>
-                  <button onclick="changerStatut(${d.id}, 'VALIDE')">Valider</button>
-                  <button onclick="changerStatut(${d.id}, 'REFUSE')">Refuser</button>
-                  ${d.statut !== 'EN_ATTENTE' ? `<button onclick="supprimerDossier(${d.id})">Supprimer</button>` : ''}
 
-              </div>
-          `;
-      });
-  }
+    try {
+        const response = await axios.get('https://mmotors-back-production.up.railway.app/admin/dossiers', { headers });
+        const dossiers = response.data;
+        const div = document.getElementById('liste-dossiers-admin');
+        div.innerHTML = '';
+        dossiers.forEach(function(d) {
+
+            div.innerHTML += `
+                <div class="carte-dossier">
+                    <p><strong>Client :</strong> ${d.clientEmail}</p>
+
+                    <p><strong>Type :</strong> ${d.typeOffre}</p>
+                    <p><strong>Message :</strong> ${d.message}</p>
+                    <p><strong>Date :</strong> ${d.dateDepot}</p>
+                    <p><strong>Statut :</strong> ${d.statut}</p>
+                    <button onclick="changerStatut(${d.id}, 'VALIDE')">Valider</button>
+                    <button onclick="changerStatut(${d.id}, 'REFUSE')">Refuser</button>
+                    ${d.statut !== 'EN_ATTENTE' ? `<button onclick="supprimerDossier(${d.id})">Supprimer</button>` : ''}
+                </div>
+            `;
+        });
+    } catch (error) {
+
+
+        document.getElementById('liste-dossiers-admin').innerHTML = '<p style="color:red;">Impossible de charger les dossiers.</p>';
+    }
+}
+
 
      async function changerStatut(id, statut) {
         try {

@@ -35,9 +35,10 @@ async function sInscrire() {
 
 
     } catch (error) {
-        msg.style.color= 'red';
-        msg.textContent ='Le mot de passe doit contenir au moins 8 caractères, une majuscule, un chiffre et un caractère spécial';
-;
+
+        msg.style.color = 'red';
+        msg.textContent = error.response?.data || 'Erreur lors de l\'inscription';
+
     }
 }
 
@@ -60,8 +61,7 @@ async function seConnecter() {
         console.log(response.data)
 
         localStorage.setItem('token', response.data.token);
-         console.log("response.dataToken")
-         console.log(response.data.token)
+         
 
         localStorage.setItem('nom', response.data.nom);
          console.log("response.data.nom")

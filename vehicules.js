@@ -51,63 +51,50 @@ console.log("TypeOffresActuels : " + typeOffreActuel)
 
   
 
-            async function rechercherVehicules() {
-
-      const marque = document.getElementById('filtre-marque').value;
-      //console.log(marque)
-
-      const modele = document.getElementById('filtre-modele').value;
-
-       const prixMin = document.getElementById('filtre-prix-min').value;
-      const prixMax = document.getElementById('filtre-prix-max').value;
-      const km = document.getElementById('filtre-km').value;
+     async function rechercherVehicules() {
+    try {
+        const marque = document.getElementById('filtre-marque').value;
+        const modele = document.getElementById('filtre-modele').value;
+        const prixMin = document.getElementById('filtre-prix-min').value;
+        const prixMax = document.getElementById('filtre-prix-max').value;
+        const km = document.getElementById('filtre-km').value;
 
         const params = { typeOffre: typeOffreActuel };
+        if (marque) params.marque = marque;
+        if (modele) params.modele = modele;
+        if (prixMin) params.prixMin = prixMin;
+        if (prixMax) params.prixMax = prixMax;
+        if (km) params.kilometrageMax = km;
 
+        const response = await axios.get('https://mmotors-back-production.up.railway.app/vehicules', { params });
+        const vehicules = response.data;
+        const div = document.getElementById('liste-vehicules');
 
-console.log("=== REQUÊTE VEHICULES ENVOYÉE ===");
-
-console.log(params)
-
-
-      if (marque) params.marque = marque;
-      if (modele) params.modele = modele;
-      if (prixMin) params.prixMin = prixMin;
-      if (prixMax) params.prixMax = prixMax;
-      if (km) params.kilometrageMax = km;
-
-
-
-   console.log("=== params ENVOYÉE ===");
-
-      console.log(params)
-      //const response = await axios.get('https://mmotors-back-production.up.railway.app/vehicules', { params });
-
-      const response = await axios.get('https://mmotors-back-production.up.railway.app/vehicules', { params });
-
-      console.log(response.data)
-         const vehicules = response.data;
-      const div = document.getElementById('liste-vehicules');
-
-      if (vehicules.length === 0) {
-          div.innerHTML = '<p>Aucun véhicule trouvé.</p>';
-          return;
-      }
+        if (vehicules.length === 0) {
+            div.innerHTML = '<p>Aucun véhicule trouvé.</p>';
+            return;
+        }
 
         div.innerHTML = '';
-        
-         vehicules.forEach(function(vehicule) {
-             div.innerHTML += `
-                 <div class="carte-vehicule">
-                     <h3>${vehicule.marque} ${vehicule.modele}</h3>
-                     <p>Année : ${vehicule.annee}</p>
-                     <p>Prix : ${vehicule.prix} €</p>
-                     <p>Kilométrage : ${vehicule.kilometrage} km</p>
-                     <button onclick="window.location.href='dossier/dossier.html?marque=${vehicule.marque}&modele=${vehicule.modele}&annee=${vehicule.annee}&prix=${vehicule.prix}&km=${vehicule.kilometrage}&typeOffre=${vehicule.typeOffre}'">Déposer un dossier</button>
-                 </div>
-             `;
-         });
-     }
+        vehicules.forEach(function(vehicule) {
+            div.innerHTML += `
+                <div class="carte-vehicule">
+                    <h3>${vehicule.marque} ${vehicule.modele}</h3>
+                    <p>Année : ${vehicule.annee}</p>
+                    <p>Prix : ${vehicule.prix} €</p>
+                    <p>Kilométrage : ${vehicule.kilometrage} km</p>
+                    <button onclick="window.location.href='dossier/dossier.html?marque=${vehicule.marque}&modele=${vehicule.modele}&annee=${vehicule.annee}&prix=${vehicule.prix}&km=${vehicule.kilometrage}&typeOffre=${vehicule.typeOffre}'">Déposer un dossier</button>
+                </div>
+            `;
+        });
+
+    } catch (error) {
+        const div = document.getElementById('liste-vehicules');
+        div.innerHTML = '<p style="color:red;">Impossible de charger les véhicules. Veuillez réessayer.</p>';
+    }
+}
+
+
 
 
 
