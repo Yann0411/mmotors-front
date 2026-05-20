@@ -3,7 +3,7 @@
     justify-content:center;
     align-items:center;
     min-height: 100vh;
-    background-color: transparent;
+    
 }
 
 .auth-box {
@@ -75,7 +75,7 @@
 }
 
 .auth-brand p {
-    color: white;
+    color: #ccc;
     margin: 5px 0 0 0;
 }
 
@@ -118,3 +118,90 @@ body::before {
     opacity: 0.15;
     z-index: -1;
 }
+
+
+
+/* Groupement champ + label + erreur */
+  .champ-groupe {
+      display: flex;  
+      flex-direction: column;
+
+      gap: 5px;
+  }
+
+
+
+
+  .champ-groupe label {
+       font-size: 0.85em;
+      font-weight: 600;
+      color: #444;
+  }
+
+
+  .requis { color: #CC0000; }
+  
+  /* Message d'erreur sous le champ */
+  .erreur-champ {
+      display: none;
+      font-size: 0.78em;
+       color: #CC0000; 
+      font-weight: 500;
+  }
+
+
+
+
+  /* Bordure rouge quand champ en erreur */
+  .input-erreur {
+       border-color: #CC0000 !important;
+      background-color: #fff8f8 !important;
+  }
+  
+
+
+  /* Wrapper mot de passe + bouton œil */
+  .champ-mdp { 
+      position: relative;
+       display: flex;
+    
+       align-items: center;
+  }
+
+
+
+  .champ-mdp input {
+      width: 100%;
+       padding-right: 42px;
+        box-sizing: border-box;
+  }
+
+
+
+  .btn-oeil {
+      position: absolute;
+  
+       right: 10px;
+       background: none !important;
+      border: none !important;
+      padding: 0 !important;
+       cursor: pointer;
+      font-size: 1.1em;
+       color: #888;
+      line-height: 1; 
+      box-shadow: none !important;
+  }
+
+
+
+  .btn-oeil:hover { color: #333; background: none !important; }
+
+  
+  /* Lien bascule */
+  .lien-bascule {
+      text-align: center;
+      margin: 0;
+      font-size: 0.88em;
+      color: #666;
+  }
+
