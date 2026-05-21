@@ -1,263 +1,426 @@
-  body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+/* variables couleurs globales */
+:root {
 
-  .accueil {
-      text-align:center;
-      padding: 80px 20px;
-      background: linear-gradient(135deg, #f5e6e6, #f0f0f0);
-      color: #222;
-      min-height: 100vh;
-      
-  }
-
-  .accueil h1 { font-size:3em;  margin-bottom: 10px;}
-
-  .accueil p { font-size:1.2em; margin-bottom:50px; color: #555; }
-
-  .choix { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+    --rouge:        #C0392B;
+    --rouge-hover:  #A93226;
+    --bleu-nuit:    #1F2937;
+    --fond:         #F8FAFC;
+}
 
 
+body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: var(--fond); }
 
 
-  .btn-choix {
-      padding:30px 60px;
-      font-size: 1.5em;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer; margin-bottom: 5px;
-      transition: transform 0.2s;
+.accueil {
+      text-align: center;
+    padding: 80px 20px;
+    color: #222;
+    min-height: 100vh;
+    /* gradient rose  */
+    background: linear-gradient(160deg, #0F172A 0%, #1F2937 70%, #2D1B1B 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
-  }
+.accueil h1 {
 
-  .btn-choix:hover { transform: scale(1.05); }
-  .btn-achat { background-color:#CC0000; color: white; }
-  .btn-location { background-color: #555555; color: white; }
+    font-size: 3em;
+    margin-bottom: 10px;
+     color: white;
+    font-weight: 800;
+    /* letter-spacing: 2px; */
+}
 
-  .catalogue { display: none; padding: 30px; }
+.accueil > p {
 
+    font-size: 1.1em;
+    color: #94A3B8;
+      margin-bottom: 48px;
+}
 
+/* le nouveau design */
+.accroche { display: none; }
 
-
-
-  .filtres {
-      background: #f5f5f5;
-      padding: 20px;
-      border-radius:10px;
-      margin-bottom: 30px;
-      display: flex;
-      gap:15px;
-      flex-wrap: wrap;
-      align-items:flex-end;
-  }
-
-  .filtres input {
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius:5px;
-      font-size: 1em;
-
-  }
+.choix { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
 
 
+/* .btn-choix {
+    padding:30px 60px;
+    font-size: 1.5em;
+} */
 
-  .filtres button {
-      padding: 8px 20px;
-      background-color: #CC0000;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1em;
-  }
+.btn-choix {
+      width: 260px;
+    padding: 32px 24px;
+    text-align: left;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: rgba(255,255,255,0.05);
+    color: white;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.btn-choix:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.btn-achat   { background: rgba(255,255,255,0.05); }
+.btn-location { background: rgba(255,255,255,0.05); }
+
+
+.catalogue { display: none; padding: 30px; }
 
 
 
-  .btn-retour {
-      margin-bottom: 20px;
-      padding:8px 20px;
-      background: #333;
-      color: white;
-      border:none;
-      border-radius: 5px;
-       cursor:pointer;
-  }
+.filtres {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 24px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+      align-items: flex-end;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
 
- 
+.filtres input {
+      padding: 9px 12px;
+    border: 1px solid #CBD5E1;
+    border-radius: 6px;
+    font-size: 0.9em;
+}
+
+.filtres input:focus {
+    outline: none;
+    border-color: var(--rouge);
+    box-shadow: 0 0 0 3px rgba(192,57,43,0.1);
+}
+
+.filtres button {
+    padding: 9px 20px;
+    background-color: var(--rouge);
+    color: white;
+    border: none;
+      border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+.filtres button:hover { background-color: var(--rouge-hover); }
+
+
+
+.btn-retour {
+    margin-bottom: 20px;
+      padding: 8px 16px;
+    background: transparent;
+    color: #64748B;
+     border: 1px solid #E2E8F0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.88em;
+    transition: all 0.2s;
+}
+
+.btn-retour:hover {
+    background: white;
+    color: #1A202C;
+      border-color: #CBD5E1;
+}
+
+
+
 .accueil .accroche {
 
-      font-size: 1em;
-      color: #666;
-      max-width: 550px;
 
-      margin: 0 auto 50px auto;
-      line-height: 1.8;
-      padding: 20px;
-      border-left: 4px solid #CC0000;
-      background-color: rgba(255,255,255,0.6);
-      border-radius: 0 8px 8px 0;
-      text-align: left;
-  }
+    font-size: 1em;
+    color: #666;
+    max-width: 550px;
+    margin: 0 auto 50px auto;
+    line-height: 1.8;
+    padding: 20px;
+    border-left: 4px solid var(--rouge);
+    background-color: rgba(255,255,255,0.6);
+     border-radius: 0 8px 8px 0;
+    text-align: left;
+}
 
 
+.liste-vehicules {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
 
-  .liste-vehicules {
-    
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-       gap: 20px;
-  }
+.carte-vehicule {
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      transition: all 0.2s;
+}
 
-  .carte-vehicule {
-       border: 1px solid #ddd;
-       border-radius:10px;
-      padding:20px;
-      background: white;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      
-  }
+.carte-vehicule:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
 
-  .carte-vehicule h3 { margin-top: 0; color: #222; }
+.carte-vehicule h3 { margin-top: 0; color: #1A202C; }
+.carte-vehicule p  { color: #64748B; font-size: 0.9em; margin: 4px 0; }
 
-  .navbar {
+.carte-vehicule button {
+    margin-top: 12px;
+      width: 100%;
+    padding: 9px;
+    background: var(--rouge);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.88em;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+.carte-vehicule button:hover { background: var(--rouge-hover); }
+
+
+.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 30px;
-    background-color: white; border-bottom: 3px solid #CC0000;
-    color: #222;
+      padding: 0 30px;
+    height: 64px;
+    background-color: white;
+    /* j'avais mis border-bottom: 3px solid #CC0000 avant */
+    border-bottom: 1px solid #E2E8F0;
     position: sticky;
     top: 0;
     z-index: 100;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 
 
+.navbar-user-info {
 
-
-  .navbar-user-info {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 4px;
-      margin-right: 5px;
-  }
-
-
-
+    display: flex;
+    flex-direction: column;
+     align-items: flex-end;
+    gap: 4px;
+    margin-right: 5px;
+}
 
 
 .navbar-brand {
-    font-size: 1.4em;
-    font-weight: bold;
-    color: #cc0000;
-    letter-spacing: 1px;
+    font-size: 1.3em;
+    font-weight: 800;
+    color: var(--rouge);
+      letter-spacing: 1.5px;
     text-decoration: none;
+    text-transform: uppercase;
 }
-
 
 .btn-nav-link {
 
-    padding: 8px 16px;
-    background: transparent;
-    color: #CC0000;
-    border: 1px solid #CC0000;
-    border-radius: 5px;
+    padding: 7px 16px;
+     background: transparent;
+    color: var(--bleu-nuit);
+     border: 1px solid #CBD5E1;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 0.9em;
-    transition: all 0.2s;
-
+    font-size: 0.88em;
+    font-weight: 500;
+      transition: all 0.2s;
 }
+
 .btn-nav-link:hover {
 
-    background-color: #CC0000;
-    color: white;
-}
 
+    background-color: var(--bleu-nuit);
+     color: white;
+    border-color: var(--bleu-nuit);
+}
 
 
 .navbar-user {
 
-
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
 }
 
- .navbar-user span {
-     color: #999;
-     font-size: 0.8em;
-     padding-right: 3px;
- }
+.navbar-user span {
+    color: #64748B;
+    font-size: 0.88em;
+    font-weight: 500;
+    /* padding-right: 3px; */
+}
 
- 
 
+/* bouton deconnexion   */
 .btn-deconnecter {
-    padding: 8px 16px;
-     background-color:#CC0000 ;
-    color: white;
-    border: none;
-     border-radius: 5px;
+      padding: 7px 14px;
+    background: transparent;
+    color: #64748B;
+    border: 1px solid #E2E8F0;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 0.9em;
-    transition: background-color 0.2s;
+    font-size: 0.85em;
+    transition: all 0.2s;
 }
 
 .btn-deconnecter:hover {
-    background-color: #6B0000;
-
+    background: #F8FAFC;
+    color: #1A202C;
+    border-color: #CBD5E1;
 }
 
-.btn-nav {
-    padding: 15px 30px;
-    font-size: 1em;
-    border: 2px solid #CC0000 ;
-    border-radius: 10px;
+
+/* badges statut */
+.statut {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75em;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+      text-transform: uppercase;
+}
+
+.statut-en-attente { background: #FEF9C3; color: #854D0E; }
+.statut-valide     { background: #DCFCE7; color: #166534; }
+.statut-refuse     { background: #FDECEA; color: #991B1B; }
+
+
+/* groupes de champs formulaire */
+.champ-groupe {
+    display: flex;
+    flex-direction: column;
+      gap: 5px;
+}
+
+.champ-groupe label {
+    font-size: 0.85em;
+    font-weight: 600;
+    color: #1A202C;
+}
+
+.champ-groupe input,
+.champ-groupe select {
+      padding: 9px 12px;
+    border: 1px solid #CBD5E1;
+    border-radius: 6px;
+    font-size: 0.9em;
+    background: white;
+}
+
+.champ-groupe input:focus,
+.champ-groupe select:focus {
+    outline: none;
+    border-color: var(--rouge);
+    box-shadow: 0 0 0 3px rgba(192,57,43,0.1);
+}
+
+.requis { color: var(--rouge); }
+
+.erreur-champ {
+    display: none;
+    font-size: 0.78em;
+      color: var(--rouge);
+    font-weight: 500;
+}
+
+.input-erreur {
+    border-color: var(--rouge) !important;
+    background-color: #FDECEA !important;
+}
+
+
+/* wrapper pour le mdp avec l'oeil */
+.champ-mdp {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.champ-mdp input {
+    width: 100%;
+    padding-right: 42px;
+      box-sizing: border-box;
+}
+
+.btn-oeil {
+    position: absolute;
+    right: 10px;
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
     cursor: pointer;
-    background: transparent;
-    color: white;
-    transition: all 0.2s;
-
+    font-size: 1.1em;
+    color: #94A3B8;
+    box-shadow: none !important;
 }
 
-.btn-nav:hover {
+.btn-oeil:hover { color: #1A202C; background: none !important; }
 
-        background-color: white;
-    color: #8d021e;
+.lien-bascule {
+    text-align: center;
+    margin: 0;
+      font-size: 0.88em;
+    color: #64748B;
 }
 
-@media (max-width: 600px) {
+.message {
+    font-size: 0.9em;
+    font-weight: 500;
+    margin-top: 4px;
+    min-height: 20px;
+}
 
+
+@media (max-width: 768px) {
 
     .navbar {
-        flex-direction: column;
+          padding: 12px 16px;
+        height: auto;
+        flex-wrap: wrap;
         gap: 10px;
-        
-        padding: 10px 15px;
-        text-align: center;
-        
-
     }
+
+    .navbar-user { flex-wrap: wrap; gap: 8px; }
 
     .accueil h1 { font-size: 2em; }
-    .accueil p { font-size: 1em; }
+    .accueil p  { font-size: 1em; }
 
-    .btn-choix {
-
-        padding: 20px 40px;
-        font-size: 1.2em;
+    .choix {
+        flex-direction: column;
+          align-items: center;
     }
 
-    .catalogue { padding: 15px; }
+    .btn-choix {
+        width: 100%;
+        max-width: 340px;
+        /* padding: 20px 40px; ancien style */
+    }
 
-
+    .catalogue { padding: 16px; }
 
     .filtres {
-
         flex-direction: column;
     }
 
-    .filtres input {
-        width: 100%;
-    }
+    .filtres input { width: 100%; }
 
+    .liste-vehicules { grid-template-columns: 1fr; }
 
 }
-
