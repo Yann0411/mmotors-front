@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
   <html lang="fr">
   <head>
 
@@ -9,48 +9,65 @@
   </head>
   <body>
 
-      <!-- la Page daccueil -->
-   <nav class="navbar">
-    
-    <a class="navbar-brand" href="index.html">M-Motors</a>
-    <div class="navbar-user">
-        <button class="btn-nav-link" 
-        onclick="window.location.href='espaceClient/espaceClient.html'">Mon espace
-        client</button>
-        <button class="btn-nav-link" 
-        onclick="window.location.href='dossier/dossier.html'">Déposer un dossier</button>
+      <nav class="navbar">
 
-        
-        <div>
-            <span id="nom-utilisateur"></span>
-            <button class="btn-deconnecter" onclick="seDeconnecter()">Se déconnecter</button>
+      <a class="navbar-brand" href="index.html">M-Motors</a>
+
+      <div class="navbar-user">
+
+          <button class="btn-nav-link" onclick="window.location.href='espaceClient/espaceClient.html'">Mon espace client</button>
+
+          <button class="btn-nav-link" onclick="window.location.href='dossier/dossier.html'">Déposer un dossier</button>
+
+          <div>
+              <span id="nom-utilisateur"></span>
+              <button class="btn-deconnecter" onclick="seDeconnecter()">Se déconnecter</button>
+          </div>
+
+      </div>
+      </nav>
+
+
+  <!-- page accueil -->
+
+  <div class="accueil" id="accueil">
+
+      <h1>M-Motors</h1>
+
+      <p>Depuis 1987, votre partenaire achat et location de véhicules</p>
+
+      <!-- mise en page-->
+      <div class="choix">
+
+          <div class="btn-choix btn-achat" onclick="afficherCatalogue('ACHAT')">
+
+              <span style="font-size:2em; display:block; margin-bottom:12px;">🚗</span>
+              <strong style="font-size:1.1em; display:block; margin-bottom:8px;">Acheter un véhicule</strong>
+
+               <span style="color:#94A3B8; font-size:0.88em;">Découvrez nos véhicules disponibles immédiatement à l'achat.</span>
+              <span style="display:block; margin-top:16px; color:#F87171; font-size:0.88em; font-weight:600;">Voir le catalogue →</span>
+          </div>
+
+          <div class="btn-choix btn-location" onclick="afficherCatalogue('LOCATION')">
             
-             
-        </div>
-       
-     </div>
-    </nav>
+              <span style="font-size:2em; display:block; margin-bottom:12px;">🔑</span>
 
-<!-- la Page daccueil -->
-<div class="accueil" id="accueil">
-    <h1>M-Motors</h1>
+               <strong style="font-size:1.1em; display:block; margin-bottom:8px;">Louer un véhicule</strong>
 
-    <p>Trouvez le véhicule qui vous correspond</p>
+              <span style="color:#94A3B8; font-size:0.88em;">Profitez de nos offres de location
+              flexibles adaptées à vos besoins.</span>
+              <span style="display:block; margin-top:16px; color:#F87171; font-size:0.88em; font-weight:600;">Voir les offres →</span>
+          </div>
 
-    <p class="accroche">Depuis 1987, M-Motors vous accompagne dans l'achat et la location de véhicules d'occasion de qualité.<br>
-    Plus d'un million de clients nous font confiance à travers toute la France.</p>
+      </div>
 
-    <div class="choix">
-        <button class="btn-choix btn-achat" onclick="afficherCatalogue('ACHAT')">Catalogue des véhicules à vendre</button>
-        <button class="btn-choix btn-location" onclick="afficherCatalogue('LOCATION')">Catalogue des véhicules en location</button>
-    </div>
-
-</div>
+  </div>
 
 
       <!-- Page catalogue -->
       <div class="catalogue" id="catalogue">
           <button class="btn-retour" onclick="retourAccueil()">← Retour</button>
+          
           <h2 id="titre-catalogue"></h2>
 
           <div class="filtres">
