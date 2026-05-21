@@ -57,9 +57,10 @@
               <input type="text" id="filtre-marque" placeholder="Marque">
 
               <input type="text" id="filtre-modele" placeholder="Modèle">
-              <input type="number" id="filtre-prix-min" placeholder="Prix min (€)">
-              <input type="number" id="filtre-prix-max" placeholder="Prix max (€)">
-              <input type="number" id="filtre-km" placeholder="Km max">
+           <input type="number" id="filtre-prix-min" placeholder="Prix min (€)" min="0">
+            <input type="number" id="filtre-prix-max" placeholder="Prix max (€)" min="0">
+            <input type="number" id="filtre-km" placeholder="Km max" min="0">
+
               <button onclick="rechercherVehicules()">Rechercher</button>
           </div>
 
