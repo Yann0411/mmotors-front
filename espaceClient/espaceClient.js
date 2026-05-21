@@ -1,87 +1,104 @@
-  
-  const statutLabels = {
-    'EN_ATTENTE': 'En attente',
-    'VALIDE': 'Validé',
-    'REFUSE': 'Refusé'
-};
+const statutLabels = { 
+      'EN_ATTENTE': 'En attente',
+      'VALIDE': 'Validé',
+      'REFUSE': 'Refusé'
+  };
 
-  const token = localStorage.getItem('token');
-if (!token) {
-    window.location.href = '../auth/auth.html';
-}
+
+
+  const typeOffreLabels = {
+      'ACHAT': 'Achat',
+      'LOCATION': 'Location'
+  };
+
+
+
   
+  const token = localStorage.getItem('token');
+  if (!token) {
+      window.location.href = '../auth/auth.html';
+
+  }
+
   function seDeconnecter() {
-      localStorage.clear();
+
+    
+    localStorage.clear();
       window.location.href = '../auth/auth.html';
   }
 
   const nomStocke = localStorage.getItem('nom');
-if (nomStocke) {
-    document.getElementById('nom-utilisateur').textContent = 'Bonjour ' + nomStocke;
-}
 
 
+  if (nomStocke) {
 
-async function chargerDossiers() {
+      document.getElementById('nom-utilisateur').textContent = 'Bonjour ' + nomStocke;
+  }
 
-        const token = localStorage.getItem('token');
-
-console.log("=======================================================");
-console.log("=== CHARGEMENT ESPACE CLIENT ===");
-console.log("token présent : " + (token ? "OUI" : "NON"));
-console.log("=======================================================");
+     function formaterDate(dateStr) {
 
     
-     const msg = document.getElementById('msg-espace');
+    if (!dateStr) return '';
+    
+    const [annee, mois, jour] = dateStr.split('-');
+      return new Date(annee, mois - 1, jour).toLocaleDateString('fr-FR', {
+          day: 'numeric', month: 'long', year: 'numeric'
+      });
 
-    if (!token) {
+  }
 
-        msg.style.color = 'red';
-        msg.textContent = 'Vous devez être connecté.';
-        return;
-    }
+  async function chargerDossiers() {
 
-    try {
+      const msg = document.getElementById('msg-espace');
 
-        const response = await axios.get('https://mmotors-back-production.up.railway.app/dossiers/moi',
-            { headers: { Authorization: 'Bearer ' + token } }
-        );
+      if (!token) { 
 
-             const dossiers = response.data;
+            msg.style.color = 'red';
+          msg.textContent = 'Vous devez être connecté.';
+          return;
+      }
 
-             console.log("=== DOSSIERS =>  REPONSE DU DU BACK ===");
-            console.log("nombre de dossiers : " + dossiers.length);
-            console.log(dossiers);
+      try {
+
+          const response = await axios.get('https://mmotors-back-production.up.railway.app/dossiers/moi',
+              { headers: { Authorization: 'Bearer ' + token } }
+          );
+
+          const dossiers = response.data;
+
+          const div = document.getElementById('liste-dossiers');
+
+          if (dossiers.length === 0) {
+          
+            div.innerHTML = '<p>Vous n\'avez pas encore de dossier.</p>';
+              return;
+          }
+
+          div.innerHTML = '';
+          dossiers.forEach(function(dossier) {
+              const statutClasse = 'statut-' + dossier.statut.toLowerCase().replace('_', '-');
+
+              div.innerHTML += `
+                  <div class="carte-dossier">
+                      <p><strong>Type :</strong> ${typeOffreLabels[dossier.typeOffre] || dossier.typeOffre}</p>
+                      
+                      <p><strong>Message :</strong> ${dossier.message}</p>
+                      <p><strong>Date :</strong> ${formaterDate(dossier.dateDepot)}</p>
+                      <span class="statut ${statutClasse}">${statutLabels[dossier.statut] || dossier.statut}</span>
+
+                  </div>
+              `;
+          });
 
 
-        const div =document.getElementById('liste-dossiers');
+      } catch (error) {
 
-        if (dossiers.length === 0) {
-            div.innerHTML ='<p>Vous n\'avez pas encore de dossier.</p>';
-            return;
-        }
-
-        div.innerHTML = '';
+           msg.style.color = 'red';
+            msg.textContent = 'Erreur lors du chargement des dossiers.';
+      }
+  }
 
 
-        dossiers.forEach(function(dossier) {
-            const statutClasse = 'statut-' + dossier.statut.toLowerCase().replace('_', '-');
-            div.innerHTML += `
-                <div class="carte-dossier">
-                    <p><strong>Type :</strong> ${dossier.typeOffre}</p>
-                    <p><strong>Message :</strong> ${dossier.message}</p>
-                    <p><strong>Date :</strong> ${dossier.dateDepot}</p>
-                    <span class="statut ${statutClasse}">${statutLabels[dossier.statut] || dossier.statut}</span>
-                </div>
-            `;
-        });
 
-    } catch (error) {
-        
-        msg.style.color = 'red';
-        
-        msg.textContent = 'Erreur lors du chargement des dossiers.';
-    }
-}
+  chargerDossiers();
 
-chargerDossiers();
