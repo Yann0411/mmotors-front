@@ -1,72 +1,106 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M-Motors - Administration</title>
-    <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="admin.css">
-</head>
-<body>
+  <html lang="fr">
+  <head>
 
-      <nav class="navbar">
-      <a class="navbar-brand" href="admin.html">M-Motors</a>
-      <div class="navbar-user">
-          <span id="nom-utilisateur"></span>
-          <button class="btn-deconnecter" onclick="seDeconnecter()">Se déconnecter</button>
-      </div>
-        </nav>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>M-Motors - Administration</title>
 
+      <link rel="stylesheet" href="../styles.css">
 
-<h1 class="admin-titre">Back-office M-Motors</h1>
+      <link rel="stylesheet" href="admin.css">
+  </head>   
+  <body>
 
+            
+    <nav class="navbar">
+         
+        <a class="navbar-brand" href="admin.html">M-Motors</a>
           
-    <div class="admin-container">
+        <div class="navbar-user">
+                  <span id="nom-utilisateur"></span>
+              <span class="badge-admin">ADMIN</span>
+              <button class="btn-deconnecter" onclick="seDeconnecter()">Se déconnecter</button>
+          </div>
+      </nav>
 
-      
+      <!-- toast de Feedback -->
+      <div id="toast" class="toast"></div>
 
-    
+      <h1 class="admin-titre">Back-office M-Motors</h1>
 
-        <!-- Section véhicules -->
-        <section class="admin-section">
+      <div class="admin-container">
 
-            <h2>Véhicules</h2>
+          <!-- sZction véhicules -->
+          <section class="admin-section">
 
-            <div class="admin-formulaire">
+              <h2>Véhicules</h2>
 
-                <h3 id="titre-form-vehicule">Ajouter un véhicule</h3>
-                <input type="hidden" id="vehicule-id">
-                 <input type="text" id="vehicule-marque" placeholder="Marque">
-                <input type="text" id="vehicule-modele" placeholder="Modele">
-                 <input type="number" id="vehicule-annee" placeholder="Année">
-                <input type="number" id="vehicule-prix" placeholder="Prix">
-                <input type="number" id="vehicule-km" placeholder="Kilométrage">
-                <select id="vehicule-typeOffre">
+                   <div class="admin-formulaire">
+                  <h3 id="titre-form-vehicule">Ajouter un véhicule</h3>
+                    <input type="hidden" id="vehicule-id">
 
-                    <option value="ACHAT">Achat</option>
-                    <option value="LOCATION">Location</option>
-                </select>
-                <button onclick="sauvegarderVehicule()">Sauvegarder</button>
-                <button onclick="annulerModification()">Annuler</button>
-                <p id="msg-vehicule" class="message"></p>
+                  <div class="champ-groupe">
 
+                      <label for="vehicule-marque">Marque <span class="requis">*</span></label>
+                      <input type="text" id="vehicule-marque" placeholder="Ex : Peugeot">
+                  </div>
 
-            </div>
+                  <div class="champ-groupe">
+                      <label for="vehicule-modele">Modèle <span class="requis">*</span></label>
 
-            <div id="liste-vehicules-admin"></div>
-        </section>
+                       <input type="text" id="vehicule-modele" placeholder="Ex : 308">
+                  </div> 
 
-        <!--  dossiers -->
-        <section class="admin-section">
-            <h2>Dossiers clients</h2>
-            <div id="liste-dossiers-admin"></div>
+                  <div class="champ-groupe">
 
-        </section>
+                      <label for="vehicule-annee">Année <span class="requis">*</span></label>
+                      <input type="number" id="vehicule-annee" placeholder="Ex : 2021" min="1900" max="2030">
+                  </div>
+   
+                  <div class="champ-groupe">
+                      <label for="vehicule-prix">Prix (€) <span class="requis">*</span></label>
+                      <input type="number" id="vehicule-prix" placeholder="Ex : 15000" min="0" step="100">
+                  </div>
 
-    </div>
+                  <div class="champ-groupe">
+                      <label for="vehicule-km">Kilométrage <span class="requis">*</span></label>
+                      <input type="number" id="vehicule-km" placeholder="Ex : 50000" min="0">
+                  </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="admin.js"></script>
+                  <div class="champ-groupe">
+                      <label for="vehicule-typeOffre">Type d'offre <span class="requis">*</span></label>
+                      <select id="vehicule-typeOffre">
 
-</body>
-</html>
+                          <option value="ACHAT">Achat</option>
+                          <option value="LOCATION">Location</option>
+
+                      </select>
+                  </div>
+
+                  <div class="btn-groupe-form">
+
+                       <button class="btn-sauvegarder" onclick="sauvegarderVehicule()">Sauvegarder</button>
+                      <button class="btn-annuler" onclick="annulerModification()">Annuler</button>
+
+                  </div>
+               
+                  <p id="msg-vehicule" class="message"></p>
+              </div>
+
+              <div id="liste-vehicules-admin"></div>
+          </section>  
+
+          <!-- section dossiers -->
+          <section class="admin-section">
+              <h2>Dossiers clients</h2>
+              <div id="liste-dossiers-admin"></div>
+          </section>
+
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <script src="admin.js"></script>
+
+  </body>
+  </html>
