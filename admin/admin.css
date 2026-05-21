@@ -104,6 +104,106 @@
     margin-bottom: 20px;
 }
 
+/* Labels champs obligatoires */
+  .champ-groupe {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+  }
+
+
+  .champ-groupe label {
+      font-size: 0.82em;
+      font-weight: 600;
+      color: #444;
+  }
+  .requis { color: #CC0000; }
+
+  /* Champ en erreur */
+  .input-erreur {
+      border-color: #CC0000 !important;
+       background-color: #fff8f8 !important;
+  }
+
+  /* Groupes de boutons */
+  .btn-groupe-form {
+       display: flex;
+      gap: 10px;
+  }
+  .btn-sauvegarder {
+
+
+      flex: 1;
+      padding: 10px;
+      background-color: #CC0000;
+      color: white;
+      border: none;
+       border-radius: 4px;
+        cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+
+  }
+  .btn-sauvegarder:hover { background-color: #a00000; }
+  .btn-annuler {
+
+       padding: 10px 16px;
+      background-color: #888;
+        color: white;
+      border: none;
+      
+      border-radius: 4px;
+       cursor: pointer;
+      font-size: 14px;
+  }
+  .btn-annuler:hover { background-color: #666; }
+
+  .btn-groupe-carte { display: flex; gap: 8px; flex-wrap: wrap; }
+  
+  .btn-modifier  { background-color: #333 !important; }
+  
+   .btn-supprimer { background-color: #CC0000 !important; }
+    .btn-valider   { background-color: #28a745 !important; color: white; padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; }
+  .btn-refuser   { background-color: #CC0000 !important; color: white; padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; }
+
+  /* Badge admin */
+  .badge-admin {
+
+      background-color: #CC0000;
+      color: white;
+      font-size: 0.7em;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 10px;
+      letter-spacing: 1px;
+  }
+  
+  /* Toast */
+  .toast {
+
+
+      position: fixed;
+       bottom: 30px;
+      right: 30px;
+      padding: 14px 24px;
+       border-radius: 8px;
+      color: white;
+      font-weight: 600;
+        font-size: 0.95em;
+     
+        opacity: 0;
+      transition: opacity 0.3s ease;
+     
+      z-index: 9999;
+       pointer-events: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  .toast.visible { opacity: 1; }
+  .toast-succes  { background-color: #28a745; }
+  .toast-erreur  { background-color: #CC0000; }
+  
+
+
 
 @media (max-width: 900px) {
     .admin-container {
