@@ -111,8 +111,7 @@ function seDeconnecter() {
                         <p>Année : ${vehicule.annee}</p>
                         <p>Prix : ${vehicule.prix.toLocaleString('fr-FR')} €</p>
                         <p>Kilométrage : ${vehicule.kilometrage.toLocaleString('fr-FR')} km</p>
-                        <button onclick="window.location.href='dossier/dossier.html?marque=${vehicule.marque}&modele=${vehicule.modele}&annee=${vehicule.annee}&prix=${vehicule.prix}&km
-  =${vehicule.kilometrage}&typeOffre=${vehicule.typeOffre}'">
+                        <button onclick="window.location.href='dossier/dossier.html?marque=${vehicule.marque}&modele=${vehicule.modele}&annee=${vehicule.annee}&prix=${vehicule.prix}&km=${vehicule.kilometrage}&typeOffre=${vehicule.typeOffre}'">
                             ${labelBtn}
                         </button>
                     </div> 
