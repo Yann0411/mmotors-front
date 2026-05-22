@@ -6,7 +6,7 @@ const token = localStorage.getItem('token');
 
   function seDeconnecter() {
 
-    
+
       localStorage.clear();
         window.location.href = '../auth/auth.html';
   }
@@ -16,7 +16,13 @@ const token = localStorage.getItem('token');
       document.getElementById('nom-utilisateur').textContent = 'Bonjour ' + nomStocke;
   }
 
-  const params = new URLSearchParams(window.location.search);
+const params = new URLSearchParams(window.location.search);
+
+ // protection basique contre les injections
+    function contientScript(valeur) {
+        return /<|>|javascript:|onerror=/i.test(valeur);
+    }
+
 
   // si le user vient depuis un véhicule précis
   if (params.get('marque')) {
@@ -61,6 +67,15 @@ const token = localStorage.getItem('token');
             msg.textContent = 'Veuillez décrire le véhicule souhaité avant d\'envoyer.';
           return;
       }
+
+      if (messageClient && contientScript(messageClient)) {
+
+        
+            msg.style.color = 'red';
+             msg.textContent = 'Le message contient des caractères non autorisés.';
+              return;
+        }
+
 
       if (!token) {
 

@@ -6,12 +6,12 @@ const statutLabels = {
 
   };
 
+
   const typeOffreLabels = {
       'ACHAT': 'Achat',
-      'LOCATION': 'Location'
-
+      'LOCATION': 'Location',
+        'LOCATION_ACHAT': 'Location avec option d\'achat (LOA)'
   };
-
 
 
     const token = localStorage.getItem('token');
@@ -148,13 +148,30 @@ const statutLabels = {
           }
       });
 
-      if (!valide) {
+  if (!valide) {
+            msg.style.color = 'red';
+              msg.textContent = 'Veuillez remplir tous les champs obligatoires.';
+            return;
+        }
 
+        // validations numérique
 
-          msg.style.color = 'red';
-            msg.textContent = 'Veuillez remplir tous les champs obligatoires.';
-          return;
-      }
+          const prixVal = parseFloat(document.getElementById('vehicule-prix').value);
+        const kmVal   = parseInt(document.getElementById('vehicule-km').value);
+
+        if (prixVal <= 0) {
+
+            document.getElementById('vehicule-prix').classList.add('input-erreur');
+            msg.style.color = 'red';
+              msg.textContent = 'Le prix doit être supérieur à 0.';
+            return;
+        }
+        if (kmVal < 0) {
+              document.getElementById('vehicule-km').classList.add('input-erreur');
+            msg.style.color = 'red';
+            msg.textContent = 'Le kilométrage ne peut pas être négatif.';
+            return;
+        }
 
       const vehicule = {
 
