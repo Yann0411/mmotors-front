@@ -1,51 +1,60 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M-Motors - Déposer un dossier</title>
-    <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="dossier.css">
-</head>
-<body>
+  <html lang="fr">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>M-Motors - Déposer un dossier</title>
+      <link rel="stylesheet" href="../styles.css">
+      <link rel="stylesheet" href="dossier.css">
+  </head>
+  <body>
 
-    <nav class="navbar">
-    <a class="navbar-brand" href="../index.html">M-Motors</a>
+      <nav class="navbar">
 
-    <div class="navbar-user">
-        <span id="nom-utilisateur"></span>
-        <button class="btn-deconnecter" onclick="seDeconnecter()">Se déconnecter</button>
-    </div>
-    </nav>
+          <a class="navbar-brand" href="../index.html">M-Motors</a>
 
+              <div class="navbar-user">
 
+              <span id="nom-utilisateur"></span>
+              <button class="btn-deconnecter" onclick="seDeconnecter()">Se déconnecter</button>
+          </div>
+      </nav>
 
-    <div class="auth-container">
+      <div class="dossier-container">
 
-        <div class="auth-box">
-            <button onclick="window.location.href='../index.html'">← Retour</button>
-        
+          <button class="btn-retour" onclick="window.location.href='../index.html'">← Retour</button>
+
+          <div class="dossier-box">
+            
+
               <h2>Déposer un dossier</h2>
+              <p class="dossier-sous-titre">Décrivez votre demande, notre équipe vous répondra rapidement.</p>
 
-            <select id="typeOffre">
-                <option value="ACHAT">Achat</option>
-                
-                <option value="LOCATION">Location</option>
+              <div class="champ-groupe">
 
-            </select>
+                    <label for="typeOffre">Type de demande <span class="requis">*</span></label>
+                  <select id="typeOffre">
+                      <option value="ACHAT">Achat</option>
+                        <option value="LOCATION">Location</option>
+                  </select>
+              </div>
 
-<textarea id="message" placeholder="Décrivez précisément le véhicule souhaité (marque, modèle, Kilométrages...). Une description incomplete sera automatiquement refusée." required></textarea>
+              <div class="champ-groupe">
+
+                       <label for="message">Votre message <span class="requis">*</span></label>
+                       <textarea id="message" placeholder="Décrivez précisément le véhicule souhaité (marque, modèle, kilométrage...). Une description incomplète sera automatiquement refusée."></textarea>
+              </div>
+
+              <button id="btn-dossier" onclick="deposerDossier()">Envoyer mon dossier</button>
+
+              <p id="msg-dossier" class="message"></p>
 
 
-            <button onclick="deposerDossier()">Envoyer mon dossier</button>
+          </div>
+      </div>
 
-        <p id="msg-dossier" class="message"></p>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <script src="dossier.js"></script>
 
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="dossier.js"></script>
-
-</body>
-</html>
+  </body>
+  </html>
