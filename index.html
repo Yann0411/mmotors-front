@@ -88,16 +88,20 @@
           <h2 id="titre-catalogue"></h2>
 
           <div class="filtres">
-              <input type="text" id="filtre-marque" placeholder="Marque">
 
-              <input type="text" id="filtre-modele" placeholder="Modèle">
+                <input type="text" id="filtre-marque" placeholder="Toutes les marques" list="list-marques" autocomplete="off">
+                <datalist id="list-marques"></datalist>
 
-           <input type="number" id="filtre-prix-min" placeholder="Prix min (€)" min="0">
-            <input type="number" id="filtre-prix-max" placeholder="Prix max (€)" min="0">
-            <input type="number" id="filtre-km" placeholder="Km max" min="0">
+                  <input type="text" id="filtre-modele" placeholder="Tous les modèles" list="list-modeles" autocomplete="off">
+                <datalist id="list-modeles"></datalist>
 
-              <button onclick="rechercherVehicules()">Rechercher</button>
-          </div>
+             <input type="number" id="filtre-prix-min" placeholder="Prix min (€)" min="0">
+              <input type="number" id="filtre-prix-max" placeholder="Prix max (€)" min="0">
+              <input type="number" id="filtre-km" placeholder="Km max" min="0">
+
+                <button onclick="rechercherVehicules()">Rechercher</button>
+            </div>
+
 
           <div class="liste-vehicules" id="liste-vehicules"></div>
       </div>

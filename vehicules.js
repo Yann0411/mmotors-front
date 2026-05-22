@@ -15,6 +15,7 @@ function seDeconnecter() {
     }
 
     let typeOffreActuel = '';
+    let tousLesVehicules = [];
 
     function afficherCatalogue(typeOffre) {
 
@@ -36,6 +37,7 @@ function seDeconnecter() {
         ['filtre-marque','filtre-modele','filtre-prix-min','filtre-prix-max','filtre-km'].forEach(id => {
             document.getElementById(id).value = '';
         });
+        chargerFiltres();
         rechercherVehicules();
     }
 
@@ -46,6 +48,26 @@ function seDeconnecter() {
 
         document.getElementById('liste-vehicules').innerHTML = '';
     }
+
+    async function chargerFiltres() {
+
+        try {
+            const response = await
+  axios.get('https://mmotors-back-production.up.railway.app/vehicules', { params: {
+  typeOffre: typeOffreActuel } });
+            tousLesVehicules = response.data;
+
+            const marques = [...new Set(tousLesVehicules.map(v => v.marque))].sort();
+            const listMarques = document.getElementById('list-marques');
+              listMarques.innerHTML = marques.map(m => `<option value="${m}">`).join('');
+
+            document.getElementById('list-modeles').innerHTML = '';
+
+        } catch(e) {
+              // silencieux, la recherche fonctionne quand même
+        }
+    }
+
 
     function validerFiltresNumeriques() {
 
@@ -124,7 +146,23 @@ function seDeconnecter() {
         }
     }
 
-    document.getElementById('filtre-marque').addEventListener('input', rechercherVehicules);
+    document.getElementById('filtre-marque').addEventListener('input', function() {
+
+        const marqueChoisie = this.value.trim();
+
+          // filtre les modèles selon la marque saisie
+        const modelesFiltres = tousLesVehicules
+            .filter(v => !marqueChoisie || v.marque.toLowerCase() ===
+  marqueChoisie.toLowerCase())
+            .map(v => v.modele);
+
+        const modelesUniques = [...new Set(modelesFiltres)].sort();
+        const listModeles = document.getElementById('list-modeles');
+ listModeles.innerHTML = modelesUniques.map(m => `<option value="${m}">`).join('');
+
+        rechercherVehicules();
+    });
+
     document.getElementById('filtre-modele').addEventListener('input', rechercherVehicules);
     document.getElementById('filtre-prix-min').addEventListener('input', rechercherVehicules);
     document.getElementById('filtre-prix-max').addEventListener('input', rechercherVehicules);
