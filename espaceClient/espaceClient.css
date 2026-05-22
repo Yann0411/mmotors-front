@@ -1,39 +1,99 @@
 .espace-container {
-    max-width: 800px;
 
-    margin: 40px auto;
-    padding: 20px;
-}
+      max-width: 700px;
+        margin: 0 auto;
+      padding: 32px 24px 60px;
+  }
 
-.espace-container h1  {
-    color: #222;
-    margin-bottom: 30px;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.15);
-}
+  .espace-header {
+
+      margin-bottom: 28px;
+  }
+
+  .espace-header h1 {
+
+      color: #1A202C;
+
+      margin: 0 0 6px 0;
+      font-size: 1.6em;
+        font-weight: 800;
+
+  }
+
+  .espace-header p {
+
+      color: #64748B;
+
+      margin: 0;
+      font-size: 0.9em;
+  }
+
+  .carte-dossier {
+
+
+      background: white;
+      border: 1px solid #E2E8F0;
+        border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 14px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      /* box-shadow: 0 2px 5px rgba(0,0,0,0.1); ancien */
+  }
+
+  .carte-dossier p {
+      margin: 4px 0;
+      font-size: 0.9em;
+        color: #374151;
+  }
 
 
 
-.carte-dossier {
+  /*
+  
+    .dossier-box h2 {
+      margin: 0;
+      color: #1A202C;
+        font-size: 1.3em;
+      font-weight: 700;
+  }
 
-    border: 1px solid #ddd;
-     border-radius: 10px;
-    padding: 20px;
-    
-    margin-bottom: 20px;
-    background: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
+  .dossier-sous-titre {
+      margin: 0;
+      color: #64748B;
+      font-size: 0.88em;
+  }
 
-.statut {
-    font-weight: bold;
-    padding: 5px 10px;
-    border-radius: 5px;
-    display: inline-block;
-    margin-top: 10px;
+  .dossier-box select {
+      padding: 9px 12px;
+      border: 1px solid #CBD5E1;
+        border-radius: 6px;
+      font-size: 0.9em;
+      background: white;
+      transition: all 0.2s;
+  }
+  
+  */
 
-}
 
-.statut-en-attente { background-color: #f0a500; color: white; }
 
-.statut-valide { background-color: #28a745; color: white; }
-.statut-refuse { background-color: #e94560; color: white; }
+
+
+  /* badges statut  */
+  .statut {
+      font-size: 0.75em;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-top: 10px;
+      text-transform: uppercase;
+        letter-spacing: 0.5px;
+  }
+
+  .statut-en-attente { background: #FEF9C3; color: #854D0E; }
+  .statut-valide     { background: #DCFCE7; color: #166534; }
+  .statut-refuse     { background: #FDECEA; color: #991B1B; }
+
+  @media (max-width: 600px) {
+      .espace-container { padding: 16px; }
+  }
