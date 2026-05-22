@@ -1,89 +1,113 @@
 const token = localStorage.getItem('token');
 
-
   if (!token) {
-      window.location.href = '../auth/auth.html';
-
-    }
-
-  const params = new URLSearchParams(window.location.search);
-
-  if (params.get('marque')) {
-
-       document.getElementById('typeOffre').value = params.get('typeOffre') || 'ACHAT';
-        document.getElementById('message').value =
-      
-        `Véhicule souhaité : ${params.get('marque')} ${params.get('modele')} ${params.get('annee')} - ${params.get('km')} km - ${params.get('prix')} € - ${params.get('typeOffre')}`;
+        window.location.href = '../auth/auth.html';
   }
 
   function seDeconnecter() {
 
+    
       localStorage.clear();
-      
-      window.location.href = '../auth/auth.html';
+        window.location.href = '../auth/auth.html';
   }
 
-   const nomStocke = localStorage.getItem('nom');
-  
-   if (nomStocke) {
-  
-    document.getElementById('nom-utilisateur').textContent = 'Bonjour ' + nomStocke;
+  const nomStocke = localStorage.getItem('nom');
+  if (nomStocke) {
+      document.getElementById('nom-utilisateur').textContent = 'Bonjour ' + nomStocke;
   }
 
-    async function deposerDossier() {
-        const typeOffre = document.getElementById('typeOffre').value;
-       const message   = document.getElementById('message').value;
-         const msg = document.getElementById('msg-dossier');
-         const btn = document.querySelector('button[onclick="deposerDossier()"]');
+  const params = new URLSearchParams(window.location.search);
 
-      
-         if (!message || message.trim() === '') {
-           msg.style.color = 'red';
-        
-           msg.textContent = 'Veuillez décrire le véhicule souhaité avant d\'envoyer.';
-         
-           return;
-      }
+  // si le user vient depuis un véhicule précis
+  if (params.get('marque')) {
 
-       
-       if (!token) {
-       
-           msg.style.color = 'red';
-          msg.textContent = 'Vous devez être connecté pour déposer un dossier.';
+      // on affiche la carte véhicule en lecture seule
+      document.getElementById('vehicule-selectionne').style.display = 'block';
+
+      document.getElementById('info-marque-modele').textContent = params.get('marque') + ' ' + params.get('modele');
+
+        document.getElementById('info-annee').textContent = params.get('annee');
+
+      document.getElementById('info-km').textContent = parseInt(params.get('km')).toLocaleString('fr-FR') + ' km';
+
+      document.getElementById('info-prix').textContent = parseFloat(params.get('prix')).toLocaleString('fr-FR') + ' €';
+
+       document.getElementById('info-type').textContent = params.get('typeOffre') === 'ACHAT' ? 'Achat' : 'Location';
+
+      // on masque le select typeOffre => c'est déjà défini par le véhicule
+      document.getElementById('groupe-typeOffre').style.display = 'none';
+      document.getElementById('typeOffre').value = params.get('typeOffre') || 'ACHAT';
+
+      // Message devient optionnel
+      document.getElementById('label-message').innerHTML = 'Message complémentaire <span style="color:#64748B; font-weight:400;">(optionnel)</span>';
+      document.getElementById('message').placeholder = 'Ajoutez un message si vous le souhaitez...';
+  }
+
+
+  async function deposerDossier() {
+
+      const typeOffre  = document.getElementById('typeOffre').value;
+      const messageClient = document.getElementById('message').value.trim();
+      const msg = document.getElementById('msg-dossier');
+        const btn = document.getElementById('btn-dossier');
+
+      msg.textContent = '';
+
+      // si pas de véhicule sélectionné, le message est obligatoire
+
+      if (!params.get('marque') && !messageClient) {
+
+          msg.style.color = 'red';
+            msg.textContent = 'Veuillez décrire le véhicule souhaité avant d\'envoyer.';
           return;
       }
 
-       btn.disabled = true;
-        btn.textContent = 'Envoi en cours...';
+      if (!token) {
 
+          msg.style.color = 'red';
+          msg.textContent = 'Vous devez être connecté pour déposer un dossier.';
+          return;
 
-      
-        let succes = false;
-        try {
+      }
 
+      // construction du message final
+      let messageFinal = '';
+
+      if (params.get('marque')) {
+
+            // infos véhicule en lecture seule + message client éventuel
+          messageFinal = `Véhicule : ${params.get('marque')} ${params.get('modele')} ${params.get('annee')} - ${parseInt(params.get('km')).toLocaleString('fr-FR')} km - ${parseFloat(params.get('prix')).toLocaleString('fr-FR')} € - ${params.get('typeOffre') === 'ACHAT' ? 'Achat' : 'Location'}`;
+          if (messageClient) {
+              messageFinal += `\nMessage client : ${messageClient}`;
+          }
+      } else {
+          messageFinal = messageClient;
+      }
+
+        btn.disabled = true;
+      btn.textContent = 'Envoi en cours...';
+
+      let succes = false;
+      try {
 
           await axios.post('https://mmotors-back-production.up.railway.app/dossiers',
-              { typeOffre, message },
+              { typeOffre, message: messageFinal },
               { headers: { Authorization: 'Bearer ' + token } }
+
           );
           succes = true;
-
-           msg.style.color = 'green';
-          
-           msg.textContent = 'Dossier envoyé ! Vous pouvez suivre son statut dans votre espace client.';
+          msg.style.color = 'green';
+            msg.textContent = 'Dossier envoyé ! Vous pouvez suivre son statut dans votre espace client.';
       } catch (error) {
-           msg.style.color = 'red';
-            msg.textContent = error.response?.data || 'Erreur lors de l\'envoi. Veuillez réessayer.';
+          msg.style.color = 'red';
+          msg.textContent = error.response?.data || 'Erreur lors de l\'envoi. Veuillez réessayer.';
       } finally {
-
           if (succes) {
-
-              // Bouton reste désactivé après succès pour éviter les doubles envois
               btn.textContent = '✓ Dossier envoyé';
               btn.style.backgroundColor = '#28a745';
-              
+              // bouton reste désactivé
           } else {
-              btn.disabled = false;
+                btn.disabled = false;
               btn.textContent = 'Envoyer mon dossier';
           }
       }
