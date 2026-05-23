@@ -32,7 +32,7 @@ const statutLabels = {
 
   if (nomStocke) {
 
-      document.getElementById('nom-utilisateur').textContent = 'Bonjour ' + nomStocke;
+       document.getElementById('nom-utilisateur').textContent = 'Bonjour ' + nomStocke;
   }
 
      function formaterDate(dateStr) {
@@ -54,13 +54,13 @@ const statutLabels = {
       if (!token) { 
 
             msg.style.color = 'red';
-          msg.textContent = 'Vous devez être connecté.';
+           msg.textContent = 'Vous devez être connecté.';
           return;
       }
 
       try {
 
-          const response = await axios.get('https://mmotors-back-production.up.railway.app/dossiers/moi',
+            const response = await axios.get('https://mmotors-back-production.up.railway.app/dossiers/moi',
               { headers: { Authorization: 'Bearer ' + token } }
           );
 

@@ -61,7 +61,10 @@ function seDeconnecter() {
             const listMarques = document.getElementById('list-marques');
               listMarques.innerHTML = marques.map(m => `<option value="${m}">`).join('');
 
-            document.getElementById('list-modeles').innerHTML = '';
+            const modeles = [...new Set(tousLesVehicules.map(v => v.modele))].sort();
+
+            document.getElementById('list-modeles').innerHTML = modeles.map(m => `<option 
+                value="${m}">`).join('');
 
         } catch(e) {
               // silencieux, la recherche fonctionne quand même
