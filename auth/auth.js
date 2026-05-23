@@ -147,7 +147,7 @@
 
   async function seConnecter() {
 
-      const email      = document.getElementById('connexion-email').value.trim();
+      const email= document.getElementById('connexion-email').value.trim();
       const motDePasse = document.getElementById('connexion-mdp').value;
 
       const msg = document.getElementById('msg-connexion');
@@ -184,6 +184,8 @@
           const response = await axios.post('https://mmotors-back-production.up.railway.app/auth/connexion', {
               email, motDePasse
           });
+
+          localStorage.clear();
           localStorage.setItem('token', response.data.token);
 
 
