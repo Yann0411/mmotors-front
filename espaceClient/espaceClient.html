@@ -9,21 +9,25 @@
   </head>
   <body>
 
-      <nav class="navbar">
+            <nav class="navbar">
 
-          <a class="navbar-brand" href="../index.html">M-Motors</a>
+             <a class="navbar-brand" href="../index.html">M-Motors</a>
 
             <div class="navbar-user">
+                <button class="btn-nav-link" onclick="window.location.href='../profil/profil.html'">Mon profil</button>
+                <span id="nom-utilisateur"></span>
+                
+                <button class="btn-deconnecter" onclick="seDeconnecter()">Se déconnecter</button>
+            </div>
 
+            </nav>
 
-                   <span id="nom-utilisateur"></span>
-                   <button class="btn-deconnecter" onclick="seDeconnecter()">Se déconnecter</button>
-          </div>
-      </nav>
 
       <div class="espace-container">
 
-          <button class="btn-retour" onclick="window.location.href='../index.html'">← Retour</button>
+           <button class="btn-retour" onclick="window.location.href='../index.html'">← Retour</button>
+        
+
 
           <div class="espace-header">
 
