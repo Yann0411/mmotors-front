@@ -109,15 +109,17 @@ function seDeconnecter() {
         if (!validerFiltresNumeriques()) return;
 
         const msgRecherche = document.getElementById('msg-recherche');
-            const aucunFiltre = !document.getElementById('filtre-marque').value &&
 
-                !document.getElementById('filtre-modele').value &&
-                //  !document.getElementById('filtre-prix-min').value &&
-                // !document.getElementById('filtre-prix-max').value &&
-                   !document.getElementById('filtre-prix-min').value &&
-                !document.getElementById('filtre-prix-max').value &&
+         const aucunFiltre = document.getElementById('filtre-marque').selectedIndex === 0 &&
+      document.getElementById('filtre-modele').selectedIndex === 0 &&
+      //  !document.getElementById('filtre-prix-min').value &&
+      // !document.getElementById('filtre-prix-max').value &&
+         !document.getElementById('filtre-prix-min').value &&
+      !document.getElementById('filtre-prix-max').value &&
 
-                !document.getElementById('filtre-km').value;
+      !document.getElementById('filtre-km').value;
+
+           
 
             if (aucunFiltre) {
                 msgRecherche.textContent = 'Aucun filtre sélectionné: tous les véhicules sont affichés. Cliquez sur un véhicule pour déposer un dossier.';
