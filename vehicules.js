@@ -96,6 +96,20 @@ function seDeconnecter() {
     async function rechercherVehicules() {
         if (!validerFiltresNumeriques()) return;
 
+        const msgRecherche = document.getElementById('msg-recherche');
+            const aucunFiltre = !document.getElementById('filtre-marque').value &&
+                !document.getElementById('filtre-modele').value &&
+                !document.getElementById('filtre-prix-min').value &&
+                !document.getElementById('filtre-prix-max').value &&
+                !document.getElementById('filtre-km').value;
+
+            if (aucunFiltre) {
+                msgRecherche.textContent = 'Aucun filtre sélectionné — tous les véhicules sont affichés. Cliquez sur un véhicule pour déposer un dossier.';
+            } else {
+                msgRecherche.textContent = '';
+            }
+
+
         try {
 
           const marque = document.getElementById('filtre-marque').value;
@@ -145,7 +159,7 @@ function seDeconnecter() {
 
 
              div.innerHTML = '';
-             
+
               vehicules.forEach(function(vehicule) {
 
                   // label du bouton selon le type

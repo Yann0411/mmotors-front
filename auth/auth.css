@@ -32,7 +32,7 @@
 
 .auth-box button {
     padding:10px;
-    background-color: #e94560;
+    background-color: #1F2937;
     color: white;
     border: none;
     border-radius: 5px;
@@ -41,7 +41,7 @@
 }
 
 .auth-box button:hover {
-    background-color: #c73652;
+    background-color: #111827;
 }
 
 .auth-box p {
@@ -50,7 +50,7 @@
 }
 
 .auth-box a {
-    color: #e94560;
+    color: #EF4444;
 }
 
 .message {
@@ -65,17 +65,17 @@
 
 .auth-brand {
     text-align: center;
-    color: white;
+    color: #1F2937;
 }
 
 .auth-brand h1 {
     font-size: 2.5em;
-    color: #e94560;
+    color: #1F2937;
     margin: 0;
 }
 
 .auth-brand p {
-    color: #ccc;
+    color: #64748B;
     margin: 5px 0 0 0;
 }
 
@@ -105,20 +105,6 @@ body {
     position: relative;
 }
 
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('../assets/voiture-neon.jpg');
-    background-size: cover;
-    background-position: center;
-    opacity: 0.15;
-    z-index: -1;
-}
-
 
 
 /* Groupement champ + label + erreur */
@@ -139,13 +125,13 @@ body::before {
   }
 
 
-  .requis { color: #CC0000; }
+  .requis { color: #EF4444; }
   
   /* Message d'erreur sous le champ */
   .erreur-champ {
       display: none;
       font-size: 0.78em;
-       color: #CC0000; 
+       color: #EF4444; 
       font-weight: 500;
   }
 
@@ -154,7 +140,7 @@ body::before {
 
   /* Bordure rouge quand champ en erreur */
   .input-erreur {
-       border-color: #CC0000 !important;
+       border-color: #EF4444 !important;
       background-color: #fff8f8 !important;
   }
   
@@ -205,3 +191,6 @@ body::before {
       color: #666;
   }
 
+@media (max-width: 480px) {
+      .auth-box { padding: 24px 16px; }
+  }

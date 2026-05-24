@@ -13,7 +13,7 @@
 
   .admin-titre {
       text-align: center;
-        color: #C0392B;
+        color: #EF4444;
       padding: 24px 20px 8px;
       font-size: 1.5em;
       font-weight: 800;
@@ -53,8 +53,8 @@
   }
 
   .tab-actif {
-      color: #C0392B;
-        border-bottom-color: #C0392B;
+      color: #EF4444;
+        border-bottom-color: #EF4444;
   }
 
 
@@ -104,8 +104,8 @@
   .admin-formulaire input:focus,
   .admin-formulaire select:focus {
       outline: none;
-      border-color: #C0392B;
-        box-shadow: 0 0 0 3px rgba(192,57,43,0.1);
+      border-color: #EF4444;
+        box-shadow: 0 0 0 3px rgba(239,68,68,0.1);
   }
 
 
@@ -136,7 +136,7 @@
 
       flex: 1;
       padding: 10px;
-      background-color: #C0392B;
+      background-color: #1F2937;
       color: white;
       border: none;
         border-radius: 6px;
@@ -145,7 +145,7 @@
       font-weight: 600;
       transition: background 0.2s;
   }
-  .btn-sauvegarder:hover { background-color: #A93226; }
+  .btn-sauvegarder:hover { background-color: #111827; }
 
 
 
@@ -193,8 +193,8 @@
   .btn-modifier  { background-color: #2563EB !important; }
   .btn-modifier:hover  { background-color: #1D4ED8 !important; }
 
-  .btn-supprimer { background-color: #C0392B !important; }
-  .btn-supprimer:hover { background-color: #A93226 !important; }
+  .btn-supprimer { background-color: #EF4444 !important; }
+  .btn-supprimer:hover { background-color: #DC2626 !important; }
 
   /* valider en vert, refuser en orange*/
   .btn-valider {
@@ -224,7 +224,7 @@
 
   /* badge admin navbar */
   .badge-admin {
-      background-color: #C0392B;
+      background-color: #EF4444;
       color: white;
       font-size: 0.7em;
       font-weight: bold;
@@ -257,10 +257,13 @@
 
   .toast.visible { opacity: 1; }
   .toast-succes  { background-color: #16A34A; }
-  .toast-erreur  { background-color: #C0392B; }
+  .toast-erreur  { background-color: #EF4444; }
 
   
   @media (max-width: 768px) {
+
+    .admin-tabs { flex-wrap: wrap; }
+  .admin-section { padding: 16px; }
       .admin-wrapper {
             padding: 12px 16px;
       }

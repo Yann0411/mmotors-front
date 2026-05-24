@@ -81,7 +81,7 @@
 
     #btn-profil, #btn-mdp {
         padding: 11px;
-        background-color: #C0392B;
+        background-color: #1F2937;
         color: white;
         border: none;
           border-radius: 6px;
@@ -90,10 +90,10 @@
         cursor: pointer;
 
         transition: background 0.2s;
-        
+
     }
 
-    #btn-profil:hover, #btn-mdp:hover { background-color: #A93226; }
+    #btn-profil:hover, #btn-mdp:hover { background-color: #111827; }
 
     @media (max-width: 600px) {
           .profil-container { padding: 16px; }

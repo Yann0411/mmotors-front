@@ -96,4 +96,5 @@
 
   @media (max-width: 600px) {
       .espace-container { padding: 16px; }
+       .carte-dossier { padding: 14px; }
   }

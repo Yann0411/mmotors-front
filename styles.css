@@ -1,14 +1,28 @@
 /* variables couleurs globales */
 :root {
 
-    --rouge:        #C0392B;
-    --rouge-hover:  #A93226;
+    --rouge:        #EF4444;
+    --rouge-hover:  #DC2626;
+    --primaire:     #1F2937;
+    --primaire-hover: #111827;
     --bleu-nuit:    #1F2937;
     --fond:         #F8FAFC;
 }
 
 
 body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: var(--fond); }
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: url('assets/voiture-neon.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.22;
+    z-index: -1;
+}
 
 
 .accueil {
@@ -107,7 +121,7 @@ body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: 
 
 .filtres button {
     padding: 9px 20px;
-    background-color: var(--rouge);
+    background-color: var(--primaire);
     color: white;
     border: none;
       border-radius: 6px;
@@ -116,7 +130,7 @@ body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: 
     font-weight: 600;
     transition: background 0.2s;
 }
-.filtres button:hover { background-color: var(--rouge-hover); }
+.filtres button:hover { background-color: var(--primaire-hover); }
 
 
 
@@ -183,7 +197,7 @@ body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: 
     margin-top: 12px;
       width: 100%;
     padding: 9px;
-    background: var(--rouge);
+    background: var(--primaire);
     color: white;
     border: none;
     border-radius: 6px;
@@ -192,7 +206,7 @@ body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: 
     font-weight: 600;
     transition: background 0.2s;
 }
-.carte-vehicule button:hover { background: var(--rouge-hover); }
+.carte-vehicule button:hover { background: var(--primaire-hover); }
 
 
 .navbar {
@@ -224,7 +238,7 @@ body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: 
 .navbar-brand {
     font-size: 1.3em;
     font-weight: 800;
-    color: var(--rouge);
+    color: var(--primaire);
       letter-spacing: 1.5px;
     text-decoration: none;
     text-transform: uppercase;
