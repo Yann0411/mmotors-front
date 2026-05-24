@@ -32,7 +32,7 @@ const statutLabels = {
 
   if (nomStocke) {
 
-       document.getElementById('nom-utilisateur').textContent = 'Bonjour ' + nomStocke;
+       document.getElementById('nom-utilisateur').textContent = 'Bonjour ' + nomStocke.charAt(0).toUpperCase() + nomStocke.slice(1);
   }
 
      function formaterDate(dateStr) {
@@ -102,7 +102,7 @@ const statutLabels = {
                 type.appendChild(document.createTextNode(typeOffreLabels[dossier.typeOffre] || dossier.typeOffre));
 
                   const message = document.createElement('p');
-                message.innerHTML = '<strong>Message :</strong> ';
+                message.innerHTML = '<strong>Ma demande :</strong> ';
                 message.appendChild(document.createTextNode(dossier.message));
 
                 const date = document.createElement('p');
@@ -225,9 +225,10 @@ const statutLabels = {
               btnValider.textContent = 'Valider';
           }
       });
+console.log(dossiers)
 
       const btnAnnulerModif = document.createElement('button');
-      
+
       btnAnnulerModif.className = 'btn-supprimer';
       btnAnnulerModif.textContent = 'Annuler';
       btnAnnulerModif.addEventListener('click', function() { form.remove(); });

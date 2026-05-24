@@ -13,10 +13,12 @@ const token = localStorage.getItem('token');
 
   const nomStocke = localStorage.getItem('nom');
   if (nomStocke) {
-      document.getElementById('nom-utilisateur').textContent = 'Bonjour ' + nomStocke;
+      document.getElementById('nom-utilisateur').textContent = 'Bonjour ' + nomStocke.charAt(0).toUpperCase() + nomStocke.slice(1);
   }
 
 const params = new URLSearchParams(window.location.search);
+ // console.log('params', params.get('marque'), params.get('prix'))
+
 
  // protection basique contre les injections
     function contientScript(valeur) {
@@ -47,6 +49,7 @@ const params = new URLSearchParams(window.location.search);
       // Message devient optionnel
       document.getElementById('label-message').innerHTML = 'Message complémentaire <span style="color:#64748B; font-weight:400;">(optionnel)</span>';
       document.getElementById('message').placeholder = 'Ajoutez un message si vous le souhaitez...';
+      document.getElementById('message').value = 'Bonjour, je suis intéressé par ce véhicule, pouvez-vous me recontacter ?'
   }
 
 
@@ -63,6 +66,8 @@ const params = new URLSearchParams(window.location.search);
 
       if (!params.get('marque') && !messageClient) {
 
+        // console.log(dossiers)
+
           msg.style.color = 'red';
             msg.textContent = 'Veuillez décrire le véhicule souhaité avant d\'envoyer.';
           return;
@@ -70,7 +75,7 @@ const params = new URLSearchParams(window.location.search);
 
       if (messageClient && contientScript(messageClient)) {
 
-        
+
             msg.style.color = 'red';
              msg.textContent = 'Le message contient des caractères non autorisés.';
               return;
@@ -93,7 +98,7 @@ const params = new URLSearchParams(window.location.search);
             // infos véhicule en lecture seule + message client éventuel
           messageFinal = `Véhicule : ${params.get('marque')} ${params.get('modele')} ${params.get('annee')} - ${parseInt(params.get('km')).toLocaleString('fr-FR')} km - ${parseFloat(params.get('prix')).toLocaleString('fr-FR')} € - ${params.get('typeOffre') === 'ACHAT' ? 'Achat' : 'Location'}`;
           if (messageClient) {
-              messageFinal += `\nMessage client : ${messageClient}`;
+              messageFinal += `\nMa demande : ${messageClient}`;
           }
       } else {
           messageFinal = messageClient;

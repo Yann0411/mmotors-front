@@ -49,12 +49,16 @@
 
                       <div class="champ-groupe">
                               <label for="vehicule-marque">Marque <span class="requis">*</span></label>
-                              <input type="text" id="vehicule-marque" placeholder="Ex : Peugeot">
+                              <!-- <input type="text" id="vehicule-marque" placeholder="Ex : Peugeot"> -->
+                              <input type="text" id="vehicule-marque" placeholder="Ex : Peugeot" list="list-marques-admin" autocomplete="off">
+                             <datalist id="list-marques-admin"></datalist>
+
                       </div>
 
                       <div class="champ-groupe">
                           <label for="vehicule-modele">Modèle <span class="requis">*</span></label>
-                            <input type="text" id="vehicule-modele" placeholder="Ex : 308">
+                              <input type="text" id="vehicule-modele" placeholder="Ex : 308" list="list-modeles-admin" autocomplete="off">
+                              <datalist id="list-modeles-admin"></datalist>
 
                       </div>
 

@@ -9,7 +9,7 @@ function seDeconnecter() {
 
 
     if (nomStocke) {
-        document.getElementById('nom-utilisateur').textContent = 'Bonjour ' + nomStocke;
+        document.getElementById('nom-utilisateur').textContent = 'Bonjour ' + nomStocke.charAt(0).toUpperCase() + nomStocke.slice(1);
     } else {
         document.querySelector('.btn-deconnecter').style.display = 'none';
     }
@@ -57,14 +57,25 @@ function seDeconnecter() {
   typeOffre: typeOffreActuel } });
             tousLesVehicules = response.data;
 
-            const marques = [...new Set(tousLesVehicules.map(v => v.marque))].sort();
-            const listMarques = document.getElementById('list-marques');
-              listMarques.innerHTML = marques.map(m => `<option value="${m}">`).join('');
+            // const marques = [...new Set(tousLesVehicules.map(v => v.marque))].sort();
+            // const listMarques = document.getElementById('list-marques');
+            //   listMarques.innerHTML = marques.map(m => `<option value="${m}">`).join('');
 
-            const modeles = [...new Set(tousLesVehicules.map(v => v.modele))].sort();
+            // const modeles = [...new Set(tousLesVehicules.map(v => v.modele))].sort();
 
-            document.getElementById('list-modeles').innerHTML = modeles.map(m => `<option 
-                value="${m}">`).join('');
+            // document.getElementById('list-modeles').innerHTML = modeles.map(m => `<option 
+            //     value="${m}">`).join('');
+
+            const marques = [...new Set(tousLesVehicules.map(v => v.marque))].sort()
+            const selectMarque = document.getElementById('filtre-marque')
+
+            selectMarque.innerHTML = '<option value="">Toutes les marques</option>' + marques.map(m => `<option value="${m}">${m}</option>`).join('')
+            
+            const modeles = [...new Set(tousLesVehicules.map(v => v.modele))].sort()
+             const selectModele = document.getElementById('filtre-modele')
+            selectModele.innerHTML = '<option value="">Tous les modèles</option>' + modeles.map(m => `<option value="${m}">${m}</option>`).join('')
+
+
 
         } catch(e) {
               // silencieux, la recherche fonctionne quand même
@@ -94,17 +105,22 @@ function seDeconnecter() {
     }
 
     async function rechercherVehicules() {
+
         if (!validerFiltresNumeriques()) return;
 
         const msgRecherche = document.getElementById('msg-recherche');
             const aucunFiltre = !document.getElementById('filtre-marque').value &&
+
                 !document.getElementById('filtre-modele').value &&
-                !document.getElementById('filtre-prix-min').value &&
+                //  !document.getElementById('filtre-prix-min').value &&
+                // !document.getElementById('filtre-prix-max').value &&
+                   !document.getElementById('filtre-prix-min').value &&
                 !document.getElementById('filtre-prix-max').value &&
+
                 !document.getElementById('filtre-km').value;
 
             if (aucunFiltre) {
-                msgRecherche.textContent = 'Aucun filtre sélectionné — tous les véhicules sont affichés. Cliquez sur un véhicule pour déposer un dossier.';
+                msgRecherche.textContent = 'Aucun filtre sélectionné: tous les véhicules sont affichés. Cliquez sur un véhicule pour déposer un dossier.';
             } else {
                 msgRecherche.textContent = '';
             }
@@ -129,6 +145,7 @@ function seDeconnecter() {
 
             const response = await axios.get('https://mmotors-back-production.up.railway.app/vehicules', { params });
             const vehicules = response.data;
+             // console.log(vehicules)
             const div = document.getElementById('liste-vehicules');
 
             if (vehicules.length === 0) {
@@ -177,7 +194,10 @@ function seDeconnecter() {
                   annee.textContent = 'Année : ' + vehicule.annee;
 
                   const prix = document.createElement('p');
-                    prix.textContent = 'Prix : ' + vehicule.prix.toLocaleString('fr-FR') + ' €';
+                    // prix.textContent = 'Prix : ' + vehicule.prix.toLocaleString('fr-FR') + ' €';
+                    const labelPrix = vehicule.typeOffre === 'ACHAT' ? 'Prix' : 'Prix mensuel'
+                    prix.textContent = labelPrix + ' : ' + vehicule.prix.toLocaleString('fr-FR') + ' €';
+
 
                   const km = document.createElement('p');
                   km.textContent = 'Kilométrage : ' + vehicule.kilometrage.toLocaleString('fr-FR') + ' km';
@@ -212,8 +232,8 @@ function seDeconnecter() {
         }
     }
 
-    document.getElementById('filtre-marque').addEventListener('input', function() {
-
+    // document.getElementById('filtre-marque').addEventListener('input', function() {
+        document.getElementById('filtre-marque').addEventListener('change', function() {
         const marqueChoisie = this.value.trim();
 
           // filtre les modèles selon la marque saisie
@@ -223,13 +243,16 @@ function seDeconnecter() {
             .map(v => v.modele);
 
         const modelesUniques = [...new Set(modelesFiltres)].sort();
-        const listModeles = document.getElementById('list-modeles');
- listModeles.innerHTML = modelesUniques.map(m => `<option value="${m}">`).join('');
+//         const listModeles = document.getElementById('list-modeles');
+//  listModeles.innerHTML = modelesUniques.map(m => `<option value="${m}">`).join('');
+
+    const selectModele = document.getElementById('filtre-modele')
+    selectModele.innerHTML = '<option value="">Tous les modèles</option>' + modelesUniques.map(m => `<option value="${m}">${m}</option>`).join('')
 
         rechercherVehicules();
     });
-
-    document.getElementById('filtre-modele').addEventListener('input', rechercherVehicules);
+    document.getElementById('filtre-modele').addEventListener('change', rechercherVehicules);
+    // document.getElementById('filtre-modele').addEventListener('input', rechercherVehicules);
     document.getElementById('filtre-prix-min').addEventListener('input', rechercherVehicules);
     document.getElementById('filtre-prix-max').addEventListener('input', rechercherVehicules);
     document.getElementById('filtre-km').addEventListener('input', rechercherVehicules);

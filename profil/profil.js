@@ -16,7 +16,7 @@ const token = localStorage.getItem('token');
     if (nomStocke) {
 
 
-          document.getElementById('nom-utilisateur').textContent = 'Bonjour ' + nomStocke;
+          document.getElementById('nom-utilisateur').textContent = 'Bonjour ' + nomStocke.charAt(0).toUpperCase() + nomStocke.slice(1);
     }
 
     function toggleMdp(inputId, btn) {
@@ -81,7 +81,8 @@ const token = localStorage.getItem('token');
               msg.textContent = 'Profil mis à jour avec succès.';
             // on met à jour le nom affiché dans la navbar
             localStorage.setItem('nom', prenom);
-            document.getElementById('nom-utilisateur').textContent = 'Bonjour ' + prenom;
+            document.getElementById('nom-utilisateur').textContent = 'Bonjour ' + prenom.charAt(0).toUpperCase() + prenom.slice(1)
+
         } catch (error) {
             msg.style.color = 'red';
             msg.textContent = error.response?.data || 'Erreur lors de la sauvegarde.';

@@ -89,11 +89,21 @@
 
           <div class="filtres">
 
-                <input type="text" id="filtre-marque" placeholder="Toutes les marques" list="list-marques" autocomplete="off">
+                <!-- <input type="text" id="filtre-marque" placeholder="Toutes les marques" list="list-marques" autocomplete="off">
                 <datalist id="list-marques"></datalist>
 
                   <input type="text" id="filtre-modele" placeholder="Tous les modèles" list="list-modeles" autocomplete="off">
-                <datalist id="list-modeles"></datalist>
+                <datalist id="list-modeles"></datalist> -->
+
+                <select id="filtre-marque">
+                 <option value="">Toutes les marques</option>
+                </select>
+
+                <select id="filtre-modele">
+                <option value="">Tous les modèles</option>
+                <select>
+
+
 
              <input type="number" id="filtre-prix-min" placeholder="Prix min (€)" min="0">
               <input type="number" id="filtre-prix-max" placeholder="Prix max (€)" min="0">

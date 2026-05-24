@@ -1,3 +1,6 @@
+
+
+
 const statutLabels = {
 
       'EN_ATTENTE': 'En attente',
@@ -32,7 +35,7 @@ const statutLabels = {
 
   const nomStocke = localStorage.getItem('nom');
   if (nomStocke) {
-        document.getElementById('nom-utilisateur').textContent = 'Bonjour ' + nomStocke;
+        document.getElementById('nom-utilisateur').textContent = 'Bonjour ' + nomStocke.charAt(0).toUpperCase() + nomStocke.slice(1)
   }
 
 
@@ -76,11 +79,17 @@ const statutLabels = {
   }
 
   // =================== Véhicules ===================
+let tousLesVehicules = []
 
   async function chargerVehicules() {
       try {
           const response = await axios.get('https://mmotors-back-production.up.railway.app/vehicules');
           const vehicules = response.data;
+
+          tousLesVehicules = vehicules
+            const marques = [...new Set(vehicules.map(v => v.marque))].sort()
+             document.getElementById('list-marques-admin').innerHTML = marques.map(m => `<option value="${m}">`).join('')
+          // console.log('vehicules chargés :', vehicules.length)
             const div = document.getElementById('liste-vehicules-admin');
         //   div.innerHTML = '';
         //   vehicules.forEach(function(v) {
@@ -365,7 +374,7 @@ const statutLabels = {
                   carte.appendChild(btnGroupe);
                 div.appendChild(carte);
 
-                
+
             });
 
       } catch (error) {
@@ -406,3 +415,13 @@ const statutLabels = {
 
   chargerVehicules();
   chargerDossiers();
+
+  document.getElementById('vehicule-marque').addEventListener('input', function() {
+      const marqueChoisie = this.value.trim()
+      const modeles = tousLesVehicules
+          .filter(v => !marqueChoisie || v.marque.toLowerCase() === marqueChoisie.toLowerCase())
+          .map(v => v.modele)
+      const modelesUniques = [...new Set(modeles)].sort()
+      document.getElementById('list-modeles-admin').innerHTML = modelesUniques.map(m => `<option value="${m}">`).join('')
+  })
+

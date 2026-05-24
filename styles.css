@@ -12,17 +12,32 @@
 
 body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: var(--fond); }
 
+/*body::backdrop {
+    content: '';
+    position: var(--fond);
+    top: 0; left: 0;
+    width: 100%; line-height: 100%;
+    background-image: url('assets/voiture-neon.jpg');
+    background-size: cover;
+    background-blend-mode: center;
+    opacity: 0.22;
+    z-index: -1;
+}*/
+
 body::before {
     content: '';
     position: fixed;
     top: 0; left: 0;
+    /*background-size: cover;*/
     width: 100%; height: 100%;
     background-image: url('assets/voiture-neon.jpg');
     background-size: cover;
     background-position: center;
     opacity: 0.22;
     z-index: -1;
+    
 }
+
 
 
 .accueil {
@@ -80,9 +95,12 @@ body::before {
 }
 
 .btn-choix:hover {
+
     background: rgba(255,255,255,0.1);
     transform: translateY(-4px);
     box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+
+
 }
 
 .btn-achat   { background: rgba(255,255,255,0.05); }
@@ -94,6 +112,8 @@ body::before {
 
 
 .filtres {
+
+
     background: white;
     padding: 20px;
     border-radius: 10px;
