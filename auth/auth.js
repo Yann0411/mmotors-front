@@ -41,6 +41,8 @@
 
   function afficherInscription() {
       document.getElementById('box-connexion').style.display = 'none';
+      document.getElementById('box-reset').style.display = 'none';
+
 
         document.getElementById('box-inscription').style.display = 'flex';
         clearErreurs('connexion');
@@ -50,11 +52,89 @@
   function afficherConnexion() {
 
       document.getElementById('box-inscription').style.display = 'none';
+      document.getElementById('box-reset').style.display = 'none';
+
       document.getElementById('box-connexion').style.display = 'flex';
       clearErreurs('inscription'); 
      // document.getElementById('msg-inscription').textContent = '';
       document.getElementById('msg-inscription').textContent = '';
   }
+
+  function afficherReset() {
+      document.getElementById('box-connexion').style.display = 'none';
+      document.getElementById('box-inscription').style.display = 'none';
+      document.getElementById('box-reset').style.display = 'flex';
+      clearErreurs('reset');
+      document.getElementById('msg-reset').textContent = '';
+  }
+
+  async function reinitialiserMotDePasse() {
+
+      const email= document.getElementById('reset-email').value.trim();
+      const nouveauMdp= document.getElementById('reset-mdp').value;
+      const confirmMdp= document.getElementById('reset-mdp-confirm').value;
+      const msg= document.getElementById('msg-reset');
+      const btn= document.getElementById('btn-reset');
+
+      clearErreurs('reset');
+      msg.textContent = '';
+
+      let hasError = false;
+
+      if (!email) {
+
+
+            afficherErreur('err-reset-email', 'Veuillez saisir votre adresse email.');
+          hasError = true;
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          afficherErreur('err-reset-email', 'Veuillez saisir une adresse email valide.');
+          hasError = true;
+      }
+
+      if (!nouveauMdp) {
+          afficherErreur('err-reset-mdp', 'Veuillez saisir un nouveau mot de passe.');
+          hasError = true;
+      } else if (!/^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/.test(nouveauMdp)) {
+            afficherErreur('err-reset-mdp', 'Le mot de passe doit contenir au moins 8 caractères, une majuscule, un chiffre et un caractère spécial (!@#$%^&*).');
+             hasError = true;
+
+
+      }
+      if (!confirmMdp) {
+             afficherErreur('err-reset-mdp-confirm', 'Veuillez confirmer votre mot de passe.');
+              hasError = true;
+      } else if (nouveauMdp !== confirmMdp) {
+
+
+          afficherErreur('err-reset-mdp-confirm', 'Les mots de passe ne correspondent pas.');
+          hasError = true;
+      }
+
+      if (hasError) return;
+
+      btn.disabled = true;
+      btn.textContent = 'Réinitialisation...';
+
+      try {
+          await axios.post('https://mmotors-back-production.up.railway.app/auth/reinitialiser-mot-de-passe',
+              { email, nouveauMotDePasse: nouveauMdp }
+          );
+          msg.style.color = 'green';
+            msg.textContent = 'Mot de passe réinitialisé ! Redirection vers la connexion...';
+          setTimeout(() => afficherConnexion(), 2000);
+      } catch (error) {
+
+             const data = error.response?.data;
+          msg.style.color = 'red';
+          msg.textContent = data || 'Une erreur est survenue. Veuillez réessayer.';
+      } finally {
+
+
+             btn.disabled = false;
+             btn.textContent = 'Réinitialiser';
+      }
+  }
+
 
   // ===== INSCRIPTION ===================
 
