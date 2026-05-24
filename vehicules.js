@@ -122,26 +122,75 @@ function seDeconnecter() {
                 return;
             }
 
-            div.innerHTML = '';
-            vehicules.forEach(function(vehicule) {
+            // div.innerHTML = '';
+            // vehicules.forEach(function(vehicule) {
 
-                // label du bouton selon le type
-                const labelBtn = vehicule.typeOffre === 'ACHAT' ? 'Déposer un dossier d\'achat'
-                    : vehicule.typeOffre === 'LOCATION_ACHAT' ? 'Déposer un dossier LOA'
-                    : 'Déposer un dossier de location';
+            //     // label du bouton selon le type
+            //     const labelBtn = vehicule.typeOffre === 'ACHAT' ? 'Déposer un dossier d\'achat'
+            //         : vehicule.typeOffre === 'LOCATION_ACHAT' ? 'Déposer un dossier LOA'
+            //         : 'Déposer un dossier de location';
 
-                div.innerHTML += `
-                    <div class="carte-vehicule">
-                        <h3>${vehicule.marque} ${vehicule.modele}</h3>
-                        <p>Année : ${vehicule.annee}</p>
-                        <p>Prix : ${vehicule.prix.toLocaleString('fr-FR')} €</p>
-                        <p>Kilométrage : ${vehicule.kilometrage.toLocaleString('fr-FR')} km</p>
-                        <button onclick="window.location.href='dossier/dossier.html?marque=${vehicule.marque}&modele=${vehicule.modele}&annee=${vehicule.annee}&prix=${vehicule.prix}&km=${vehicule.kilometrage}&typeOffre=${vehicule.typeOffre}'">
-                            ${labelBtn}
-                        </button>
-                    </div> 
-                `;
-            });
+            //     div.innerHTML += `
+            //         <div class="carte-vehicule">
+            //             <h3>${vehicule.marque} ${vehicule.modele}</h3>
+            //             <p>Année : ${vehicule.annee}</p>
+            //             <p>Prix : ${vehicule.prix.toLocaleString('fr-FR')} €</p>
+            //             <p>Kilométrage : ${vehicule.kilometrage.toLocaleString('fr-FR')} km</p>
+            //             <button onclick="window.location.href='dossier/dossier.html?marque=${vehicule.marque}&modele=${vehicule.modele}&annee=${vehicule.annee}&prix=${vehicule.prix}&km=${vehicule.kilometrage}&typeOffre=${vehicule.typeOffre}'">
+            //                 ${labelBtn}
+            //             </button>
+            //         </div> 
+            //     `;
+            // });
+
+
+             div.innerHTML = '';
+             
+              vehicules.forEach(function(vehicule) {
+
+                  // label du bouton selon le type
+                  const labelBtn = vehicule.typeOffre === 'ACHAT' ? 'Déposer un dossier d\'achat'
+                      : vehicule.typeOffre === 'LOCATION_ACHAT' ? 'Déposer un dossier LOA'
+                      : 'Déposer un dossier de location';
+
+                  const carte = document.createElement('div');
+                    carte.className = 'carte-vehicule';
+
+                  const titre = document.createElement('h3');
+                  titre.textContent = vehicule.marque + ' ' + vehicule.modele;
+
+                    const annee = document.createElement('p');
+                  annee.textContent = 'Année : ' + vehicule.annee;
+
+                  const prix = document.createElement('p');
+                    prix.textContent = 'Prix : ' + vehicule.prix.toLocaleString('fr-FR') + ' €';
+
+                  const km = document.createElement('p');
+                  km.textContent = 'Kilométrage : ' + vehicule.kilometrage.toLocaleString('fr-FR') + ' km';
+
+                  const btn = document.createElement('button');
+                    btn.textContent = labelBtn;
+                  btn.addEventListener('click', function() {
+                        const params = new URLSearchParams({
+                          marque: vehicule.marque,
+                          modele: vehicule.modele,
+                          annee: vehicule.annee,
+                          prix: vehicule.prix,
+                          km: vehicule.kilometrage,
+                          typeOffre: vehicule.typeOffre
+                      });
+                      window.location.href = 'dossier/dossier.html?' + params.toString();
+                  });
+
+                  carte.appendChild(titre);
+                    carte.appendChild(annee);
+                  carte.appendChild(prix);
+                  carte.appendChild(km);
+                    carte.appendChild(btn);
+                  div.appendChild(carte);
+              });
+
+
 
         } catch (error) {
             document.getElementById('liste-vehicules').innerHTML =

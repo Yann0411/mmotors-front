@@ -82,21 +82,60 @@ const statutLabels = {
           const response = await axios.get('https://mmotors-back-production.up.railway.app/vehicules');
           const vehicules = response.data;
             const div = document.getElementById('liste-vehicules-admin');
-          div.innerHTML = '';
-          vehicules.forEach(function(v) {
+        //   div.innerHTML = '';
+        //   vehicules.forEach(function(v) {
 
-              div.innerHTML += `
-                  <div class="carte-vehicule">
-                      <h3>${v.marque} ${v.modele} (${v.annee})</h3>
-                      <p>Prix : ${v.prix.toLocaleString('fr-FR')} € &nbsp;|&nbsp; Km : ${v.kilometrage.toLocaleString('fr-FR')} &nbsp;|&nbsp; ${typeOffreLabels[v.typeOffre] || v.typeOffre}</p>
-                      <div class="btn-groupe-carte">
+        //       div.innerHTML += `
+        //           <div class="carte-vehicule">
+        //               <h3>${v.marque} ${v.modele} (${v.annee})</h3>
+        //               <p>Prix : ${v.prix.toLocaleString('fr-FR')} € &nbsp;|&nbsp; Km : ${v.kilometrage.toLocaleString('fr-FR')} &nbsp;|&nbsp; ${typeOffreLabels[v.typeOffre] || v.typeOffre}</p>
+        //               <div class="btn-groupe-carte">
 
-                          <button class="btn-modifier" onclick="remplirFormulaire(${v.id}, '${v.marque}', '${v.modele}', ${v.annee}, ${v.prix}, ${v.kilometrage},'${v.typeOffre}')">Modifier</button>
-                          <button class="btn-supprimer" onclick="supprimerVehicule(${v.id}, '${v.marque}', '${v.modele}', ${v.annee})">Supprimer</button>
-                      </div>
-                  </div>
-              `;
-          });
+        //                   <button class="btn-modifier" onclick="remplirFormulaire(${v.id}, '${v.marque}', '${v.modele}', ${v.annee}, ${v.prix}, ${v.kilometrage},'${v.typeOffre}')">Modifier</button>
+        //                   <button class="btn-supprimer" onclick="supprimerVehicule(${v.id}, '${v.marque}', '${v.modele}', ${v.annee})">Supprimer</button>
+        //               </div>
+        //           </div>
+        //       `;
+        //   });
+
+                    div.innerHTML = '';
+            vehicules.forEach(function(v) {
+
+                const carte = document.createElement('div');
+                  carte.className = 'carte-vehicule';
+
+                const titre = document.createElement('h3');
+                titre.textContent = v.marque + ' ' + v.modele + ' (' + v.annee + ')';
+
+                  const infos = document.createElement('p');
+                infos.textContent = 'Prix : ' + v.prix.toLocaleString('fr-FR') + ' € | Km : ' + v.kilometrage.toLocaleString('fr-FR') + ' | ' + (typeOffreLabels[v.typeOffre] || v.typeOffre);
+
+                const btnGroupe = document.createElement('div');
+                  btnGroupe.className = 'btn-groupe-carte';
+
+                const btnModifier = document.createElement('button');
+                  btnModifier.className = 'btn-modifier';
+                btnModifier.textContent = 'Modifier';
+                     btnModifier.addEventListener('click', function() {
+                    remplirFormulaire(v.id, v.marque, v.modele, v.annee, v.prix, v.kilometrage, v.typeOffre);
+                });
+
+                  const btnSupprimer = document.createElement('button');
+                btnSupprimer.className = 'btn-supprimer';
+                btnSupprimer.textContent = 'Supprimer';
+                btnSupprimer.addEventListener('click', function() {
+                      supprimerVehicule(v.id, v.marque, v.modele, v.annee);
+                });
+
+                btnGroupe.appendChild(btnModifier);
+                  btnGroupe.appendChild(btnSupprimer);
+                carte.appendChild(titre);
+                carte.appendChild(infos);
+                  carte.appendChild(btnGroupe);
+                div.appendChild(carte);
+            });
+
+
       } catch (error) {
             document.getElementById('liste-vehicules-admin').innerHTML = '<p style="color:red;">Impossible de charger les véhicules.</p>';
       }
@@ -239,23 +278,96 @@ const statutLabels = {
               return;
           }
 
-          dossiers.forEach(function(d) {
-              const statutClasse = 'statut-' + d.statut.toLowerCase().replace('_', '-');
-              div.innerHTML += `
-                  <div class="carte-dossier">
-                      <p><strong>Client :</strong> ${d.clientEmail}</p>
-                      <p><strong>Type :</strong> ${typeOffreLabels[d.typeOffre] || d.typeOffre}</p>
-                      <p><strong>Message :</strong> ${d.message}</p>
-                      <p><strong>Date :</strong> ${formaterDate(d.dateDepot)}</p>
-                      <span class="statut ${statutClasse}">${statutLabels[d.statut] || d.statut}</span>
-                      <div class="btn-groupe-carte" style="margin-top:12px;">
-                          <button class="btn-valider" onclick="changerStatut(${d.id}, 'VALIDE', this)">Valider</button>
-                          <button class="btn-refuser" onclick="changerStatut(${d.id}, 'REFUSE', this)">Refuser</button>
-                          ${d.statut !== 'EN_ATTENTE' ? `<button class="btn-supprimer" onclick="supprimerDossier(${d.id}, '${d.clientEmail}')">Supprimer</button>` : ''}
-                      </div>
-                  </div>
-              `;
-          });
+        //   dossiers.forEach(function(d) {
+        //       const statutClasse = 'statut-' + d.statut.toLowerCase().replace('_', '-');
+        //       div.innerHTML += `
+        //           <div class="carte-dossier">
+        //               <p><strong>Client :</strong> ${d.clientEmail}</p>
+        //               <p><strong>Type :</strong> ${typeOffreLabels[d.typeOffre] || d.typeOffre}</p>
+        //               <p><strong>Message :</strong> ${d.message}</p>
+        //               <p><strong>Date :</strong> ${formaterDate(d.dateDepot)}</p>
+        //               <span class="statut ${statutClasse}">${statutLabels[d.statut] || d.statut}</span>
+        //               <div class="btn-groupe-carte" style="margin-top:12px;">
+        //                   <button class="btn-valider" onclick="changerStatut(${d.id}, 'VALIDE', this)">Valider</button>
+        //                   <button class="btn-refuser" onclick="changerStatut(${d.id}, 'REFUSE', this)">Refuser</button>
+        //                   ${d.statut !== 'EN_ATTENTE' ? `<button class="btn-supprimer" onclick="supprimerDossier(${d.id}, '${d.clientEmail}')">Supprimer</button>` : ''}
+        //               </div>
+        //           </div>
+        //       `;
+        //   });
+        dossiers.forEach(function(d) {
+
+
+                const statutClasse = 'statut-' + d.statut.toLowerCase().replace('_', '-');
+
+             const carte = document.createElement('div');
+                  carte.className = 'carte-dossier';
+
+                const client = document.createElement('p');
+                  client.innerHTML = '<strong>Client :</strong> ';
+                client.appendChild(document.createTextNode(d.clientEmail));
+
+                const type = document.createElement('p');
+                  type.innerHTML = '<strong>Type :</strong> ';
+                type.appendChild(document.createTextNode(typeOffreLabels[d.typeOffre] || d.typeOffre));
+
+                  const message = document.createElement('p');
+                   message.innerHTML = '<strong>Message :</strong> ';
+                    message.appendChild(document.createTextNode(d.message));
+
+                const date = document.createElement('p');
+                  date.innerHTML = '<strong>Date :</strong> ';
+                date.appendChild(document.createTextNode(formaterDate(d.dateDepot)));
+
+
+
+                  const statut = document.createElement('span');
+                statut.className = 'statut ' + statutClasse;
+                statut.textContent = statutLabels[d.statut] || d.statut;
+
+
+
+                const btnGroupe = document.createElement('div');
+                  btnGroupe.className = 'btn-groupe-carte';
+                btnGroupe.style.marginTop = '12px';
+
+
+
+                  const btnValider = document.createElement('button');
+                btnValider.className = 'btn-valider';
+                btnValider.textContent = 'Valider';
+                  btnValider.addEventListener('click', function() { changerStatut(d.id, 'VALIDE', btnValider); });
+
+                const btnRefuser = document.createElement('button');
+                  btnRefuser.className = 'btn-refuser';
+                btnRefuser.textContent = 'Refuser';
+                btnRefuser.addEventListener('click', function() { changerStatut(d.id, 'REFUSE', btnRefuser); });
+
+                  btnGroupe.appendChild(btnValider);
+
+                btnGroupe.appendChild(btnRefuser);
+
+
+
+                if (d.statut !== 'EN_ATTENTE') {
+                    const btnSupprimer = document.createElement('button');
+                      btnSupprimer.className = 'btn-supprimer';
+                    btnSupprimer.textContent = 'Supprimer';
+                    btnSupprimer.addEventListener('click', function() { supprimerDossier(d.id, d.clientEmail); });
+                      btnGroupe.appendChild(btnSupprimer);
+                }
+
+                carte.appendChild(client);
+                  carte.appendChild(type);
+                carte.appendChild(message);
+                  carte.appendChild(date);
+                carte.appendChild(statut);
+                  carte.appendChild(btnGroupe);
+                div.appendChild(carte);
+
+                
+            });
+
       } catch (error) {
             document.getElementById('liste-dossiers-admin').innerHTML = '<p style="color:red;">Impossible de charger les dossiers.</p>';
       }
