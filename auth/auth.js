@@ -205,11 +205,11 @@
 
           const data = error.response?.data;
           if (data === 'Email introuvable') {
-              afficherErreur('err-connexion-email', '"Email ou mot de passe incorrect".');
+              afficherErreur('err-connexion-email', 'Email ou mot de passe incorrect.');
 
           } else if (data === 'Mot de passe incorrect') {
 
-              afficherErreur('err-connexion-mdp', '"Email ou mot de passe incorrect".');
+              afficherErreur('err-connexion-mdp', 'Email ou mot de passe incorrect.');
           } else {
 
 
