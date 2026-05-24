@@ -60,11 +60,11 @@
 
   async function sInscrire() {
 
-      const nom       = document.getElementById('inscription-nom').value.trim();
+      const nom = document.getElementById('inscription-nom').value.trim();
 
-      const prenom    = document.getElementById('inscription-prenom').value.trim();
+      const prenom = document.getElementById('inscription-prenom').value.trim();
 
-      const email     = document.getElementById('inscription-email').value.trim();
+      const email= document.getElementById('inscription-email').value.trim();
       const motDePasse = document.getElementById('inscription-mdp').value;
       const msg = document.getElementById('msg-inscription');
       const btn = document.getElementById('btn-inscription');
@@ -205,11 +205,11 @@
 
           const data = error.response?.data;
           if (data === 'Email introuvable') {
-              afficherErreur('err-connexion-email', 'Aucun compte associé à cette adresse email.');
+              afficherErreur('err-connexion-email', '"Email ou mot de passe incorrect".');
 
           } else if (data === 'Mot de passe incorrect') {
 
-              afficherErreur('err-connexion-mdp', 'Le mot de passe saisi est incorrect.');
+              afficherErreur('err-connexion-mdp', '"Email ou mot de passe incorrect".');
           } else {
 
 
