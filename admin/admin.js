@@ -67,7 +67,7 @@ const statutLabels = {
 
   }
 
-  // ===== format date =====
+  // ===== format date ===============
 
   function formaterDate(dateStr) {
 
@@ -78,7 +78,7 @@ const statutLabels = {
       });
   }
 
-  // =================== Véhicules ===================
+  // =================== Véhicules ====================================
 let tousLesVehicules = []
 
   async function chargerVehicules() {
