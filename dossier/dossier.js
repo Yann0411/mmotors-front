@@ -57,6 +57,8 @@ const params = new URLSearchParams(window.location.search);
 
       const typeOffre  = document.getElementById('typeOffre').value;
       const messageClient = document.getElementById('message').value.trim();
+      const telephone = document.getElementById('telephone').value.trim()
+
       const msg = document.getElementById('msg-dossier');
         const btn = document.getElementById('btn-dossier');
 
@@ -111,7 +113,7 @@ const params = new URLSearchParams(window.location.search);
       try {
 
           await axios.post('https://mmotors-back-production.up.railway.app/dossiers',
-              { typeOffre, message: messageFinal },
+              { typeOffre, message: messageFinal, telephone },
               { headers: { Authorization: 'Bearer ' + token } }
 
           );

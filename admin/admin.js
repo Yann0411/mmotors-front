@@ -328,6 +328,21 @@ let tousLesVehicules = []
                   date.innerHTML = '<strong>Date :</strong> ';
                 date.appendChild(document.createTextNode(formaterDate(d.dateDepot)));
 
+            //     if (d.telephone) {
+            //     const tel = document.createElement('p')
+            //     tel.innerHTML = '<strong>Téléphone :</strong>'
+            //     tel.appendChild(document.createTextNode(d.telephone))
+            //     carte.appendChild(tel)
+            // }
+
+                let tel = null
+            if (d.telephone) {
+                tel = document.createElement('p')
+                tel.innerHTML = '<strong>Téléphone :</strong> '
+                tel.appendChild(document.createTextNode(d.telephone))
+            }
+
+
 
 
                   const statut = document.createElement('span');
@@ -364,12 +379,15 @@ let tousLesVehicules = []
                     btnSupprimer.textContent = 'Supprimer';
                     btnSupprimer.addEventListener('click', function() { supprimerDossier(d.id, d.clientEmail); });
                       btnGroupe.appendChild(btnSupprimer);
+                   
+
                 }
 
                 carte.appendChild(client);
                   carte.appendChild(type);
                 carte.appendChild(message);
                   carte.appendChild(date);
+                if (d.telephone) carte.appendChild(tel)
                 carte.appendChild(statut);
                   carte.appendChild(btnGroupe);
                 div.appendChild(carte);
