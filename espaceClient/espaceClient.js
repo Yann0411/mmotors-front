@@ -225,7 +225,7 @@ const statutLabels = {
               btnValider.textContent = 'Valider';
           }
       });
-console.log(dossiers)
+console.log(dossier)
 
       const btnAnnulerModif = document.createElement('button');
 
