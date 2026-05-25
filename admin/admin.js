@@ -322,8 +322,16 @@ let tousLesVehicules = []
                   type.innerHTML = '<strong>Type :</strong> ';
                 type.appendChild(document.createTextNode(typeOffreLabels[d.typeOffre] || d.typeOffre));
 
+                let vehiculeInfoEl = null
+                if (d.vehiculeInfo) {
+                    vehiculeInfoEl = document.createElement('p')
+                    vehiculeInfoEl.innerHTML = '<strong>Véhicule :</strong> '
+                    vehiculeInfoEl.appendChild(document.createTextNode(d.vehiculeInfo))
+                }
+
+
                   const message = document.createElement('p');
-                   message.innerHTML = '<strong>Message :</strong> ';
+                   message.innerHTML = '<strong>Ma demande :</strong> ';
                     message.appendChild(document.createTextNode(d.message));
 
                 const date = document.createElement('p');
@@ -338,7 +346,7 @@ let tousLesVehicules = []
             // }
 
                 let tel = null
-            if (d.telephone) {
+                if (d.telephone) {
                 tel = document.createElement('p')
                 tel.innerHTML = '<strong>Téléphone :</strong> '
                 tel.appendChild(document.createTextNode(d.telephone))
@@ -387,7 +395,9 @@ let tousLesVehicules = []
 
                 carte.appendChild(client);
                   carte.appendChild(type);
-                carte.appendChild(message);
+                // carte.appendChild(message);
+                if (d.vehiculeInfo) carte.appendChild(vehiculeInfoEl)
+                if (d.message) carte.appendChild(message)
                   carte.appendChild(date);
                 if (d.telephone) carte.appendChild(tel)
                 carte.appendChild(statut);

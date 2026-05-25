@@ -99,18 +99,32 @@ const params = new URLSearchParams(window.location.search);
       }
 
       // construction du message final
-      let messageFinal = '';
+    //   let messageFinal = '';
 
-      if (params.get('marque')) {
+    //   if (params.get('marque')) {
 
-            // infos véhicule en lecture seule + message client éventuel
-          messageFinal = `Véhicule : ${params.get('marque')} ${params.get('modele')} ${params.get('annee')} - ${parseInt(params.get('km')).toLocaleString('fr-FR')} km - ${parseFloat(params.get('prix')).toLocaleString('fr-FR')} € - ${params.get('typeOffre') === 'ACHAT' ? 'Achat' : 'Location'}`;
-          if (messageClient) {
-              messageFinal += `\nMa demande : ${messageClient}`;
-          }
-      } else {
-          messageFinal = messageClient;
-      }
+    //         // infos véhicule en lecture seule + message client éventuel
+    //       messageFinal = `Véhicule : ${params.get('marque')} ${params.get('modele')} ${params.get('annee')} - ${parseInt(params.get('km')).toLocaleString('fr-FR')} km - ${parseFloat(params.get('prix')).toLocaleString('fr-FR')} € - ${params.get('typeOffre') === 'ACHAT' ? 'Achat' : 'Location'}`;
+    //       if (messageClient) {
+    //           messageFinal += `\nMa demande : ${messageClient}`;
+    //       }
+    //   } else {
+    //       messageFinal = messageClient;
+    //   }
+
+
+                let vehiculeInfo = null
+
+            if (params.get('marque')) {
+
+                vehiculeInfo = params.get('marque') + ' ' + params.get('modele') + ' ' + params.get('annee')
+
+                  + ' - ' + parseInt(params.get('km')).toLocaleString('fr-FR') + ' km'
+
+                    + ' - ' + parseFloat(params.get('prix')).toLocaleString('fr-FR') + ' €'
+                    + ' - ' + (params.get('typeOffre') === 'ACHAT' ? 'Achat' : 'Location')
+            }       
+
 
         btn.disabled = true;
       btn.textContent = 'Envoi en cours...';
@@ -119,7 +133,7 @@ const params = new URLSearchParams(window.location.search);
       try {
 
           await axios.post('https://mmotors-back-production.up.railway.app/dossiers',
-              { typeOffre, message: messageFinal, telephone },
+             { typeOffre, message: messageClient, vehiculeInfo, telephone },
               { headers: { Authorization: 'Bearer ' + token } }
 
           );

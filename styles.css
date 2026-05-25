@@ -12,26 +12,13 @@
 
 body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: var(--fond); }
 
- *, *::before, *::after { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: border-box; }
 
-
-/*body::backdrop {
-    content: '';
-    position: var(--fond);
-    top: 0; left: 0;
-    width: 100%; line-height: 100%;
-    background-image: url('assets/voiture-neon.jpg');
-    background-size: cover;
-    background-blend-mode: center;
-    opacity: 0.22;
-    z-index: -1;
-}*/
 
 body::before {
     content: '';
     position: fixed;
     top: 0; left: 0;
-    /*background-size: cover;*/
     width: 100%; height: 100%;
     background-image: url('assets/voiture-neon.jpg');
     background-size: cover;
@@ -62,7 +49,6 @@ body::before {
     margin-bottom: 10px;
      color: white;
     font-weight: 800;
-    /* letter-spacing: 2px; */
 }
 
 .accueil > p {
@@ -77,11 +63,6 @@ body::before {
 
 .choix { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
 
-
-/* .btn-choix {
-    padding:30px 60px;
-    font-size: 1.5em;
-} */
 
 .btn-choix {
       width: 260px;
@@ -110,7 +91,7 @@ body::before {
 .btn-location { background: rgba(255,255,255,0.05); }
 
 
-.catalogue { display: none; padding: 30px; max-width: 1200px;  margin: 0 auto; }
+.catalogue { display: none; padding: 30px; max-width: 1200px; margin: 0 auto; }
 
 
 
@@ -310,7 +291,6 @@ body::before {
     color: #64748B;
     font-size: 0.88em;
     font-weight: 500;
-    /* padding-right: 3px; */
 }
 
 
@@ -436,7 +416,7 @@ body::before {
 
 
 @media (max-width: 1024px) {
-      .liste-vehicules { grid-template-columns: repeat(2, 1fr); }
+    .liste-vehicules { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
@@ -461,7 +441,6 @@ body::before {
     .btn-choix {
         width: 100%;
         max-width: 340px;
-        /* padding: 20px 40px; ancien style */
     }
 
     .catalogue { padding: 16px; }
@@ -470,6 +449,7 @@ body::before {
         flex-direction: column;
     }
 
+    /* input,  select et button */
     .filtres input,
     .filtres select,
       .filtres button { width: 100%; flex: none; }

@@ -8,7 +8,8 @@ const statutLabels = {
 
   const typeOffreLabels = {
       'ACHAT': 'Achat',
-      'LOCATION': 'Location'
+      'LOCATION': 'Location',
+      'LOCATION_ACHAT': 'Location avec option d\'achat (LOA)'
   };
 
 
@@ -101,6 +102,17 @@ const statutLabels = {
                   type.innerHTML = '<strong>Type :</strong> ';
                 type.appendChild(document.createTextNode(typeOffreLabels[dossier.typeOffre] || dossier.typeOffre));
 
+               let vehiculeInfoEl = null
+
+                if (dossier.vehiculeInfo) {
+                    vehiculeInfoEl = document.createElement('p')
+                    vehiculeInfoEl.innerHTML = '<strong>Véhicule :</strong> '
+                    vehiculeInfoEl.appendChild(document.createTextNode(dossier.vehiculeInfo))
+                    
+                }   
+
+
+
                   const message = document.createElement('p');
                 message.innerHTML = '<strong>Ma demande :</strong> ';
                 message.appendChild(document.createTextNode(dossier.message));
@@ -114,9 +126,13 @@ const statutLabels = {
                 statut.textContent = statutLabels[dossier.statut] || dossier.statut;
 
                 carte.appendChild(type);
-                  carte.appendChild(message);
+                //   carte.appendChild(message);
+                if (dossier.vehiculeInfo) carte.appendChild(vehiculeInfoEl)
+
+                if (dossier.message) carte.appendChild(message)
                 carte.appendChild(date);
                 carte.appendChild(statut);
+
                 if (dossier.statut === 'EN_ATTENTE') {
                     const btnGroupe = document.createElement('div');
                      btnGroupe.style.marginTop = '12px';
@@ -224,7 +240,7 @@ const statutLabels = {
                     btnAnnulerModif.className = 'btn-supprimer';
                     btnAnnulerModif.textContent = 'Annuler';
 
-                    
+
                     btnAnnulerModif.addEventListener('click', function() { form.remove(); });
 
                     form.appendChild(labelMsg);
@@ -238,6 +254,19 @@ const statutLabels = {
                 }
 
 
+            async function annulerDossier(id, carte) {
+
+                if (!confirm('Voulez-vous annuler ce dossier ?')) return
+                try {
+                    // await axios.delete('https://mmotors-back-production.up.railway.app/dossiers/'
+                    await axios.delete('https://mmotors-back-production.up.railway.app/dossiers/' + id,
+                        { headers: { Authorization: 'Bearer ' + token } }
+                    )   
+                    chargerDossiers()
+                } catch (error) {
+                    alert('Erreur lors de l\'annulation.')
+                }
+            }
 
 
   chargerDossiers();
