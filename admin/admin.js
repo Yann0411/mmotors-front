@@ -86,6 +86,8 @@ let tousLesVehicules = []
           const response = await axios.get('https://mmotors-back-production.up.railway.app/vehicules');
           const vehicules = response.data;
 
+           vehicules.sort((a, b) => b.annee - a.annee)
+
           tousLesVehicules = vehicules
             const marques = [...new Set(vehicules.map(v => v.marque))].sort()
              document.getElementById('list-marques-admin').innerHTML = marques.map(m => `<option value="${m}">`).join('')

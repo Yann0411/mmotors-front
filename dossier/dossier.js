@@ -74,6 +74,12 @@ const params = new URLSearchParams(window.location.search);
             msg.textContent = 'Veuillez décrire le véhicule souhaité avant d\'envoyer.';
           return;
       }
+      if (!telephone) {
+      msg.style.color = 'red'
+      msg.textContent = 'Veuillez renseigner votre numéro de téléphone.'
+      return
+  }
+
 
       if (messageClient && contientScript(messageClient)) {
 
