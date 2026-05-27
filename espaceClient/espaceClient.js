@@ -1,273 +1,261 @@
-const statutLabels = { 
-      'EN_ATTENTE': 'En attente',
-      'VALIDE': 'Validé',
-      'REFUSE': 'Refusé'
-  };
+const statutLabels = {
+  EN_ATTENTE: "En attente",
+  VALIDE: "Validé",
+  REFUSE: "Refusé",
+};
 
+const typeOffreLabels = {
+  ACHAT: "Achat",
+  LOCATION: "Location",
+  LOCATION_ACHAT: "Location avec option d'achat (LOA)",
+};
 
+const token = localStorage.getItem("token");
+if (!token) {
+  window.location.href = "../auth/auth.html";
+}
 
-  const typeOffreLabels = {
-      'ACHAT': 'Achat',
-      'LOCATION': 'Location',
-      'LOCATION_ACHAT': 'Location avec option d\'achat (LOA)'
-  };
+function seDeconnecter() {
+  localStorage.clear();
+  window.location.href = "../auth/auth.html";
+}
 
+const nomStocke = localStorage.getItem("nom");
 
+if (nomStocke) {
+  document.getElementById("nom-utilisateur").textContent =
+    "Bonjour " + nomStocke.charAt(0).toUpperCase() + nomStocke.slice(1);
+}
 
-  
-  const token = localStorage.getItem('token');
+function formaterDate(dateStr) {
+  if (!dateStr) return "";
+
+  const [annee, mois, jour] = dateStr.split("-");
+  return new Date(annee, mois - 1, jour).toLocaleDateString("fr-FR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
+
+async function chargerDossiers() {
+  const msg = document.getElementById("msg-espace");
+
   if (!token) {
-      window.location.href = '../auth/auth.html';
-
+    msg.style.color = "red";
+    msg.textContent = "Vous devez être connecté.";
+    return;
   }
 
-  function seDeconnecter() {
+  try {
+    const response = await axios.get(
+      "https://mmotors-back-production.up.railway.app/dossiers/moi",
+      { headers: { Authorization: "Bearer " + token } },
+    );
 
-    
-    localStorage.clear();
-      window.location.href = '../auth/auth.html';
-  }
+    const dossiers = response.data;
 
-  const nomStocke = localStorage.getItem('nom');
+    const div = document.getElementById("liste-dossiers");
 
+    if (dossiers.length === 0) {
+      div.innerHTML = "<p>Vous n'avez pas encore de dossier.</p>";
+      return;
+    }
 
-  if (nomStocke) {
+    //   div.innerHTML = '';
+    //   dossiers.forEach(function(dossier) {
+    //       const statutClasse = 'statut-' + dossier.statut.toLowerCase().replace('_', '-');
 
-       document.getElementById('nom-utilisateur').textContent = 'Bonjour ' + nomStocke.charAt(0).toUpperCase() + nomStocke.slice(1);
-  }
+    //       div.innerHTML += `
+    //           <div class="carte-dossier">
+    //               <p><strong>Type :</strong> ${typeOffreLabels[dossier.typeOffre] || dossier.typeOffre}</p>
 
-     function formaterDate(dateStr) {
+    //               <p><strong>Message :</strong> ${dossier.message}</p>
+    //               <p><strong>Date :</strong> ${formaterDate(dossier.dateDepot)}</p>
+    //               <span class="statut ${statutClasse}">${statutLabels[dossier.statut] || dossier.statut}</span>
 
-    
-    if (!dateStr) return '';
-    
-    const [annee, mois, jour] = dateStr.split('-');
-      return new Date(annee, mois - 1, jour).toLocaleDateString('fr-FR', {
-          day: 'numeric', month: 'long', year: 'numeric'
-      });
+    //           </div>
+    //       `;
+    //   });
 
-  }
+    div.innerHTML = "";
+    dossiers.forEach(function (dossier) {
+      const statutClasse =
+        "statut-" + dossier.statut.toLowerCase().replace("_", "-");
 
-  async function chargerDossiers() {
+      const carte = document.createElement("div");
+      carte.className = "carte-dossier";
 
-      const msg = document.getElementById('msg-espace');
+      const type = document.createElement("p");
+      type.innerHTML = "<strong>Type :</strong> ";
+      type.appendChild(
+        document.createTextNode(
+          typeOffreLabels[dossier.typeOffre] || dossier.typeOffre,
+        ),
+      );
 
-      if (!token) { 
+      let vehiculeInfoEl = null;
 
-            msg.style.color = 'red';
-           msg.textContent = 'Vous devez être connecté.';
-          return;
+      if (dossier.vehiculeInfo) {
+        vehiculeInfoEl = document.createElement("p");
+        vehiculeInfoEl.innerHTML = "<strong>Véhicule :</strong> ";
+        vehiculeInfoEl.appendChild(
+          document.createTextNode(dossier.vehiculeInfo),
+        );
       }
 
-      try {
+      const message = document.createElement("p");
+      message.innerHTML = "<strong>Ma demande :</strong> ";
+      message.appendChild(document.createTextNode(dossier.message));
 
-            const response = await axios.get('https://mmotors-back-production.up.railway.app/dossiers/moi',
-              { headers: { Authorization: 'Bearer ' + token } }
-          );
+      const date = document.createElement("p");
+      date.innerHTML = "<strong>Date :</strong> ";
+      date.appendChild(
+        document.createTextNode(formaterDate(dossier.dateDepot)),
+      );
 
-          const dossiers = response.data;
+      const statut = document.createElement("span");
+      statut.className = "statut " + statutClasse;
+      statut.textContent = statutLabels[dossier.statut] || dossier.statut;
 
-          const div = document.getElementById('liste-dossiers');
+      carte.appendChild(type);
+      //   carte.appendChild(message);
+      if (dossier.vehiculeInfo) carte.appendChild(vehiculeInfoEl);
 
-          if (dossiers.length === 0) {
-          
-            div.innerHTML = '<p>Vous n\'avez pas encore de dossier.</p>';
-              return;
-          }
+      if (dossier.message) carte.appendChild(message);
+      carte.appendChild(date);
+      carte.appendChild(statut);
 
-        //   div.innerHTML = '';
-        //   dossiers.forEach(function(dossier) {
-        //       const statutClasse = 'statut-' + dossier.statut.toLowerCase().replace('_', '-');
+      if (dossier.statut === "EN_ATTENTE") {
+        const btnGroupe = document.createElement("div");
+        btnGroupe.style.marginTop = "12px";
 
-        //       div.innerHTML += `
-        //           <div class="carte-dossier">
-        //               <p><strong>Type :</strong> ${typeOffreLabels[dossier.typeOffre] || dossier.typeOffre}</p>
-                      
-        //               <p><strong>Message :</strong> ${dossier.message}</p>
-        //               <p><strong>Date :</strong> ${formaterDate(dossier.dateDepot)}</p>
-        //               <span class="statut ${statutClasse}">${statutLabels[dossier.statut] || dossier.statut}</span>
+        btnGroupe.style.display = "flex";
+        btnGroupe.style.gap = "8px";
 
-        //           </div>
-        //       `;
-        //   });
+        const btnAnnuler = document.createElement("button");
+        btnAnnuler.className = "btn-supprimer";
 
-        div.innerHTML = '';
-            dossiers.forEach(function(dossier) {
-                const statutClasse = 'statut-' + dossier.statut.toLowerCase().replace('_', '-');
+        btnAnnuler.textContent = "Annuler";
+        btnAnnuler.addEventListener("click", function () {
+          annulerDossier(dossier.id, carte);
+        });
 
-                const carte = document.createElement('div');
-                  carte.className = 'carte-dossier';
+        const btnModifier = document.createElement("button");
+        btnModifier.className = "btn-modifier";
+        btnModifier.textContent = "Modifier";
 
-                const type = document.createElement('p');
-                  type.innerHTML = '<strong>Type :</strong> ';
-                type.appendChild(document.createTextNode(typeOffreLabels[dossier.typeOffre] || dossier.typeOffre));
+        btnModifier.addEventListener("click", function () {
+          afficherFormulaireModif(dossier, carte);
+        });
 
-               let vehiculeInfoEl = null
-
-                if (dossier.vehiculeInfo) {
-                    vehiculeInfoEl = document.createElement('p')
-                    vehiculeInfoEl.innerHTML = '<strong>Véhicule :</strong> '
-                    vehiculeInfoEl.appendChild(document.createTextNode(dossier.vehiculeInfo))
-                    
-                }   
-
-
-
-                  const message = document.createElement('p');
-                message.innerHTML = '<strong>Ma demande :</strong> ';
-                message.appendChild(document.createTextNode(dossier.message));
-
-                const date = document.createElement('p');
-                  date.innerHTML = '<strong>Date :</strong> ';
-                date.appendChild(document.createTextNode(formaterDate(dossier.dateDepot)));
-
-                  const statut = document.createElement('span');
-                statut.className = 'statut ' + statutClasse;
-                statut.textContent = statutLabels[dossier.statut] || dossier.statut;
-
-                carte.appendChild(type);
-                //   carte.appendChild(message);
-                if (dossier.vehiculeInfo) carte.appendChild(vehiculeInfoEl)
-
-                if (dossier.message) carte.appendChild(message)
-                carte.appendChild(date);
-                carte.appendChild(statut);
-
-                if (dossier.statut === 'EN_ATTENTE') {
-                    const btnGroupe = document.createElement('div');
-                     btnGroupe.style.marginTop = '12px';
-                 
-                     btnGroupe.style.display = 'flex';
-                    btnGroupe.style.gap = '8px';
-
-                    const btnAnnuler = document.createElement('button');
-                     btnAnnuler.className = 'btn-supprimer';
-                   
-                     btnAnnuler.textContent = 'Annuler';
-                    btnAnnuler.addEventListener('click', function() { annulerDossier(dossier.id, carte); });
-
-                    const btnModifier = document.createElement('button');
-                    btnModifier.className = 'btn-modifier';
-                    btnModifier.textContent = 'Modifier';
-                   
-                   
-                    btnModifier.addEventListener('click', function() { afficherFormulaireModif(dossier, carte); });
-
-                    btnGroupe.appendChild(btnModifier);
-                    btnGroupe.appendChild(btnAnnuler);
-                    carte.appendChild(btnGroupe);
-                }
-
-                  div.appendChild(carte);
-            });
-
-
-
-      } catch (error) {
-
-           msg.style.color = 'red';
-            msg.textContent = 'Erreur lors du chargement des dossiers.';
+        btnGroupe.appendChild(btnModifier);
+        btnGroupe.appendChild(btnAnnuler);
+        carte.appendChild(btnGroupe);
       }
+
+      div.appendChild(carte);
+    });
+  } catch (error) {
+    msg.style.color = "red";
+    msg.textContent = "Erreur lors du chargement des dossiers.";
   }
+}
 
-                function afficherFormulaireModif(dossier, carte) {
+function afficherFormulaireModif(dossier, carte) {
+  if (carte.querySelector(".form-modif")) return;
 
-                    if (carte.querySelector('.form-modif')) return;
+  const form = document.createElement("div");
+  form.className = "form-modif";
+  form.style.marginTop = "12px";
 
-                    
-                    const form = document.createElement('div');
-                    form.className = 'form-modif';
-                    form.style.marginTop = '12px';
+  const labelMsg = document.createElement("label");
+  labelMsg.textContent = "Message :";
 
-                     const labelMsg = document.createElement('label');
-                    labelMsg.textContent = 'Message :';
+  const textarea = document.createElement("textarea");
 
-                    const textarea = document.createElement('textarea');
-                    
-                       textarea.style.width = '100%';
-                    textarea.style.marginBottom = '8px';
-                    textarea.rows = 3;
-                       textarea.value = dossier.message;
+  textarea.style.width = "100%";
+  textarea.style.marginBottom = "8px";
+  textarea.rows = 3;
+  textarea.value = dossier.message;
 
+  const labelTel = document.createElement("label");
+  labelTel.textContent = "Téléphone :";
 
+  const inputTel = document.createElement("input");
 
-                    const labelTel = document.createElement('label')
-                    labelTel.textContent = 'Téléphone :';
+  inputTel.type = "tel";
+  inputTel.style.width = "100%";
+  inputTel.style.marginBottom = "8px";
 
-                    const inputTel = document.createElement('input');
+  inputTel.value = dossier.telephone || "";
 
-                    inputTel.type = 'tel';
-                    inputTel.style.width = '100%';
-                    inputTel.style.marginBottom = '8px';
+  const msgErreur = document.createElement("p");
+  msgErreur.style.color = "red";
+  msgErreur.style.fontSize = "0.85rem";
 
-                    inputTel.value = dossier.telephone || '';
+  const btnValider = document.createElement("button");
 
-                    const msgErreur = document.createElement('p');
-                    msgErreur.style.color = 'red';
-                    msgErreur.style.fontSize = '0.85rem'
+  btnValider.className = "btn-modifier";
+  btnValider.textContent = "Valider";
 
-                    const btnValider = document.createElement('button');
+  btnValider.addEventListener("click", async function () {
+    const nouveauMessage = textarea.value.trim();
+    const nouveauTel = inputTel.value.trim();
 
-                btnValider.className = 'btn-modifier';
-                    btnValider.textContent = 'Valider';
-                    
-                    btnValider.addEventListener('click', async function() {
+    if (!nouveauMessage) {
+      msgErreur.textContent = "Le message ne peut pas être vide.";
+      return;
+    }
+    btnValider.disabled = true;
+    btnValider.textContent = "Sauvegarde...";
+    try {
+      await axios.put(
+        "https://mmotors-back-production.up.railway.app/dossiers/" + dossier.id,
+        //  await axios.put('https://mmotors-back-production.up.railway.app/dossiers/'
 
-                        const nouveauMessage = textarea.value.trim();
-                        const nouveauTel = inputTel.value.trim();
+        { message: nouveauMessage, telephone: nouveauTel },
+        { headers: { Authorization: "Bearer " + token } },
+      );
+      chargerDossiers();
+    } catch (error) {
+      msgErreur.textContent = "Erreur lors de la modification.";
+      btnValider.disabled = false;
+      btnValider.textContent = "Valider";
+    }
+  });
 
-                        if (!nouveauMessage) { msgErreur.textContent = 'Le message ne peut pas être vide.'; return; }
-                        btnValider.disabled = true;
-                        btnValider.textContent = 'Sauvegarde...';
-                        try {
+  const btnAnnulerModif = document.createElement("button");
 
-                            await axios.put('https://mmotors-back-production.up.railway.app/dossiers/' + dossier.id,
-                                //  await axios.put('https://mmotors-back-production.up.railway.app/dossiers/'
+  btnAnnulerModif.className = "btn-supprimer";
+  btnAnnulerModif.textContent = "Annuler";
 
-                                { message: nouveauMessage, telephone: nouveauTel },
-                                { headers: { Authorization: 'Bearer ' + token } }
-                            );
-                            chargerDossiers();
-                        } catch (error) {
-                            msgErreur.textContent = 'Erreur lors de la modification.';
-                            btnValider.disabled = false;
-                            btnValider.textContent = 'Valider';
-                        }
-                    });
+  btnAnnulerModif.addEventListener("click", function () {
+    form.remove();
+  });
 
-                    const btnAnnulerModif = document.createElement('button');
+  form.appendChild(labelMsg);
+  form.appendChild(textarea);
+  form.appendChild(labelTel);
+  form.appendChild(inputTel);
+  form.appendChild(msgErreur);
+  form.appendChild(btnValider);
+  form.appendChild(btnAnnulerModif);
+  carte.appendChild(form);
+}
 
-                    btnAnnulerModif.className = 'btn-supprimer';
-                    btnAnnulerModif.textContent = 'Annuler';
+async function annulerDossier(id, carte) {
+  if (!confirm("Voulez-vous annuler ce dossier ?")) return;
+  try {
+    // await axios.delete('https://mmotors-back-production.up.railway.app/dossiers/'
+    await axios.delete(
+      "https://mmotors-back-production.up.railway.app/dossiers/" + id,
+      { headers: { Authorization: "Bearer " + token } },
+    );
+    chargerDossiers();
+  } catch (error) {
+    alert("Erreur lors de l'annulation.");
+  }
+}
 
-
-                    btnAnnulerModif.addEventListener('click', function() { form.remove(); });
-
-                    form.appendChild(labelMsg);
-                    form.appendChild(textarea);
-                    form.appendChild(labelTel);
-                    form.appendChild(inputTel);
-                    form.appendChild(msgErreur);
-                    form.appendChild(btnValider);
-                    form.appendChild(btnAnnulerModif);
-                    carte.appendChild(form);
-                }
-
-
-            async function annulerDossier(id, carte) {
-
-                if (!confirm('Voulez-vous annuler ce dossier ?')) return
-                try {
-                    // await axios.delete('https://mmotors-back-production.up.railway.app/dossiers/'
-                    await axios.delete('https://mmotors-back-production.up.railway.app/dossiers/' + id,
-                        { headers: { Authorization: 'Bearer ' + token } }
-                    )   
-                    chargerDossiers()
-                } catch (error) {
-                    alert('Erreur lors de l\'annulation.')
-                }
-            }
-
-
-  chargerDossiers();
-
+chargerDossiers();

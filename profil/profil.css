@@ -1,9 +1,8 @@
 .profil-container {
-        max-width: 580px;
-          margin: 0 auto;
-        padding: 32px 24px 60px;
-
-    }
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 32px 24px 60px;
+}
 
 /*
 .btn-achat   { background: rgba(255,255,255,0.05); }
@@ -30,72 +29,73 @@
 
 */
 
-    
-    .profil-header {
-        margin-bottom: 28px;
+.profil-header {
+  margin-bottom: 28px;
+}
 
-    }
+.profil-header h1 {
+  color: #1a202c;
+  margin: 0 0 6px 0;
+  font-size: 1.6em;
+  font-weight: 800;
+}
 
-    .profil-header h1 {
+.profil-header p {
+  color: #64748b;
+  margin: 0;
+  font-size: 0.9em;
+}
 
+.profil-box {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 28px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
 
-        color: #1A202C;
-        margin: 0 0 6px 0;
-          font-size: 1.6em;
-        font-weight: 800;
-    }
+.profil-box h2 {
+  margin: 0;
+  color: #1a202c;
+  font-size: 1.1em;
+  font-weight: 700;
+}
 
-    .profil-header p {
-        color: #64748B;
-        margin: 0;
-          font-size: 0.9em;
-    }
+/* email désactivé */
+.profil-box input:disabled {
+  background: #f8fafc;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
 
-    .profil-box {
-        background: white;
-        border: 1px solid #E2E8F0;
-          border-radius: 12px;
-        padding: 28px;
-        margin-bottom: 20px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-         display: flex;
-        flex-direction: column;
-          gap: 14px;
-    }
+#btn-profil,
+#btn-mdp {
+  padding: 11px;
+  background-color: #1f2937;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95em;
+  font-weight: 600;
+  cursor: pointer;
 
-    .profil-box h2 {
-        margin: 0;
-        color: #1A202C;
-          font-size: 1.1em;
-        font-weight: 700;
-    }
+  transition: background 0.2s;
+}
 
-    /* email désactivé */
-    .profil-box input:disabled {
-        background: #F8FAFC;
-        color: #94A3B8;
-          cursor: not-allowed;
+#btn-profil:hover,
+#btn-mdp:hover {
+  background-color: #111827;
+}
 
-
-    }
-
-    #btn-profil, #btn-mdp {
-        padding: 11px;
-        background-color: #1F2937;
-        color: white;
-        border: none;
-          border-radius: 6px;
-        font-size: 0.95em;
-        font-weight: 600;
-        cursor: pointer;
-
-        transition: background 0.2s;
-
-    }
-
-    #btn-profil:hover, #btn-mdp:hover { background-color: #111827; }
-
-    @media (max-width: 600px) {
-          .profil-container { padding: 16px; }
-        .profil-box { padding: 20px; }
-    }
+@media (max-width: 600px) {
+  .profil-container {
+    padding: 16px;
+  }
+  .profil-box {
+    padding: 20px;
+  }
+}

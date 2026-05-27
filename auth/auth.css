@@ -1,196 +1,180 @@
 .auth-container {
-    display: flex;
-    justify-content:center;
-    align-items:center;
-    min-height: 100vh;
-    
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
 .auth-box {
-    background:white;
-    padding: 40px;
-    border-radius: 10px;
-    width: 100%;
-    max-width: 400px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .auth-box h2 {
-    text-align: center;
-    color: #1a1a2e;
-    margin: 0;
+  text-align: center;
+  color: #1a1a2e;
+  margin: 0;
 }
 
 .auth-box input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1em;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
 }
 
 .auth-box button {
-    padding:10px;
-    background-color: #1F2937;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-    cursor: pointer;
+  padding: 10px;
+  background-color: #1f2937;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
 }
 
 .auth-box button:hover {
-    background-color: #111827;
+  background-color: #111827;
 }
 
 .auth-box p {
-    text-align:center;
-    margin: 0;
+  text-align: center;
+  margin: 0;
 }
 
 .auth-box a {
-    color: #EF4444;
+  color: #ef4444;
 }
 
 .message {
-    color: green;
-    font-weight: bold;
+  color: green;
+  font-weight: bold;
 }
 
 .auth-container {
-    flex-direction: column;
-    gap: 20px;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .auth-brand {
-    text-align: center;
-    color: #1F2937;
+  text-align: center;
+  color: #1f2937;
 }
 
 .auth-brand h1 {
-    font-size: 2.5em;
-    color: #1F2937;
-    margin: 0;
+  font-size: 2.5em;
+  color: #1f2937;
+  margin: 0;
 }
 
 .auth-brand p {
-    color: #64748B;
-    margin: 5px 0 0 0;
+  color: #64748b;
+  margin: 5px 0 0 0;
 }
 
-
 textarea {
-
-    width: 100%;
-    height: 150px;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-    resize: vertical;
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  resize: vertical;
 }
 
 select {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1em;
-    background: white;
-    
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+  background: white;
 }
-
 
 body {
-    position: relative;
+  position: relative;
 }
 
-
-
 /* Groupement champ + label + erreur */
-  .champ-groupe {
-      display: flex;  
-      flex-direction: column;
+.champ-groupe {
+  display: flex;
+  flex-direction: column;
 
-      gap: 5px;
-  }
+  gap: 5px;
+}
 
+.champ-groupe label {
+  font-size: 0.85em;
+  font-weight: 600;
+  color: #444;
+}
 
+.requis {
+  color: #ef4444;
+}
 
+/* Message d'erreur sous le champ */
+.erreur-champ {
+  display: none;
+  font-size: 0.78em;
+  color: #ef4444;
+  font-weight: 500;
+}
 
-  .champ-groupe label {
-       font-size: 0.85em;
-      font-weight: 600;
-      color: #444;
-  }
+/* Bordure rouge quand champ en erreur */
+.input-erreur {
+  border-color: #ef4444 !important;
+  background-color: #fff8f8 !important;
+}
 
+/* Wrapper mot de passe + bouton œil */
+.champ-mdp {
+  position: relative;
+  display: flex;
 
-  .requis { color: #EF4444; }
-  
-  /* Message d'erreur sous le champ */
-  .erreur-champ {
-      display: none;
-      font-size: 0.78em;
-       color: #EF4444; 
-      font-weight: 500;
-  }
+  align-items: center;
+}
 
+.champ-mdp input {
+  width: 100%;
+  padding-right: 42px;
+  box-sizing: border-box;
+}
 
+.btn-oeil {
+  position: absolute;
 
+  right: 10px;
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  cursor: pointer;
+  font-size: 1.1em;
+  color: #888 !important;
+  line-height: 1;
+  box-shadow: none !important;
+}
 
-  /* Bordure rouge quand champ en erreur */
-  .input-erreur {
-       border-color: #EF4444 !important;
-      background-color: #fff8f8 !important;
-  }
-  
+.btn-oeil:hover {
+  color: #333;
+  background: none !important;
+}
 
-
-  /* Wrapper mot de passe + bouton œil */
-  .champ-mdp { 
-      position: relative;
-       display: flex;
-    
-       align-items: center;
-  }
-
-
-
-  .champ-mdp input {
-      width: 100%;
-       padding-right: 42px;
-        box-sizing: border-box;
-  }
-
-
-
-  .btn-oeil {
-      position: absolute;
-  
-       right: 10px;
-       background: none !important;
-      border: none !important;
-      padding: 0 !important;
-       cursor: pointer;
-      font-size: 1.1em;
-       color: #888;
-      line-height: 1; 
-      box-shadow: none !important;
-  }
-
-
-
-  .btn-oeil:hover { color: #333; background: none !important; }
-
-  
-  /* Lien bascule */
-  .lien-bascule {
-      text-align: center;
-      margin: 0;
-      font-size: 0.88em;
-      color: #666;
-  }
+/* Lien bascule */
+.lien-bascule {
+  text-align: center;
+  margin: 0;
+  font-size: 0.88em;
+  color: #666;
+}
 
 @media (max-width: 480px) {
-      .auth-box { padding: 24px 16px; }
+  .auth-box {
+    padding: 24px 16px;
   }
+}

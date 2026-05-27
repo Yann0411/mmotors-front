@@ -1,277 +1,274 @@
 /* wrapper principal - remplace l'ancien admin-container en flex */
-  .admin-wrapper {
-      max-width: 900px;
-        margin: 0 auto;
-      padding: 20px 24px 40px;
-  }
+.admin-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 24px 40px;
+}
 
-  /* ancien .admin-container gardé au cas où */
-  /* .admin-container {
+
+/* .admin-container {
       display: flex;
       gap: 30px;
   } */
 
-  .admin-titre {
-      text-align: center;
-        color: #EF4444;
-      padding: 24px 20px 8px;
-      font-size: 1.5em;
-      font-weight: 800;
-      letter-spacing: 1px;
-  }
+.admin-titre {
+  text-align: center;
+  color: #ef4444;
+  padding: 24px 20px 8px;
+  font-size: 1.5em;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
 
+/* ===== onglets ===== */
 
+.admin-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 2px solid #e2e8f0;
+  margin-bottom: 28px;
+  
+}
 
+.tab-btn {
+  padding: 10px 24px;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  cursor: pointer;
+  font-size: 0.92em;
+  font-weight: 600;
+  color: #64748b;
+  transition: all 0.2s;
+}
 
+.tab-btn:hover {
+  color: #1a202c;
+}
 
+.tab-actif {
+  color: #ef4444;
+  border-bottom-color: #ef4444;
+}
 
-  /* ===== onglets ===== */
+.admin-section {
+  margin-bottom: 32px;
+  padding: 24px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  /* border-left: 4px solid #CC0000; ancien style */
+}
 
+.admin-section h2 {
+  margin-top: 0;
+  color: #1a202c;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  font-size: 1.1em;
+}
+
+.admin-formulaire {
+  background: #f8fafc;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 440px;
+  border: 1px solid #e2e8f0;
+}
+
+.admin-formulaire input,
+.admin-formulaire select {
+  padding: 9px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.9em;
+  background: white;
+}
+
+.admin-formulaire input:focus,
+.admin-formulaire select:focus {
+  outline: none;
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.carte-vehicule,
+.carte-dossier {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.carte-dossier p {
+  margin: 4px 0;
+  font-size: 0.9em;
+  color: #374151;
+}
+
+/* groupes boutons formulaire */
+.btn-groupe-form {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-sauvegarder {
+  flex: 1;
+  padding: 10px;
+  background-color: #1f2937;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.btn-sauvegarder:hover {
+  background-color: #111827;
+}
+
+.btn-annuler {
+  padding: 10px 16px;
+  background-color: transparent;
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: all 0.2s;
+}
+.btn-annuler:hover {
+  background: #f8fafc;
+  color: #1a202c;
+}
+
+.btn-groupe-carte {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+/* boutons actions cards */
+.carte-vehicule button,
+.carte-dossier button {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.82em;
+  font-weight: 600;
+  color: white;
+  transition: all 0.2s;
+}
+
+.btn-modifier {
+  background-color: #2563eb !important;
+}
+.btn-modifier:hover {
+  background-color: #1d4ed8 !important;
+}
+
+.btn-supprimer {
+  background-color: #ef4444 !important;
+}
+.btn-supprimer:hover {
+  background-color: #dc2626 !important;
+}
+
+/* valider en vert, refuser en orange*/
+.btn-valider {
+  background-color: #16a34a !important;
+  color: white;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.82em;
+  font-weight: 600;
+}
+.btn-valider:hover {
+  background-color: #15803d !important;
+}
+
+.btn-refuser {
+  background-color: #d97706 !important;
+  color: white;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.82em;
+  font-weight: 600;
+}
+.btn-refuser:hover {
+  background-color: #b45309 !important;
+}
+
+/* badge admin navbar */
+.badge-admin {
+  background-color: #ef4444;
+  color: white;
+  font-size: 0.7em;
+  font-weight: bold;
+  padding: 2px 8px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  letter-spacing: 1px;
+}
+
+/* toast notification */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  padding: 14px 24px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  font-size: 0.95em;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 9999;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.toast.visible {
+  opacity: 1;
+}
+.toast-succes {
+  background-color: #16a34a;
+}
+.toast-erreur {
+  background-color: #ef4444;
+}
+
+@media (max-width: 768px) {
   .admin-tabs {
-      display: flex;
-      gap: 4px;
-        border-bottom: 2px solid #E2E8F0;
-      margin-bottom: 28px;
-      /* j'avais essayé avec background mais c'est mieux sans */
+    flex-wrap: wrap;
   }
-
-  .tab-btn {
-      padding: 10px 24px;
-      background: transparent;
-      border: none;
-      border-bottom: 3px solid transparent;
-      margin-bottom: -2px;
-      cursor: pointer;
-        font-size: 0.92em;
-      font-weight: 600;
-      color: #64748B;
-      transition: all 0.2s;
-  }
-
-  .tab-btn:hover {
-      color: #1A202C;
-  }
-
-  .tab-actif {
-      color: #EF4444;
-        border-bottom-color: #EF4444;
-  }
-
-
   .admin-section {
-      margin-bottom: 32px;
-      padding: 24px;
-        background: white;
-      border-radius: 12px;
-      border: 1px solid #E2E8F0;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-      /* border-left: 4px solid #CC0000; ancien style */
+    padding: 16px;
   }
-
-  .admin-section h2 {
-
-
-      margin-top: 0;
-        color: #1A202C;
-      border-bottom: 1px solid #E2E8F0;
-      padding-bottom: 12px;
-      margin-bottom: 20px;
-      font-size: 1.1em;
+  .admin-wrapper {
+    padding: 12px 16px;
   }
-
-
+  .tab-btn {
+    padding: 8px 14px;
+    font-size: 0.85em;
+  }
   .admin-formulaire {
-        background: #F8FAFC;
-      padding: 20px;
-      border-radius: 8px;
-      margin-bottom: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      max-width: 440px;
-      border: 1px solid #E2E8F0;
+    max-width: 100%;
   }
-
-  .admin-formulaire input,
-  .admin-formulaire select {
-        padding: 9px 12px;
-      border: 1px solid #CBD5E1;
-      border-radius: 6px;
-      font-size: 0.9em;
-      background: white;
-  }
-
-  .admin-formulaire input:focus,
-  .admin-formulaire select:focus {
-      outline: none;
-      border-color: #EF4444;
-        box-shadow: 0 0 0 3px rgba(239,68,68,0.1);
-  }
-
-
-  .carte-vehicule, .carte-dossier {
-      background: white;
-      border: 1px solid #E2E8F0;
-        border-radius: 10px;
-      padding: 16px;
-      margin-bottom: 12px;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-  }
-
-  .carte-dossier p {
-      margin: 4px 0;
-      font-size: 0.9em;
-      color: #374151;
-  }
-
-
-  /* groupes boutons formulaire */
-  .btn-groupe-form {
-      display: flex;
-        gap: 10px;
-  }
-
-  .btn-sauvegarder {
-
-
-      flex: 1;
-      padding: 10px;
-      background-color: #1F2937;
-      color: white;
-      border: none;
-        border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.9em;
-      font-weight: 600;
-      transition: background 0.2s;
-  }
-  .btn-sauvegarder:hover { background-color: #111827; }
-
-
-
-  .btn-annuler {
-      padding: 10px 16px;
-        background-color: transparent;
-      color: #64748B;
-      border: 1px solid #CBD5E1;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.9em;
-      transition: all 0.2s;
-  }
-  .btn-annuler:hover {
-      background: #F8FAFC;
-        color: #1A202C;
-  }
-
-
-
-  .btn-groupe-carte {
-      display: flex;
-      gap: 8px;
-        flex-wrap: wrap;
-      margin-top: 10px;
-  }
-
-  /* boutons actions cards */
-  .carte-vehicule button,
-  .carte-dossier button {
-      padding: 6px 14px;
-      border: none;
-        border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.82em;
-      font-weight: 600;
-      color: white;
-      transition: all 0.2s;
-  }
-
-
-
-
-
-  .btn-modifier  { background-color: #2563EB !important; }
-  .btn-modifier:hover  { background-color: #1D4ED8 !important; }
-
-  .btn-supprimer { background-color: #EF4444 !important; }
-  .btn-supprimer:hover { background-color: #DC2626 !important; }
-
-  /* valider en vert, refuser en orange*/
-  .btn-valider {
-      background-color: #16A34A !important;
-      color: white;
-      padding: 6px 14px;
-      border: none;
-        border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.82em;
-      font-weight: 600;
-  }
-  .btn-valider:hover { background-color: #15803D !important; }
-
-  .btn-refuser {
-        background-color: #D97706 !important;
-      color: white;
-      padding: 6px 14px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.82em;
-        font-weight: 600;
-  }
-  .btn-refuser:hover { background-color: #B45309 !important; }
-
-
-  /* badge admin navbar */
-  .badge-admin {
-      background-color: #EF4444;
-      color: white;
-      font-size: 0.7em;
-      font-weight: bold;
-        padding: 2px 8px;
-        padding: 2px 8px;
-      border-radius: 10px;
-      letter-spacing: 1px;
-  }
-
-
-  /* toast notification */
-  .toast {
-      position: fixed;
-      bottom: 30px;
-        right: 30px;
-      padding: 14px 24px;
-      border-radius: 8px;
-      color: white;
-      font-weight: 600;
-      font-size: 0.95em;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      z-index: 9999;
-        pointer-events: none;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-
-  }
-  
-
-
-  .toast.visible { opacity: 1; }
-  .toast-succes  { background-color: #16A34A; }
-  .toast-erreur  { background-color: #EF4444; }
-
-  
-  @media (max-width: 768px) {
-
-    .admin-tabs { flex-wrap: wrap; }
-  .admin-section { padding: 16px; }
-      .admin-wrapper {
-            padding: 12px 16px;
-      }
-      .tab-btn {
-          padding: 8px 14px;
-          font-size: 0.85em;
-      }
-      .admin-formulaire {
-          max-width: 100%;
-      }
-  }
+}

@@ -1,129 +1,176 @@
-<!DOCTYPE html>
-  <html lang="fr">
+<!doctype html>
+<html lang="fr">
   <head>
-
-      <meta charset="UTF-8">
-       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>M-Motors</title>
-      <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>M-Motors</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
-   <body>
-
-   
-   
-      <nav class="navbar">
-
+  <body>
+    <nav class="navbar">
       <a class="navbar-brand" href="index.html">M-Motors</a>
 
       <div class="navbar-user">
+        <button
+          class="btn-nav-link"
+          onclick="window.location.href = 'espaceClient/espaceClient.html'"
+        >
+          Mon espace client
+        </button>
 
-           <button class="btn-nav-link" onclick="window.location.href='espaceClient/espaceClient.html'">Mon espace client</button>
+        <button
+          class="btn-nav-link"
+          onclick="window.location.href = 'dossier/dossier.html'"
+        >
+          Déposer un dossier
+        </button>
 
-          <button class="btn-nav-link" onclick="window.location.href='dossier/dossier.html'">Déposer un dossier</button>
-
-             <div>
-              <span id="nom-utilisateur"></span>
-              <button class="btn-deconnecter" onclick="seDeconnecter()">Se déconnecter</button>
-           </div>
-
+        <div>
+          <span id="nom-utilisateur"></span>
+          <button class="btn-deconnecter" onclick="seDeconnecter()">
+            Se déconnecter
+          </button>
+        </div>
       </div>
-      </nav>
+    </nav>
 
+    <!-- page accueil -->
 
-
-
-
-  <!-- page accueil -->
-
-  <div class="accueil" id="accueil">
- 
+    <div class="accueil" id="accueil">
       <h1>M-Motors</h1>
- 
-       <p>Depuis 1987, votre partenaire achat et location de véhicules</p>
+
+      <p>Depuis 1987, votre partenaire achat et location de véhicules</p>
 
       <div class="choix">
+        <div class="btn-choix btn-achat" onclick="afficherCatalogue('ACHAT')">
+          <span style="font-size: 2em; display: block; margin-bottom: 12px"
+            >🚗</span
+          >
 
-          <div class="btn-choix btn-achat" onclick="afficherCatalogue('ACHAT')">
+          <strong style="font-size: 1.1em; display: block; margin-bottom: 8px"
+            >Acheter un véhicule</strong
+          >
 
-              <span style="font-size:2em; display:block; margin-bottom:12px;">🚗</span>
+          <span style="color: #94a3b8; font-size: 0.88em"
+            >Découvrez nos véhicules disponibles immédiatement à l'achat.</span
+          >
+          <span
+            style="
+              display: block;
+              margin-top: 16px;
+              color: #f87171;
+              font-size: 0.88em;
+              font-weight: 600;
+            "
+            >Voir le catalogue →</span
+          >
+        </div>
 
-              <strong style="font-size:1.1em; display:block; margin-bottom:8px;">Acheter un véhicule</strong>
+        <div
+          class="btn-choix btn-location"
+          onclick="afficherCatalogue('LOCATION')"
+        >
+          <span style="font-size: 2em; display: block; margin-bottom: 12px"
+            >🔑</span
+          >
 
-               <span style="color:#94A3B8; font-size:0.88em;">Découvrez nos véhicules disponibles immédiatement à l'achat.</span>
-               <span style="display:block; margin-top:16px; color:#F87171; font-size:0.88em; font-weight:600;">Voir le catalogue →</span>
-          </div>
+          <strong style="font-size: 1.1em; display: block; margin-bottom: 8px"
+            >Louer un véhicule</strong
+          >
 
-          <div class="btn-choix btn-location" onclick="afficherCatalogue('LOCATION')">
+          <span style="color: #94a3b8; font-size: 0.88em"
+            >Profitez de nos offres de location flexibles adaptées à vos
+            besoins.</span
+          >
+          <span
+            style="
+              display: block;
+              margin-top: 16px;
+              color: #f87171;
+              font-size: 0.88em;
+              font-weight: 600;
+            "
+            >Voir les offres →</span
+          >
+        </div>
 
-               <span style="font-size:2em; display:block; margin-bottom:12px;">🔑</span>
+        <div class="btn-choix" onclick="afficherCatalogue('LOCATION_ACHAT')">
+          <span style="font-size: 2em; display: block; margin-bottom: 12px"
+            >⭐</span
+          >
 
-               <strong style="font-size:1.1em; display:block; margin-bottom:8px;">Louer un véhicule</strong>
+          <strong style="font-size: 1.1em; display: block; margin-bottom: 8px"
+            >Location avec option d'achat</strong
+          >
 
-      
-      
-                <span style="color:#94A3B8; font-size:0.88em;">Profitez de nos offres de location flexibles adaptées à vos besoins.</span>
-              <span style="display:block; margin-top:16px; color:#F87171; font-size:0.88em; font-weight:600;">Voir les offres →</span>
-          </div>
-
-          <div class="btn-choix" onclick="afficherCatalogue('LOCATION_ACHAT')">
-
-               <span style="font-size:2em; display:block; margin-bottom:12px;">⭐</span>
-
-              <strong style="font-size:1.1em; display:block; margin-bottom:8px;">Location avec option d'achat</strong>
-
-              <!-- LOA = location longue durée, client peut racheter à la fin -->
-               <span style="color:#94A3B8; font-size:0.88em;">Louez et rachetez à terme. Assurance, entretien et SAV inclus.</span>
-              <span style="display:block; margin-top:16px; color:#F87171; font-size:0.88em; font-weight:600;">Voir les offres →</span>
-          </div>
-
+          <!-- LOA = location longue durée, client peut racheter à la fin -->
+          <span style="color: #94a3b8; font-size: 0.88em"
+            >Louez et rachetez à terme. Assurance, entretien et SAV
+            inclus.</span
+          >
+          <span
+            style="
+              display: block;
+              margin-top: 16px;
+              color: #f87171;
+              font-size: 0.88em;
+              font-weight: 600;
+            "
+            >Voir les offres →</span
+          >
+        </div>
       </div>
+    </div>
 
-  </div>
+    <!-- Page catalogue -->
+    <div class="catalogue" id="catalogue">
+      <button class="btn-retour" onclick="retourAccueil()">← Retour</button>
 
+      <h2 id="titre-catalogue"></h2>
 
-      <!-- Page catalogue -->
-      <div class="catalogue" id="catalogue">
-          <button class="btn-retour" onclick="retourAccueil()">← Retour</button>
-
-          <h2 id="titre-catalogue"></h2>
-
-          <div class="filtres">
-
-                <!-- <input type="text" id="filtre-marque" placeholder="Toutes les marques" list="list-marques" autocomplete="off">
+      <div class="filtres">
+        <!-- <input type="text" id="filtre-marque" placeholder="Toutes les marques" list="list-marques" autocomplete="off">
                 <datalist id="list-marques"></datalist>
 
                   <input type="text" id="filtre-modele" placeholder="Tous les modèles" list="list-modeles" autocomplete="off">
                 <datalist id="list-modeles"></datalist> -->
 
-                <select id="filtre-marque">
-                 <option value="">Toutes les marques</option>
-                </select>
+        <select id="filtre-marque">
+          <option value="">Toutes les marques</option>
+        </select>
 
-                <select id="filtre-modele">
-                <option value="">Tous les modèles</option>
-                </select>
+        <select id="filtre-modele">
+          <option value="">Tous les modèles</option>
+        </select>
 
+        <input
+          type="number"
+          id="filtre-prix-min"
+          placeholder="Prix min (€)"
+          min="0"
+        />
+        <input
+          type="number"
+          id="filtre-prix-max"
+          placeholder="Prix max (€)"
+          min="0"
+        />
+        <input type="number" id="filtre-km" placeholder="Km max" min="0" />
 
-
-             <input type="number" id="filtre-prix-min" placeholder="Prix min (€)" min="0">
-              <input type="number" id="filtre-prix-max" placeholder="Prix max (€)" min="0">
-              <input type="number" id="filtre-km" placeholder="Km max" min="0">
-
-                <!-- <button onclick="rechercherVehicules()">Rechercher</button> -->
-                 <button onclick="rechercherVehicules(true)">Rechercher</button>
-
-            </div>
-
-            <p id="msg-recherche" style="color:#64748B; font-size:0.88em; margin: 0 0 12px 0;"></p>
-
-
-
-          <div class="liste-vehicules" id="liste-vehicules"></div>
+        <!-- <button onclick="rechercherVehicules()">Rechercher</button> -->
+        <button onclick="rechercherVehicules(true)">Rechercher</button>
       </div>
 
-      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <p
+        id="msg-recherche"
+        style="color: #64748b; font-size: 0.88em; margin: 0 0 12px 0"
+      ></p>
 
-      <script src="vehicules.js"></script>
+      <div class="liste-vehicules" id="liste-vehicules"></div>
+    </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="vehicules.js"></script>
   </body>
-  </html>
+</html>

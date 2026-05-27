@@ -1,48 +1,50 @@
-<!DOCTYPE html>
-  <html lang="fr">
+<!doctype html>
+<html lang="fr">
   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>M-Motors - Mon espace client</title>
-      <link rel="stylesheet" href="../styles.css">
-      <link rel="stylesheet" href="espaceClient.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>M-Motors - Mon espace client</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="espaceClient.css" />
   </head>
   <body>
+    <nav class="navbar">
+      <a class="navbar-brand" href="../index.html">M-Motors</a>
 
-            <nav class="navbar">
+      <div class="navbar-user">
+        <button
+          class="btn-nav-link"
+          onclick="window.location.href = '../profil/profil.html'"
+        >
+          Mon profil
+        </button>
+        <span id="nom-utilisateur"></span>
 
-             <a class="navbar-brand" href="../index.html">M-Motors</a>
+        <button class="btn-deconnecter" onclick="seDeconnecter()">
+          Se déconnecter
+        </button>
+      </div>
+    </nav>
 
-            <div class="navbar-user">
-                <button class="btn-nav-link" onclick="window.location.href='../profil/profil.html'">Mon profil</button>
-                <span id="nom-utilisateur"></span>
-                
-                <button class="btn-deconnecter" onclick="seDeconnecter()">Se déconnecter</button>
-            </div>
+    <div class="espace-container">
+      <button
+        class="btn-retour"
+        onclick="window.location.href = '../index.html'"
+      >
+        ← Retour
+      </button>
 
-            </nav>
-
-
-      <div class="espace-container">
-
-           <button class="btn-retour" onclick="window.location.href='../index.html'">← Retour</button>
-        
-
-
-          <div class="espace-header">
-
-              <h1>Mes dossiers</h1>
-                <p>Retrouvez ici l'historique et le statut de vos demandes.</p>
-          </div>
-
-          <p id="msg-espace" class="message"></p>
-          
-          <div id="liste-dossiers"></div>
-
+      <div class="espace-header">
+        <h1>Mes dossiers</h1>
+        <p>Retrouvez ici l'historique et le statut de vos demandes.</p>
       </div>
 
-      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-      <script src="espaceClient.js"></script>
+      <p id="msg-espace" class="message"></p>
 
+      <div id="liste-dossiers"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="espaceClient.js"></script>
   </body>
-  </html>
+</html>

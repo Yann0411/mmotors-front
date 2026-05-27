@@ -1,87 +1,103 @@
-<!DOCTYPE html>
-  <html lang="fr">
+<!doctype html>
+<html lang="fr">
   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>M-Motors - Déposer un dossier</title>
-      <link rel="stylesheet" href="../styles.css">
-      <link rel="stylesheet" href="dossier.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>M-Motors - Déposer un dossier</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="dossier.css" />
   </head>
   <body>
+    <nav class="navbar">
+      <a class="navbar-brand" href="../index.html">M-Motors</a>
+      <div class="navbar-user">
+        <button
+          class="btn-nav-link"
+          onclick="window.location.href = '../espaceClient/espaceClient.html'"
+        >
+          Mon espace client
+        </button>
 
-      <nav class="navbar">
-          <a class="navbar-brand" href="../index.html">M-Motors</a>
-            <div class="navbar-user">
-              <span id="nom-utilisateur"></span>
-              <button class="btn-deconnecter" onclick="seDeconnecter()">Se déconnecter</button>
-          </div>
-      </nav>
-
-
-
-      <div class="dossier-container">
-
-            <button class="btn-retour" onclick="window.location.href='../index.html'">← Retour</button>
-
-          <div class="dossier-box">
-              <h2>Déposer un dossier</h2>
-              <p class="dossier-sous-titre">Notre équipe traitera votre demande dans les plus brefs délais.</p>
-
-              <!-- carte véhicule sélectionné = > masquée par défaut -->
-               <div id="vehicule-selectionne" style="display:none">
-                    <p class="label-section">Véhicule sélectionné</p>
-                  <div class="vehicule-recap">
-                      <div class="vehicule-recap-ligne">
-
-                          <span class="vehicule-recap-titre" id="info-marque-modele"></span>
-                          <span class="vehicule-recap-badge" id="info-type"></span>
-                      </div>
-                      <div class="vehicule-recap-details">
-                          <span id="info-annee"></span>
-                           <span>·</span>
-                             <span id="info-km"></span>
-                           <span>·</span>
-                              <span id="info-prix"></span>
-
-                      </div>
-                  </div>
-              </div>
-
-              <!-- type offre masqué si véhicule sélectionné -->
-              <div id="groupe-typeOffre" class="champ-groupe">
-                  <label for="typeOffre">Type de demande <span class="requis">*</span></label>
-                  <select id="typeOffre">
-                      <option value="ACHAT">Achat</option>
-
-                      <option value="LOCATION">Location</option>
-
-                        <option value="LOCATION_ACHAT">Location avec option d'achat (LOA)</option>
-                  </select>
-              </div>
-
-              <div class="champ-groupe">
-
-
-                       <label for="message" id="label-message">Votre message <span class="requis">*</span></label>
-                      <textarea id="message" placeholder="Décrivez précisément le véhicule souhaité (marque, modèle, kilométrage...)."></textarea>
-              </div>
-
-              <div class="champ-groupe">
-                 <!-- <label for="telephone">Téléphone <span style="color:#64748B; font-weight:400;">(optionnel)</span></label> -->
-                  <label for="telephone">Téléphone <span class="requis">*</span></label>
-                 <input type="tel" id="telephone" placeholder="Ex : 06 12 34 56 78">
-            </div>
-
-
-              <button id="btn-dossier" onclick="deposerDossier()">Envoyer mon dossier</button>
-
-              <p id="msg-dossier" class="message"></p>
-
-          </div>
+        <span id="nom-utilisateur"></span>
+        <button class="btn-deconnecter" onclick="seDeconnecter()">
+          Se déconnecter
+        </button>
       </div>
+    </nav>
 
-      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-      <script src="dossier.js"></script>
+    <div class="dossier-container">
+      <button
+        class="btn-retour"
+        onclick="window.location.href = '../index.html'"
+      >
+        ← Retour
+      </button>
 
+      <div class="dossier-box">
+        <h2>Déposer un dossier</h2>
+        <p class="dossier-sous-titre">
+          Notre équipe traitera votre demande dans les plus brefs délais.
+        </p>
+
+        <!-- carte véhicule sélectionné = > masquée par défaut -->
+        <div id="vehicule-selectionne" style="display: none">
+          <p class="label-section">Véhicule sélectionné</p>
+          <div class="vehicule-recap">
+            <div class="vehicule-recap-ligne">
+              <span class="vehicule-recap-titre" id="info-marque-modele"></span>
+              <span class="vehicule-recap-badge" id="info-type"></span>
+            </div>
+            <div class="vehicule-recap-details">
+              <span id="info-annee"></span>
+              <span>·</span>
+              <span id="info-km"></span>
+              <span>·</span>
+              <span id="info-prix"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- type offre masqué si véhicule sélectionné -->
+        <div id="groupe-typeOffre" class="champ-groupe">
+          <label for="typeOffre"
+            >Type de demande <span class="requis">*</span></label
+          >
+          <select id="typeOffre">
+            <option value="ACHAT">Achat</option>
+
+            <option value="LOCATION">Location</option>
+
+            <option value="LOCATION_ACHAT">
+              Location avec option d'achat (LOA)
+            </option>
+          </select>
+        </div>
+
+        <div class="champ-groupe">
+          <label for="message" id="label-message"
+            >Votre message <span class="requis">*</span></label
+          >
+          <textarea
+            id="message"
+            placeholder="Décrivez précisément le véhicule souhaité (marque, modèle, kilométrage...)."
+          ></textarea>
+        </div>
+
+        <div class="champ-groupe">
+          <!-- <label for="telephone">Téléphone <span style="color:#64748B; font-weight:400;">(optionnel)</span></label> -->
+          <label for="telephone">Téléphone <span class="requis">*</span></label>
+          <input type="tel" id="telephone" placeholder="Ex : 06 12 34 56 78" />
+        </div>
+
+        <button id="btn-dossier" onclick="deposerDossier()">
+          Envoyer mon dossier
+        </button>
+
+        <p id="msg-dossier" class="message"></p>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="dossier.js"></script>
   </body>
-  </html>
+</html>

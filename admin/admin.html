@@ -1,127 +1,157 @@
-<!DOCTYPE html>
-  <html lang="fr">
+<!doctype html>
+<html lang="fr">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>M-Motors - Administration</title>
 
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>M-Motors - Administration</title>
-
-      <link rel="stylesheet" href="../styles.css">
-      <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="admin.css" />
   </head>
   <body>
+    <nav class="navbar">
+      <a class="navbar-brand" href="admin.html">M-Motors</a>
+      <div class="navbar-user">
+        <span id="nom-utilisateur"></span>
+        <span class="badge-admin">ADMIN</span>
+        <button class="btn-deconnecter" onclick="seDeconnecter()">
+          Se déconnecter
+        </button>
+      </div>
+    </nav>
 
-      <nav class="navbar">
+    <div id="toast" class="toast"></div>
+    <div class="admin-wrapper">
+      <h1 class="admin-titre">Back-office M-Motors</h1>
 
-          <a class="navbar-brand" href="admin.html">M-Motors</a>
+      <!-- onglets navigation -->
+      <div class="admin-tabs">
+        <button
+          class="tab-btn tab-actif"
+          onclick="afficherOnglet('vehicules', this)"
+        >
+          🚗 Véhicules
+        </button>
 
-          <div class="navbar-user">
-              <span id="nom-utilisateur"></span>
-
-              <span class="badge-admin">ADMIN</span>
-              <button class="btn-deconnecter" onclick="seDeconnecter()">Se déconnecter</button>
-          </div>
-      </nav>
-
-      <div id="toast" class="toast"></div>
-
-      <div class="admin-wrapper">
-
-          <h1 class="admin-titre">Back-office M-Motors</h1>
-
-          <!-- onglets navigation -->
-          <div class="admin-tabs">
-              <button class="tab-btn tab-actif" onclick="afficherOnglet('vehicules', this)">  🚗 Véhicules </button>
-
-                <button class="tab-btn" onclick="afficherOnglet('dossiers', this)">  📁 Dossiers clients </button>
-          </div>
-
-          <!-- onglet véhicules -->
-          <div id="onglet-vehicules" class="onglet">
-
-              <div class="admin-section">
-
-                  <h2 id="titre-form-vehicule">Ajouter un véhicule</h2>
-
-                  <div class="admin-formulaire">
-
-                      <input type="hidden" id="vehicule-id">
-
-                      <div class="champ-groupe">
-                              <label for="vehicule-marque">Marque <span class="requis">*</span></label>
-                              <!-- <input type="text" id="vehicule-marque" placeholder="Ex : Peugeot"> -->
-                              <input type="text" id="vehicule-marque" placeholder="Ex : Peugeot" list="list-marques-admin" autocomplete="off">
-                             <datalist id="list-marques-admin"></datalist>
-
-                      </div>
-
-                      <div class="champ-groupe">
-                          <label for="vehicule-modele">Modèle <span class="requis">*</span></label>
-                              <input type="text" id="vehicule-modele" placeholder="Ex : 308" list="list-modeles-admin" autocomplete="off">
-                              <datalist id="list-modeles-admin"></datalist>
-
-                      </div>
-
-                      <div class="champ-groupe">
-
-                          <label for="vehicule-annee">Année <span class="requis">*</span></label>
-                          <input type="number" id="vehicule-annee" placeholder="Ex : 2021" min="1900" max="2030">
-                      </div>
-
-
-
-                      <div class="champ-groupe">
-                            <label for="vehicule-prix">Prix (€) <span class="requis">*</span></label>
-                          <input type="number" id="vehicule-prix" placeholder="Ex : 15000" min="0" step="100">
-                      </div>
-
-                      <div class="champ-groupe">
-                          <label for="vehicule-km">Kilométrage <span class="requis">*</span></label>
-                          <input type="number" id="vehicule-km" placeholder="Ex : 50000" min="0">
-                      </div>
-
-
-
-                      <div class="champ-groupe">
-                          <label for="vehicule-typeOffre">Type d'offre <span class="requis">*</span></label>
-                          <select id="vehicule-typeOffre">
-                            <option value="ACHAT">Achat</option>
-                            <option value="LOCATION">Location</option>
-                            <option value="LOCATION_ACHAT">Location avec option d'achat (LOA)</option>
-                        </select>
-
-                      </div>
-
-                      <div class="btn-groupe-form">
-
-                          <button class="btn-sauvegarder" onclick="sauvegarderVehicule()">Sauvegarder</button>
-                          <button class="btn-annuler" onclick="annulerModification()">Annuler</button>
-                      </div>
-
-                      <p id="msg-vehicule" class="message"></p>
-                  </div>
-
-                  <div id="liste-vehicules-admin"></div>
-
-              </div>
-          </div>
-
-          <!-- onglet dossiers -->
-          <div id="onglet-dossiers" class="onglet" style="display:none">
-
-              <div class="admin-section">
-
-                  <h2>Dossiers clients</h2>
-                    <div id="liste-dossiers-admin"></div>
-              </div>
-
-          </div>
-
+        <button class="tab-btn" onclick="afficherOnglet('dossiers', this)">
+          📁 Dossiers clients
+        </button>
       </div>
 
-      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-      <script src="admin.js"></script>
+      <!-- onglet véhicules -->
+      <div id="onglet-vehicules" class="onglet">
+        <div class="admin-section">
+          <h2 id="titre-form-vehicule">Ajouter un véhicule</h2>
 
+          <div class="admin-formulaire">
+            <input type="hidden" id="vehicule-id" />
+
+            <div class="champ-groupe">
+              <label for="vehicule-marque"
+                >Marque <span class="requis">*</span></label
+              >
+              <!-- <input type="text" id="vehicule-marque" placeholder="Ex : Peugeot"> -->
+              <input
+                type="text"
+                id="vehicule-marque"
+                placeholder="Ex : Peugeot"
+                list="list-marques-admin"
+                autocomplete="off"
+              />
+              <datalist id="list-marques-admin"></datalist>
+            </div>
+
+            <div class="champ-groupe">
+              <label for="vehicule-modele"
+                >Modèle <span class="requis">*</span></label
+              >
+              <input
+                type="text"
+                id="vehicule-modele"
+                placeholder="Ex : 308"
+                list="list-modeles-admin"
+                autocomplete="off"
+              />
+              <datalist id="list-modeles-admin"></datalist>
+            </div>
+
+            <div class="champ-groupe">
+              <label for="vehicule-annee"
+                >Année <span class="requis">*</span></label
+              >
+              <input
+                type="number"
+                id="vehicule-annee"
+                placeholder="Ex : 2021"
+                min="1900"
+                max="2030"
+              />
+            </div>
+
+            <div class="champ-groupe">
+              <label for="vehicule-prix"
+                >Prix (€) <span class="requis">*</span></label
+              >
+              <input
+                type="number"
+                id="vehicule-prix"
+                placeholder="Ex : 15000"
+                min="0"
+                step="100"
+              />
+            </div>
+
+            <div class="champ-groupe">
+              <label for="vehicule-km"
+                >Kilométrage <span class="requis">*</span></label
+              >
+              <input
+                type="number"
+                id="vehicule-km"
+                placeholder="Ex : 50000"
+                min="0"
+              />
+            </div>
+
+            <div class="champ-groupe">
+              <label for="vehicule-typeOffre"
+                >Type d'offre <span class="requis">*</span></label
+              >
+              <select id="vehicule-typeOffre">
+                <option value="ACHAT">Achat</option>
+                <option value="LOCATION">Location</option>
+                <option value="LOCATION_ACHAT">
+                  Location avec option d'achat (LOA)
+                </option>
+              </select>
+            </div>
+
+            <div class="btn-groupe-form">
+              <button class="btn-sauvegarder" onclick="sauvegarderVehicule()">
+                Sauvegarder
+              </button>
+              <button class="btn-annuler" onclick="annulerModification()">
+                Annuler
+              </button>
+            </div>
+
+            <p id="msg-vehicule" class="message"></p>
+          </div>
+
+          <div id="liste-vehicules-admin"></div>
+        </div>
+      </div>
+
+      <!-- onglet dossiers -->
+      <div id="onglet-dossiers" class="onglet" style="display: none">
+        <div class="admin-section">
+          <h2>Dossiers clients</h2>
+          <div id="liste-dossiers-admin"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="admin.js"></script>
   </body>
-  </html>
-
+</html>
