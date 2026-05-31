@@ -431,6 +431,45 @@ async function chargerDossiers() {
       if (d.telephone) carte.appendChild(tel);
       carte.appendChild(statut);
       carte.appendChild(btnGroupe);
+
+      const zoneCommentaire = document.createElement("div");
+      zoneCommentaire.style.marginTop = "12px";
+      zoneCommentaire.style.borderTop = "1px solid #e2e8f0";
+      zoneCommentaire.style.paddingTop = "10px";
+
+      if (d.commentaireInterne) {
+        const commentaireAffiche = document.createElement("p");
+        commentaireAffiche.innerHTML = "<strong>Note interne :</strong> ";
+        commentaireAffiche.appendChild(
+          document.createTextNode(d.commentaireInterne),
+        );
+        commentaireAffiche.style.color = "#64748b";
+        zoneCommentaire.appendChild(commentaireAffiche);
+      }
+
+
+      const textarea = document.createElement("textarea");
+      textarea.placeholder = "Ajouter une note interne...";
+      textarea.value = d.commentaireInterne || "";
+      textarea.style.width = "100%";
+      textarea.style.marginTop = "6px";
+      textarea.style.padding = "8px";
+      textarea.style.borderRadius = "6px";
+      textarea.style.border = "1px solid #cbd5e1";
+      textarea.rows = 2;
+
+      const btnCommentaire = document.createElement("button");
+      btnCommentaire.textContent = "Sauvegarder la note";
+      btnCommentaire.className = "btn-valider";
+      btnCommentaire.style.marginTop = "6px";
+      btnCommentaire.addEventListener("click", function () {
+        sauvegarderCommentaire(d.id, textarea.value);
+      });
+
+      zoneCommentaire.appendChild(textarea);
+      zoneCommentaire.appendChild(btnCommentaire);
+      carte.appendChild(zoneCommentaire);
+
       div.appendChild(carte);
     });
   } catch (error) {
@@ -500,3 +539,16 @@ document
       .map((m) => `<option value="${m}">`)
       .join("");
   });
+
+async function sauvegarderCommentaire(id, commentaire) {
+  try {
+    await axios.patch(
+      "https://mmotors-back-production.up.railway.app/admin/dossiers/" + id + "/commentaire",
+      { commentaireInterne: commentaire },
+      { headers },
+    );
+    afficherToast("✓ Note interne sauvegardée");
+  } catch (error) {
+    afficherToast("Erreur lors de la sauvegarde", "erreur");
+  }
+}
