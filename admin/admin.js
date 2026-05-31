@@ -444,12 +444,13 @@ async function chargerDossiers() {
           document.createTextNode(d.commentaireInterne),
         );
         commentaireAffiche.style.color = "#64748b";
+        commentaireAffiche.style.whiteSpace = "pre-line";
         zoneCommentaire.appendChild(commentaireAffiche);
       }
 
       const textarea = document.createElement("textarea");
       textarea.placeholder = "Ajouter une note interne...";
-      textarea.value = d.commentaireInterne || "";
+      textarea.value = "";
       textarea.style.width = "100%";
       textarea.style.marginTop = "6px";
       textarea.style.padding = "8px";
