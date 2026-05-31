@@ -447,7 +447,6 @@ async function chargerDossiers() {
         zoneCommentaire.appendChild(commentaireAffiche);
       }
 
-
       const textarea = document.createElement("textarea");
       textarea.placeholder = "Ajouter une note interne...";
       textarea.value = d.commentaireInterne || "";
@@ -543,11 +542,14 @@ document
 async function sauvegarderCommentaire(id, commentaire) {
   try {
     await axios.patch(
-      "https://mmotors-back-production.up.railway.app/admin/dossiers/" + id + "/commentaire",
+      "https://mmotors-back-production.up.railway.app/admin/dossiers/" +
+        id +
+        "/commentaire",
       { commentaireInterne: commentaire },
       { headers },
     );
     afficherToast("✓ Note interne sauvegardée");
+     chargerDossiers();
   } catch (error) {
     afficherToast("Erreur lors de la sauvegarde", "erreur");
   }
